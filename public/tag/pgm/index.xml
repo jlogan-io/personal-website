@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PgM on Jonathan Logan - Personal Website</title>
+    <link>http://localhost:1313/tag/pgm/</link>
+    <description>Recent content in PgM on Jonathan Logan - Personal Website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tag/pgm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Art of Sending Quality Status Reports</title>
+      <link>http://localhost:1313/posts/20250115-statusreports/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/20250115-statusreports/</guid>
+      
+        <description>In the realm of cybersecurity—or any industry managing complex, multi-project programs—effective communication can be the difference between success and failure. A well-crafted status report is more than a routine deliverable; it’s a strategic tool that fosters transparency, aligns expectations, and drives informed decision-making.
+When managing a program composed of interdependent projects, creating a high-quality status report becomes even more critical. Each project within the program contributes to the overarching objectives, and delays or challenges in one project can ripple across others.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

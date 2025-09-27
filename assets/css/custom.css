@@ -70,3 +70,16 @@
 .breadcrumb:first-child::after {content: none;}
 
 
+@media screen and (min-width: 961px) {
+    
+    .wrapper {
+    
+      justify-self: center;
+    
+    }
+    
+    .wrapper__main--fullscreen {
+        width: 900px;
+        justify-self: center;
+    }
+}

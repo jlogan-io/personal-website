@@ -1,0 +1,577 @@
+<!doctype html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  
+    class="html theme--light"
+  
+><head>
+  <meta charset="utf-8" />
+  <title>
+    Jonathan Logan
+        |
+        Navigating the Challenges of Working with a Micromanager in Cybersecurity
+      
+
+    
+
+  </title>
+
+  <meta name="generator" content="Hugo 0.131.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Jonathan Logan" />
+  <meta
+    name="description"
+    content="Hello! My name is Jonathan Logan and I&#39;m an Engineering Program Manager at CrowdStrike with a focus on DevOps, Agility, and Leadership. When I&#39;m not working I enjoy spending time with my family, working on my home lab, and spending nights in the California desert hiking and doing astrophotography."
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.009f917038f30ebd1f2147e8e1dfd40fc1b799422a7869aa0da12af1fd1bf8ba.css"
+      integrity="sha256-AJ&#43;RcDjzDr0fIUfo4d/UD8G3mUIqeGmqDaEq8f0b&#43;Lo="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/custom.min.19db8c50b4318953cf3396cd75d7112345fece10b1d53b467e3ccb2b01eac65d.css"
+      integrity="sha256-GduMULQxiVPPM5bNddcRI0X&#43;zhCx1TtGfjzLKwHqxl0="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.cd68e5e384ddf989eca2ea0bae432fbb203fc03e45f00dc144efe3436f49cc85.css"
+      integrity="sha256-zWjl44Td&#43;YnsouoLrkMvuyA/wD5F8A3BRO/jQ29JzIU="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://jlogan.io/posts/20250215-mircromanagers/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+  <script defer src="https://analytics.jlogan.io/script.js"></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.d6d329d93844b162e8bed1e915619625ca91687952177552b9b3e211014a2957.js"
+      integrity="sha256-1tMp2ThEsWLovtHpFWGWJcqRaHlSF3VSubPiEQFKKVc="
+      crossorigin="anonymous"
+    ></script>
+  <script
+      type="text/javascript"
+      src="/js/custom.min.792d94325192a5b95b3ce25a631b0e0267db087c80f4373169c451bd2e8fee17.js"
+      integrity="sha256-eS2UMlGSpblbPOJaYxsOAmfbCHyA9DcxacRRvS6P7hc="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jlogan.io/posts/20250215-mircromanagers/thumbnail-image.png">
+  <meta name="twitter:title" content="Navigating the Challenges of Working with a Micromanager in Cybersecurity">
+  <meta name="twitter:description" content="The cybersecurity field is fast-paced, high-stakes, and constantly evolving. As a senior program manager, I’ve learned that technical challenges are only one part of the equation. Navigating interpersonal dynamics, especially with a micromanager, can be just as critical—and often more complex. Micromanagers scrutinize every detail, often leaving their teams feeling stifled, untrusted, and overwhelmed. Learning how to effectively manage the relationship can be pivotal for your career growth and mental well-being.">
+
+
+
+  
+  <meta property="og:url" content="https://jlogan.io/posts/20250215-mircromanagers/">
+  <meta property="og:site_name" content="Jonathan Logan - Personal Website">
+  <meta property="og:title" content="Navigating the Challenges of Working with a Micromanager in Cybersecurity">
+  <meta property="og:description" content="The cybersecurity field is fast-paced, high-stakes, and constantly evolving. As a senior program manager, I’ve learned that technical challenges are only one part of the equation. Navigating interpersonal dynamics, especially with a micromanager, can be just as critical—and often more complex. Micromanagers scrutinize every detail, often leaving their teams feeling stifled, untrusted, and overwhelmed. Learning how to effectively manage the relationship can be pivotal for your career growth and mental well-being.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-15T00:00:00+00:00">
+    <meta property="og:image" content="https://jlogan.io/posts/20250215-mircromanagers/thumbnail-image.png">
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "posts",
+        "name": "Navigating the Challenges of Working with a Micromanager in Cybersecurity",
+        "headline": "Navigating the Challenges of Working with a Micromanager in Cybersecurity",
+        "alternativeHeadline": "",
+        "description": "
+      
+        The cybersecurity field is fast-paced, high-stakes, and constantly evolving. As a senior program manager, I\u0026rsquo;ve learned that technical challenges are only one part of the equation. Navigating interpersonal dynamics, especially with a micromanager, can be just as critical—and often more complex. Micromanagers scrutinize every detail, often leaving their teams feeling stifled, untrusted, and overwhelmed. Learning how to effectively manage the relationship can be pivotal for your career growth and mental well-being.
+
+
+      
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jlogan.io\/posts\/20250215-mircromanagers\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "copyrightYear" : "2025",
+        "dateCreated": "2025-02-15T00:00:00.00Z",
+        "datePublished": "2025-02-15T00:00:00.00Z",
+        "dateModified": "2025-02-15T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Jonathan Logan",
+            "url": "https://jlogan.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/jlogan.io\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/jlogan.io\/posts\/20250215-mircromanagers\/",
+        "wordCount" : "722",
+        "genre" : [ ],
+        "keywords" : [ ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div
+  class="sidebar
+    .
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/jonathanlogan.png"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">I&#39;m Jonathan Logan</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Hello! My name is Jonathan Logan and I'm an Engineering Program Manager at CrowdStrike with a focus on DevOps, Agility, and Leadership. When I'm not working I enjoy spending time with my family, working on my home lab, and spending nights in the California desert hiking and doing astrophotography.</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.linkedin.com/in/jonathan-logan-99ab925b/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fab fa-linkedin-in fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="mailto:jlogan3990@gmail.com"
+            target="_blank"
+            rel="noopener me"
+            aria-label="e-mail"
+            title="e-mail"
+          >
+            <i class="fa-regular fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.instagram.com/jlogan.io/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            <i class="fa-brands fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Jonathan Logan
+        2025
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    .
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+
+          <li class="nav__list-item">
+            <div class="optionswitch">
+              <input class="optionswitch__picker" type="checkbox" id="1" hidden />
+
+              
+              
+                
+
+              
+                
+
+              
+                
+
+              
+
+
+              <label class="optionswitch__label" for="1"
+                >Posts <i class="fa fa-angle-down" aria-hidden="true"></i
+              ></label>
+
+              <div class="optionswitch__triangle"></div>
+              <ul class="optionswitch__list">
+                
+                  <li class="optionswitch__list-item">
+                    
+                    <a
+                      href="/posts/"
+                      
+                      title=""
+                      >All Posts</a
+                    >
+                  </li>
+                
+                  <li class="optionswitch__list-item">
+                    
+                    <a
+                      href="/category/blog/"
+                      
+                      title=""
+                      >Blog</a
+                    >
+                  </li>
+                
+                  <li class="optionswitch__list-item">
+                    
+                    <a
+                      href="/category/home-lab/"
+                      
+                      title=""
+                      >Home Lab</a
+                    >
+                  </li>
+                
+              </ul>
+            </div>
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      .
+    "
+  >
+    
+      <div class="post__thumbnail-wrapper">
+        <img class="post__thumbnail" src="/posts/20250215-mircromanagers/thumbnail-image.png" alt="Thumbnail image" />
+      </div>
+    
+    <div class="post__content">
+      <h1>Navigating the Challenges of Working With a Micromanager in Cybersecurity</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  Sat, Feb 15, 2025
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">4-minute read</span>
+          </li>
+        </ul>
+      <div class="tableofcontents__base">
+	<h3>Table of Contents</h3>
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#understand-the-root-causes">Understand the Root Causes</a></li>
+    <li><a href="#communicate-proactively">Communicate Proactively</a></li>
+    <li><a href="#set-boundaries-professionally">Set Boundaries Professionally</a></li>
+    <li><a href="#focus-on-your-growth">Focus on Your Growth</a></li>
+    <li><a href="#turn-challenges-into-opportunities">Turn Challenges into Opportunities</a></li>
+  </ul>
+</nav>
+</div><p>The cybersecurity field is fast-paced, high-stakes, and constantly evolving. As a senior program manager, I&rsquo;ve learned that technical challenges are only one part of the equation. Navigating interpersonal dynamics, especially with a micromanager, can be just as critical—and often more complex. Micromanagers scrutinize every detail, often leaving their teams feeling stifled, untrusted, and overwhelmed. Learning how to effectively manage the relationship can be pivotal for your career growth and mental well-being.</p>
+<h2 id="understand-the-root-causes">Understand the Root Causes</h2>
+<p>The first step in working with a micromanager is understanding what might be driving their behavior. In cybersecurity, the stakes are high: a single oversight can lead to significant breaches, financial loss, and reputational damage. Managers in this space may operate under intense pressure, which can manifest as a need to control every aspect of their team’s work.</p>
+<p>Consider what might be behind their actions. Are they under pressure from their own leadership? Do they lack the technical expertise to feel confident in delegating tasks? Or are they simply anxious about meeting tight deadlines? While this doesn&rsquo;t excuse their behavior, understanding the root causes can help you approach the situation more strategically.</p>
+<h2 id="communicate-proactively">Communicate Proactively</h2>
+<p>Effective communication is a cornerstone of any professional relationship, but it becomes even more critical when dealing with a micromanager. Proactive communication can help you preempt potential misunderstandings and demonstrate your value.</p>
+<ol>
+<li>
+<p><strong>Clarify Expectations</strong>: Micromanagers often focus on details because they fear their expectations won’t be met. Take the initiative to seek clarity upfront. Summarize your understanding of their expectations and confirm it with them. For example: “To confirm, you’d like the incident response plan updated with X, Y, and Z by Friday. Is that correct?”</p>
+</li>
+<li>
+<p><strong>Provide Regular Updates</strong>: Micromanagers micromanage because they feel out of the loop. Preempt this by providing regular, concise updates on your progress. Tools like status reports or brief emails can go a long way in building trust and reducing their need to hover.</p>
+</li>
+<li>
+<p><strong>Ask for Feedback</strong>: Micromanagers often criticize but rarely provide constructive feedback. Proactively ask for their input on your work. This can not only improve the quality of your output but also show that you’re invested in meeting their standards.</p>
+</li>
+</ol>
+<h2 id="set-boundaries-professionally">Set Boundaries Professionally</h2>
+<p>Micromanagers sometimes overstep boundaries, whether it’s expecting you to work late hours without notice or demanding unnecessary revisions. In the cybersecurity world, where crises can demand extra effort, this is a fine line to walk.</p>
+<p>To set boundaries effectively:</p>
+<ol>
+<li>
+<p><strong>Be Direct but Respectful</strong>: If your manager’s demands are unreasonable, address them directly. For instance: “I understand the urgency of this task, but I’ll need additional resources or an adjusted deadline to complete it effectively.”</p>
+</li>
+<li>
+<p><strong>Leverage Documentation</strong>: Document your conversations, expectations, and deliverables. This not only protects you but also creates a clear record to reference if conflicts arise.</p>
+</li>
+<li>
+<p><strong>Know When to Escalate</strong>: If your manager’s micromanagement becomes overly disruptive or creates a toxic work environment, it’s essential to escalate the issue. Reach out to HR or another appropriate channel within your organization.</p>
+</li>
+</ol>
+<h2 id="focus-on-your-growth">Focus on Your Growth</h2>
+<p>Working under a micromanager can feel draining, but it’s also an opportunity to develop resilience, emotional intelligence, and conflict management skills. These soft skills are invaluable in cybersecurity, where cross-functional collaboration and crisis management are daily realities.</p>
+<ol>
+<li>
+<p><strong>Seek Mentors and Allies</strong>: Build relationships with other leaders and peers within your organization who can offer guidance and support.</p>
+</li>
+<li>
+<p><strong>Invest in Yourself</strong>: Use this time to deepen your expertise, whether through certifications like CISSP or CISM, or by honing skills in areas like incident response or cloud security. The stronger your skill set, the more confident you’ll feel navigating challenging dynamics.</p>
+</li>
+<li>
+<p><strong>Plan Your Career Path</strong>: If the situation with your micromanager doesn’t improve, consider how this experience fits into your long-term career goals. Sometimes, the best decision is to seek a new role where your contributions are valued and supported.</p>
+</li>
+</ol>
+<h2 id="turn-challenges-into-opportunities">Turn Challenges into Opportunities</h2>
+<p>Working with a micromanager is never easy, especially in a field as demanding as cybersecurity. However, it’s also an opportunity to build skills that will serve you throughout your career. By understanding the root causes of their behavior, communicating proactively, setting boundaries, and focusing on your own growth, you can turn a challenging situation into a stepping stone for success. Remember, even the most difficult professional relationships can teach valuable lessons—and sometimes, the key to thriving lies in how you respond to the challenge.</p>
+</div>
+    <div class="post__footer">
+      
+          <span><a class="category" href="/category/blog/">Blog</a></span>
+
+
+        
+
+        
+          <span><a class="tag" href="/tag/work/">Work</a><a class="tag" href="/tag/blog/">Blog</a><a class="tag" href="/tag/project-management/">Project Management</a><a class="tag" href="/tag/pgm/">PgM</a><a class="tag" href="/tag/program-manager/">Program Manager</a><a class="tag" href="/tag/cyber/">Cyber</a><a class="tag" href="/tag/security/">Security</a></span>
+
+
+        
+    </div>
+
+    
+	
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Jonathan Logan
+        2025
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

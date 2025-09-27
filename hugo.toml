@@ -10,30 +10,49 @@ theme = 'anatole'
   identifier = "home"
   weight = 100
   url = "/"
+  
+  [[menu.main]]
+  name = "Projects"
+  weight = 200
+  identifier = "projects"
+  url = "/projects/"
+  
+  [[menu.main]]
+  name = "References"
+  weight = 300
+  identifier = "references"
+  url = "/references/"
 
   [[menu.main]]
   name = "Posts"
-  weight = 200
+  weight = 400
   identifier = "posts"
   url = "/posts/"
   
     [[menu.main]]
     name = "All Posts"
-    weight = 210
+    weight = 410
     identifier = "allposts"
     url = "/posts/"
     parent = "posts"
  
     [[menu.main]]
     name = "Home Lab"
-    weight = 220
+    weight = 420
     identifier = "homelab"
     url = "/category/home-lab/"
+    parent = "posts"
+
+    [[menu.main]]
+    name = "Blog"
+    weight = 420
+    identifier = "blog"
+    url = "/category/blog/"
     parent = "posts"
 	
 #    [[menu.main]]
 #    name = "Astrophotography"
-#    weight = 230
+#    weight = 430
 #    identifier = "astrophotography"
 #    url = "/category/astrophotography/"
 #    parent = "posts"
@@ -68,7 +87,7 @@ url = "https://www.instagram.com/jlogan.io/"
 [params]
 title = "I'm Jonathan Logan"
 author = "Jonathan Logan"
-description = "Hello! My name is Jonathan Logan and I'm an Engineering Program Manager at CrowdStrike with a focus on DevOps, Agility, and Leadership. When I'm not working I enjoy spending time with my family, working on my home lab, and spending nights in the California desert hiking and doing astrophotography."
+description = "Hello! I’m Jonathan Logan, an engineer who leads high-impact teams at the intersection of DevOps, agility, and AI. I believe in empowering people and building scalable systems. Off the clock, I’m off the grid: exploring California’s night skies, experimenting with tech, and making time count with my family."
 profilePicture = "images/jonathanlogan.png"
 mainSections = []
 contentratio = 0.6
@@ -80,6 +99,10 @@ customJs = ["js/custom.js"]
 contactFormAction = "https://formspree.io/f/xbjnqokd"
 readMore = true
 doNotLoadAnimations = true
+hidesidebar = true
+
+[mermaid]
+enable = true
 
 [taxonomies]
     category = "category"

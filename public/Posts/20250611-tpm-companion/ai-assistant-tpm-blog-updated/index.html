@@ -1,0 +1,692 @@
+<!doctype html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  
+    class="html theme--light"
+  
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <title>
+    Jonathan Logan
+        |
+        How I Built an AI Assistant for TPMs
+      
+
+    
+
+  </title>
+
+  <meta name="generator" content="Hugo 0.131.0"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Jonathan Logan" />
+  <meta
+    name="description"
+    content="Hello! I’m Jonathan Logan, an engineer who leads high-impact teams at the intersection of DevOps, agility, and AI. I believe in empowering people and building scalable systems. Off the clock, I’m off the grid: exploring California’s night skies, experimenting with tech, and making time count with my family."
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.009f917038f30ebd1f2147e8e1dfd40fc1b799422a7869aa0da12af1fd1bf8ba.css"
+      integrity="sha256-AJ&#43;RcDjzDr0fIUfo4d/UD8G3mUIqeGmqDaEq8f0b&#43;Lo="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css"
+    integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/custom.min.485c5d8b4090ea7afafb39f486815a7e8b0c24a0bffa478be81db0b801e4985c.css"
+      integrity="sha256-SFxdi0CQ6nr6&#43;zn0hoFafosMJKC/&#43;keL6B2wuAHkmFw="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/css/syntax.min.cd68e5e384ddf989eca2ea0bae432fbb203fc03e45f00dc144efe3436f49cc85.css"
+      integrity="sha256-zWjl44Td&#43;YnsouoLrkMvuyA/wD5F8A3BRO/jQ29JzIU="
+      crossorigin="anonymous"
+      media="screen"
+    />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css"
+    integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css"
+    integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css"
+    integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css"
+    integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="http://localhost:1313/posts/20250611-tpm-companion/ai-assistant-tpm-blog-updated/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+  <script defer src="https://analytics.jlogan.io/script.js"></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.d6d329d93844b162e8bed1e915619625ca91687952177552b9b3e211014a2957.js"
+      integrity="sha256-1tMp2ThEsWLovtHpFWGWJcqRaHlSF3VSubPiEQFKKVc="
+      crossorigin="anonymous"
+    ></script>
+  <script
+      type="text/javascript"
+      src="/js/custom.min.792d94325192a5b95b3ce25a631b0e0267db087c80f4373169c451bd2e8fee17.js"
+      integrity="sha256-eS2UMlGSpblbPOJaYxsOAmfbCHyA9DcxacRRvS6P7hc="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How I Built an AI Assistant for TPMs">
+  <meta name="twitter:description" content="How I Built an AI Assistant for TPMs: From Zoom Transcripts to Jira Tickets (and Beyond) In December 2024, I started building the first version of the app. After testing it in January and February 2025, I demoed it to the Program Management community at CrowdStrike in March. I had hit a breaking point.
+I was managing several high-stakes infrastructure and security programs, each with its own cadence of Zoom calls, sprawling Jira boards, Confluence pages that aged out fast, and stakeholder groups pinging me on Slack at all hours.">
+
+
+
+  
+  <meta property="og:url" content="http://localhost:1313/posts/20250611-tpm-companion/ai-assistant-tpm-blog-updated/">
+  <meta property="og:site_name" content="Jonathan Logan - Personal Website">
+  <meta property="og:title" content="How I Built an AI Assistant for TPMs">
+  <meta property="og:description" content="How I Built an AI Assistant for TPMs: From Zoom Transcripts to Jira Tickets (and Beyond) In December 2024, I started building the first version of the app. After testing it in January and February 2025, I demoed it to the Program Management community at CrowdStrike in March. I had hit a breaking point.
+I was managing several high-stakes infrastructure and security programs, each with its own cadence of Zoom calls, sprawling Jira boards, Confluence pages that aged out fast, and stakeholder groups pinging me on Slack at all hours.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-06-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-06-11T00:00:00+00:00">
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "posts",
+        "name": "How I Built an AI Assistant for TPMs",
+        "headline": "How I Built an AI Assistant for TPMs",
+        "alternativeHeadline": "",
+        "description": "
+      
+        How I Built an AI Assistant for TPMs: From Zoom Transcripts to Jira Tickets (and Beyond) In December 2024, I started building the first version of the app. After testing it in January and February 2025, I demoed it to the Program Management community at CrowdStrike in March. I had hit a breaking point.\nI was managing several high-stakes infrastructure and security programs, each with its own cadence of Zoom calls, sprawling Jira boards, Confluence pages that aged out fast, and stakeholder groups pinging me on Slack at all hours.
+
+
+      
+
+
+    ",
+        "inLanguage": "en-us",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/20250611-tpm-companion\/ai-assistant-tpm-blog-updated\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Jonathan Logan"
+        },
+        "copyrightYear" : "2025",
+        "dateCreated": "2025-06-11T00:00:00.00Z",
+        "datePublished": "2025-06-11T00:00:00.00Z",
+        "dateModified": "2025-06-11T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Jonathan Logan",
+            "url": "http://localhost:1313/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http:\/\/localhost:1313\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "http:\/\/localhost:1313\/posts\/20250611-tpm-companion\/ai-assistant-tpm-blog-updated\/",
+        "wordCount" : "957",
+        "genre" : [ ],
+        "keywords" : [ 
+      
+      "AI"
+
+    
+      
+        ,
+
+      
+      "Technical Program Management"
+
+    
+      
+        ,
+
+      
+      "Claude"
+
+    
+      
+        ,
+
+      
+      "Automation"
+
+    
+      
+        ,
+
+      
+      "Jira"
+
+    
+      
+        ,
+
+      
+      "Slack"
+
+    
+      
+        ,
+
+      
+      "Confluence"
+
+    ]
+    }
+  </script>
+
+
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar wrapper__sidebar--hidden"
+        
+      ><div
+  class="sidebar
+    .
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/jonathanlogan.png"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">I&#39;m Jonathan Logan</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p>Hello! I’m Jonathan Logan, an engineer who leads high-impact teams at the intersection of DevOps, agility, and AI. I believe in empowering people and building scalable systems. Off the clock, I’m off the grid: exploring California’s night skies, experimenting with tech, and making time count with my family.</p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.linkedin.com/in/jonathan-logan-99ab925b/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fab fa-linkedin-in fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="mailto:jlogan3990@gmail.com"
+            target="_blank"
+            rel="noopener me"
+            aria-label="e-mail"
+            title="e-mail"
+          >
+            <i class="fa-regular fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://www.instagram.com/jlogan.io/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            <i class="fa-brands fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Jonathan Logan
+        2025
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main wrapper__main--fullscreen"
+        
+      >
+        <header class="header"><div
+  class="
+    .
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Home</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/projects/"
+              
+              title=""
+              >Projects</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/references/"
+              
+              title=""
+              >References</a
+            >
+          </li>
+        
+
+      
+        
+        
+
+          <li class="nav__list-item">
+            <div class="optionswitch">
+              <input class="optionswitch__picker" type="checkbox" id="3" hidden />
+
+              
+              
+                
+
+              
+                
+
+              
+                
+
+              
+
+
+              <label class="optionswitch__label" for="3"
+                >Posts <i class="fa fa-angle-down" aria-hidden="true"></i
+              ></label>
+
+              <div class="optionswitch__triangle"></div>
+              <ul class="optionswitch__list">
+                
+                  <li class="optionswitch__list-item">
+                    
+                    <a
+                      href="/posts/"
+                      
+                      title=""
+                      >All Posts</a
+                    >
+                  </li>
+                
+                  <li class="optionswitch__list-item">
+                    
+                    <a
+                      href="/category/blog/"
+                      
+                      title=""
+                      >Blog</a
+                    >
+                  </li>
+                
+                  <li class="optionswitch__list-item">
+                    
+                    <a
+                      href="/category/home-lab/"
+                      
+                      title=""
+                      >Home Lab</a
+                    >
+                  </li>
+                
+              </ul>
+            </div>
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contact</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      .
+    "
+  >
+    
+    <div class="post__content">
+      <h1>How I Built an AI Assistant for TPMs</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  Wed, Jun 11, 2025
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">5-minute read</span>
+          </li>
+        </ul>
+      <h2 id="how-i-built-an-ai-assistant-for-tpms-from-zoom-transcripts-to-jira-tickets-and-beyond">How I Built an AI Assistant for TPMs: From Zoom Transcripts to Jira Tickets (and Beyond)</h2>
+<p>In December 2024, I started building the first version of the app. After testing it in January and February 2025, I demoed it to the Program Management community at CrowdStrike in March. I had hit a breaking point.</p>
+<p>I was managing several high-stakes infrastructure and security programs, each with its own cadence of Zoom calls, sprawling Jira boards, Confluence pages that aged out fast, and stakeholder groups pinging me on Slack at all hours. I was burning too much time stitching information across systems—and too little time actually influencing outcomes.</p>
+<p>So I built an AI assistant.</p>
+<p>It wasn’t a moonshot. It was a pragmatic solution to a real problem: I needed help <em>automating the coordination layer of program management</em>—summarizing meetings, tracking development progress, identifying risks, and generating accurate status updates. And I needed to do it without sacrificing clarity, context, or trust. That assistant, powered by <strong>Claude 3.7 Sonnet</strong>, changed the way I work.</p>
+<h2 id="the-coordination-tax">The Coordination Tax</h2>
+<p>Like most TPMs operating at scale, my calendar was a graveyard of context switches. In a typical week, I sat through dozens of meetings across engineering, product, security, and operations. I spent my evenings updating Jira, syncing Confluence pages, and formatting risk reports. It wasn’t sustainable.</p>
+<p>Even with strong rituals and good hygiene, I found myself struggling to keep up with:</p>
+<ul>
+<li>Unstructured conversations that needed summarizing</li>
+<li>Decisions made verbally but never logged</li>
+<li>Risk signals scattered across epics and sprints</li>
+<li>Stakeholders asking for insights faster than I could type</li>
+</ul>
+<p>The real problem wasn’t a lack of tools—it was the <em>fragmentation of context</em>. I needed a way to synthesize information across systems and surface what mattered, when it mattered.</p>
+<h2 id="building-the-assistant">Building the Assistant</h2>
+<p>I started with a simple hypothesis: <strong>Claude 3.7 Sonnet</strong>, with its long-context reasoning and low hallucination rate, could serve as the backbone of a TPM-focused coordination tool. From there, I built a lightweight Flask application to orchestrate inputs and outputs across the systems I touched daily.</p>
+<p>The assistant consumed Zoom transcripts, monitored Jira activity, and pushed structured summaries and reports to Confluence and Slack.</p>
+<h3 id="-architecture-overview">📊 Architecture Overview</h3>
+<div class="mermaid">flowchart TD
+  subgraph Input Sources
+    A[Zoom Transcripts] --> C
+    B[Jira Ticket Updates] --> D
+    E[Slack Channel Activity] --> D
+    F[Confluence Pages] --> D
+  end
+
+  subgraph AI Assistant Flask Appss
+    C[Meeting Parser]
+    D[Jira Analyzer]
+    G[Claude 3.7 Sonnet]
+    H[Risk Synthesizer]
+    I[Dependency Mapper]
+    C --> G
+    D --> G
+    G --> H
+    G --> I
+  end
+
+  subgraph Output Channels
+    H --> J[Slack: Status Summaries]
+    H --> K[Confluence: Risk Reports]
+    I --> L[Slack: Dependency Alerts]
+    G --> M[Jira: Ticket Drafts]
+    C --> N[Confluence: Meeting Notes]
+  end
+</div>
+
+<h2 id="from-6-to-15-programs">From 6 to 15 Programs</h2>
+<p>Before building the assistant, I was managing 6 to 8 concurrent initiatives—a reasonable load, but one that left little headroom for growth. Within two months of deploying the tool, I was managing <strong>15 programs in parallel</strong>.</p>
+<p>The difference wasn’t just about scale—it was about focus. I was spending less time documenting and more time unblocking teams, resolving ambiguity, and driving execution.</p>
+<p>The assistant didn&rsquo;t replace the need for judgment—it gave me back the time to apply it.</p>
+<h2 id="-weekly-workflow-loop">🔁 Weekly Workflow Loop</h2>
+<div class="mermaid">sequenceDiagram
+  participant TPM
+  participant Zoom
+  participant Jira
+  participant Claude
+  participant Confluence
+  participant Slack
+
+  Zoom->>TPM: Weekly recorded meetings
+  TPM->>Claude: Upload transcript
+  Claude->>Claude: Generate notes + action items
+  Claude-->>Confluence: Post meeting summary
+  Claude-->>Slack: Push TL;DR & action items
+
+  Jira->>Claude: Poll ticket updates
+  Claude-->>TPM: Dev progress summary
+
+  Claude->>Claude: Risk analysis + blockers
+  Claude-->>Slack: Weekly risk/status snapshot
+  Claude-->>Confluence: Publish status update
+</div>
+
+<h2 id="what-worked">What Worked</h2>
+<p>Claude’s ability to reason across long documents and interleave structured outputs made it the perfect match for TPM workflows. The model was particularly strong at detecting implicit decisions or surfacing risks that weren’t directly stated. When paired with disciplined prompt templates, it delivered consistent, trustworthy outputs that engineers and stakeholders quickly came to rely on.</p>
+<p>Slack notifications and Confluence publishing made the assistant feel native to our existing workflows. People didn’t need to “use a new tool”—they just received better, faster updates where they already worked.</p>
+<h2 id="what-didnt-yet">What Didn&rsquo;t (Yet)</h2>
+<p>Of course, not everything was smooth. Transcripts from Whisper lacked reliable speaker attribution, which made some summaries ambiguous unless manually corrected. Claude occasionally hallucinated ticket status when Jira updates weren’t freshly pulled, so context freshness became a key constraint.</p>
+<p>The dependency analysis feature was only as good as the teams’ ticket hygiene. If epics were loosely linked or descriptions vague, Claude had less signal to work with. And from a security perspective, I had to implement strict measures to ensure stateless processing, protect sensitive content, and meet internal audit standards.</p>
+<h2 id="a-new-way-to-lead">A New Way to Lead</h2>
+<p>This project started as an experiment. It ended up transforming how I approached my role.</p>
+<ul>
+<li>I reduced Jira update latency from days to minutes</li>
+<li>I consistently delivered clear, accurate status reports ahead of schedule</li>
+<li>I surfaced risks earlier—often before they were escalated</li>
+<li>I doubled my program load without burnout</li>
+<li>I re-centered my energy on solving problems, not tracking them</li>
+</ul>
+<h2 id="what-comes-next">What Comes Next</h2>
+<p>There’s still more to build. I’m exploring:</p>
+<ul>
+<li>Embedding-based memory so Claude can track program threads over time</li>
+<li>Dynamic Jira querying with Claude’s upcoming tool-use API</li>
+<li>Slack-side approval flows for one-click publishing</li>
+<li>Hardened access controls and audit logging for enterprise adoption</li>
+</ul>
+<p>But even in its current form, this assistant has redefined how I think about program management. I no longer see “AI” as a separate toolset—it’s a <strong>layer of leverage</strong> that sits alongside my instincts, processes, and leadership skills.</p>
+<p>If you’re a TPM juggling multiple streams of work and trying to stay ahead of context collapse, this kind of assistant isn’t a luxury—it’s a necessity.</p>
+<p>I didn’t set out to build an AI product.</p>
+<p>I set out to <strong>build myself a better way to lead</strong>.</p>
+</div>
+    <div class="post__footer">
+      
+
+        
+    </div>
+
+    
+	
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        Jonathan Logan
+        2025
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js"
+    integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ="
+    crossorigin="anonymous"
+  ></script></body>
+  
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+  
+</html>

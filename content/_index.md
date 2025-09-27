@@ -4,21 +4,37 @@ toc: true
 
 # Who am I
 
-I am an engineer by formation, curious and energetic - who applies technology to solve real-world problems. Personally, I’m a easy going, sociable, a fast-learner, curious and a natural leader. I do what I love, and I love what I do. I lead by example and work side by side with my teams.
+I am an engineer by training who is curious, energetic, and passionate about using technology to solve real-world problems. I thrive at the intersection of technical expertise and managerial insight, consistently bringing a clear business and product vision to technology-driven projects.
 
-I am a deliberate jack of all trades, master of none. My profile is a hybrid of technical and managerial experience, but always related to technological projects. I bring business and product vision to tech teams. I am a fast learner, curious to see how technology can improve the customer experience in multiple areas. I have a strong motivation and sense of responsibility with myself, my team and clients (or peers), and people like my positive and easy going, can-do attitude.
+As a deliberate "jack of all trades," I embrace my role as a specialized generalist, bridging gaps between diverse technical domains to build a comprehensive understanding of what it takes to create successful tech products. My hands-on experience spans various programming languages and frameworks, from ANSI C to Go, always driven by my curiosity to learn and apply new technologies that enhance customer experiences.
 
-On the technical side, I’m a specialized generalist, always working between different areas and aiming to develop a holistic vision on what is involved into creating a successful tech product. Through my work I have involved a diverse variety of languages (from ANSI C to Go) and frameworks.
+Leadership comes naturally to me; I lead by example, working closely alongside my teams to inspire collaboration and innovation. My colleagues appreciate my positive, easy-going nature, fast learning curve, and unwavering sense of responsibility towards my team and our shared goals.
+
+Ultimately, I do what I love and love what I do, always approaching challenges with enthusiasm, adaptability, and a can-do attitude.
 
 # Experience
 
-I have over 10 years of experience leading a diverse portfolio of projects and working with teams of all sizes. I have architected, developed, and delivered digital products to help businesses improve people's lives by solving complex problems with simple solutions.
+I have over 12 years of experience leading a diverse portfolio of projects and working with teams of all sizes. I have architected, developed, and delivered digital products to help businesses improve people's lives by solving complex problems with simple solutions.
 
 ## CrowdStrike
 ### Engineering Program Manager III
-*March 2024 - Present / San Diego, CA (Remote)*
+*March 2024 - May 2025 / San Diego, CA (Remote)*
 
-I am currently an Engineering Program Manager III at CrowdStrike responsible for driving Major Initiative (MI) programs and projects to completion in the Platform Product Group. This position requires I drive the scheduling, scoping, and end-to-end execution of major projects and programs. I work directly with Engineering Developers, Product Managers, and Development Managers to ensure timely delivery against the roadmap. I also work closely with cross functional teams across multiple timezones (Australia, Europe, the United Kingdom, Israel, and the United States) to drive collaboration, ensure dependencies are well known, and critical issues are identified and driven to resolution. 
+*Impacted by company-wide layoffs affecting the entire Program Management organization*
+
+As the lead Engineering Program Manager for the Platform Scale group at CrowdStrike, I drove strategic and tactical execution across complex, global initiatives. My role required a deep understanding of distributed systems, cloud infrastructure, and cross-functional coordination at scale, with a focus on platform evolution, AI enablement, and engineering efficiency.
+
+Served as the lead Engineering Program Manager for the Platform Scale Product Group, responsible for defining and executing both the long-term engineering strategy and near-term tactical roadmap across multiple cloud platforms: AWS, GCP, and OCI
+
+- Led high-priority Major Initiative (MI) programs across CrowdStrike’s core platform, ensuring cross-functional alignment and on-time delivery with stakeholders across global time zones (U.S., EMEA, Israel, Australia)
+
+- Spearheaded the expansion of CrowdStrike’s core development stack into Google Cloud Platform (GCP) and Oracle Cloud Infrastructure (OCI), coordinating deep collaboration between infrastructure, security, and engineering teams
+
+- Drove efforts to inject AI into the software development lifecycle, leading programs focused on the development of Retrieval-Augmented Generation (RAG) Agents and foundational MPC (Model-Program Communication) services
+
+- Maintained a deep technical understanding of CrowdStrike’s product architecture, enabling effective scope planning, scheduling, and risk management across complex engineering initiatives
+
+- Fostered strong relationships with engineering leads, product managers, and executive stakeholders to identify critical dependencies, resolve blockers, and drive outcomes aligned to business objectives
 
 ## Amazon Web Services 
 ### Technical Program Manager II
