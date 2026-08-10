@@ -1,0 +1,181 @@
+name: Build and deploy
+
+# The whole point of this pipeline: edit markdown locally, push, and the live
+# site rebuilds itself. No manual `hugo` run, no committed build output, no
+# copying files to a server by hand.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - 'scripts/**'
+      - 'deploy/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Two overlapping rsyncs against the same directory would interleave and could
+  # leave the live site in a mixed state. Queue instead of cancelling: a
+  # cancelled deploy mid-rsync is exactly the state we are avoiding.
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  # Pinned deliberately. This is the version that last produced a known-good
+  # build of this site, and the version verified against this content.
+  # Bump it as a conscious commit, never float on 'latest' -- the vendored
+  # anatole theme already emits deprecation warnings that become hard errors in
+  # later Hugo releases.
+  HUGO_VERSION: '0.131.0'
+  SITE_URL: 'https://jlogan.io/'
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # The anatole theme is VENDORED into themes/ -- all its files are
+          # tracked directly. No submodule fetch is needed, and asking for one
+          # used to fail outright on a stray gitlink in this repo.
+          submodules: false
+          # Full history so Hugo's .Lastmod / .GitInfo resolve real commit dates
+          # rather than falling back to file mtimes.
+          fetch-depth: 0
+
+      - name: Install Hugo (extended)
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          # NOT optional. themes/anatole/layouts/partials/head.html compiles
+          # SCSS via resources.ToCSS, which only the extended build provides.
+          extended: true
+
+      - name: Build
+        run: hugo --minify --gc --baseURL "$SITE_URL"
+
+      - name: Verify the build before it can be deployed
+        # This gate exists because of a real past failure: the build output that
+        # used to be committed to this repo was a `hugo server` dev build with
+        # http://localhost:1313/ baked into its sitemap. Catch that class of
+        # mistake here rather than serving it to the internet.
+        run: |
+          set -euo pipefail
+          fail() { echo "::error::$1"; exit 1; }
+
+          [ -f public/index.html ]  || fail "public/index.html missing - build produced nothing"
+          [ -f public/sitemap.xml ] || fail "public/sitemap.xml missing"
+          [ -f public/404.html ]    || fail "public/404.html missing - nginx error_page would break"
+
+          if grep -q 'localhost' public/sitemap.xml; then
+            fail "sitemap.xml contains 'localhost' - built with a dev baseURL, refusing to deploy"
+          fi
+          if ! grep -q "$SITE_URL" public/sitemap.xml; then
+            fail "sitemap.xml does not contain $SITE_URL - wrong baseURL"
+          fi
+
+          # A near-empty build would happily rsync --delete the live site into
+          # nothing. Guard the floor.
+          # grep -o | wc -l, not grep -c: --minify emits the entire sitemap on a
+          # single line, and grep -c counts matching LINES, so it would always
+          # report 1 no matter how many URLs the build produced.
+          pages=$(grep -o '<loc>' public/sitemap.xml | wc -l)
+          echo "sitemap URLs: $pages"
+          [ "$pages" -ge 30 ] || fail "only $pages URLs in sitemap (expected >=30) - build looks truncated"
+
+          posts=$(find public/posts -mindepth 1 -maxdepth 1 -type d | wc -l)
+          echo "post directories: $posts"
+          [ "$posts" -ge 5 ] || fail "only $posts posts built (expected >=5)"
+
+          echo "Build verified: $pages URLs, $posts posts, $(du -sh public | cut -f1) total"
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: public/
+          retention-days: 7
+
+  deploy:
+    name: Deploy to Lightsail
+    runs-on: ubuntu-latest
+    needs: build
+    # Never deploy from a pull request -- PRs build only, so a fork PR cannot
+    # reach the deploy secrets or the live site.
+    if: github.event_name != 'pull_request'
+    environment:
+      name: production
+      url: https://jlogan.io
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: public
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          [ -n "$DEPLOY_SSH_KEY" ]  || { echo "::error::DEPLOY_SSH_KEY secret is not set"; exit 1; }
+          [ -n "$SSH_KNOWN_HOSTS" ] || { echo "::error::SSH_KNOWN_HOSTS secret is not set"; exit 1; }
+
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # Pinned host keys, NOT StrictHostKeyChecking=no. Disabling the check
+          # would let anything that can answer on that address receive a deploy.
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+          [ -n "$DEPLOY_HOST" ] || { echo "::error::DEPLOY_HOST secret is not set"; exit 1; }
+          [ -n "$DEPLOY_USER" ] || { echo "::error::DEPLOY_USER secret is not set"; exit 1; }
+
+          # The destination path is NOT specified here. The server forces it via
+          # the rrsync command= restriction on the deploy key, so this key can
+          # only ever write into /srv/jlogan.io/html.
+          #
+          # --checksum, not the default mtime comparison: artifact
+          # download/upload does not preserve mtimes, so every file would look
+          # modified on every run and the whole site would transfer each time.
+          rsync -rlz --delete --checksum --human-readable --stats \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=yes -o BatchMode=yes" \
+            public/ "$DEPLOY_USER@$DEPLOY_HOST:."
+
+      - name: Verify the live site
+        run: |
+          set -euo pipefail
+          # Give nginx a moment to see the new files.
+          sleep 3
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 https://jlogan.io/)
+          echo "GET https://jlogan.io/ -> $code"
+          if [ "$code" != "200" ]; then
+            echo "::error::live site returned $code"
+            exit 1
+          fi
+          # A 200 that is really a Pangolin SSO login page means the resource was
+          # left with authentication enabled -- the site would be behind a login
+          # wall while still reporting healthy.
+          if curl -sS --max-time 20 https://jlogan.io/ | grep -qiE 'pangolin|sign in to continue'; then
+            echo "::warning::Response looks like an auth page. Check that the Pangolin resource for jlogan.io has authentication disabled."
+          fi
+
+      - name: Clean up SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

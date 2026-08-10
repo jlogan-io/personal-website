@@ -1,0 +1,60 @@
+# Static file server for jlogan.io, running on the Lightsail instance alongside
+# the existing Pangolin stack.
+#
+# Deliberately publishes NO ports. Traefik (part of the Pangolin stack) reaches
+# this container by name over the shared Docker network, so nginx is never
+# exposed to the internet directly -- all ingress, TLS and access control stay
+# with Pangolin.
+#
+# Install to /srv/jlogan.io/docker-compose.yml (see setup-lightsail.sh), then:
+#   cd /srv/jlogan.io && docker compose up -d
+
+services:
+  jlogan-web:
+    image: nginx:1.27-alpine
+    container_name: jlogan-web
+    restart: unless-stopped
+
+    volumes:
+      # The rsync target. Read-only to the container: only the deploy user
+      # writes here, and only over rsync.
+      - ./html:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+    # Traefik needs to resolve this container by name. The network is created
+    # and owned by the Pangolin stack, hence external: true.
+    networks:
+      - pangolin
+
+    healthcheck:
+      # Confirms nginx is serving actual content, not just that the process is
+      # alive -- an empty html/ directory should read as unhealthy.
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+    # Static file serving needs no write access anywhere except nginx's own
+    # runtime scratch space.
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    security_opt:
+      - no-new-privileges:true
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  pangolin:
+    external: true
+    # Set PANGOLIN_NETWORK in deploy/.env to the exact network name Traefik is
+    # attached to. Get it from scripts/inspect-lightsail.sh -- the "DOCKER
+    # NETWORKS" section lists which network each container is on.
+    # Compose fails fast with the message below if it is unset.
+    name: ${PANGOLIN_NETWORK:?set PANGOLIN_NETWORK in deploy/.env to Traefik network name}
