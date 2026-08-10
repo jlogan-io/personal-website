@@ -63,12 +63,6 @@ theme = 'anatole'
   identifier = "contact"
   url = "/contact/"
 
-  [[footer]]
-  name = "imprint"
-  weight = 1
-  identifier = "imprint"
-  url = "/imprint/"
-
 [[params.socialIcons]]
 icon = "fab fa-linkedin-in"
 title = "Linkedin"
