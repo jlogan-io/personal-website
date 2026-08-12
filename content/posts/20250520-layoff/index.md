@@ -7,7 +7,6 @@ category:
   - Blog
 toc: true
 thumbnail: "posts/20250520-layoff/thumbnail-image.png"
-author: Jonathan Logan
 ---
 
 A few weeks ago, I got laid off.
