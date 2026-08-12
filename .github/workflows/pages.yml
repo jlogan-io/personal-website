@@ -1,0 +1,69 @@
+name: Build and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Lets you rebuild without a commit, e.g. after changing Pages settings.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race. Queue rather than cancel, so a push during a
+# build still ends up published rather than silently dropped.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # The anatole theme compiles SCSS, which the plain Hugo binary cannot do.
+      # It must be the EXTENDED build or the CSS silently comes out empty.
+      HUGO_VERSION: 0.164.0
+    steps:
+      - name: Install Hugo (extended)
+        run: |
+          curl -sSLo hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i hugo.deb
+          hugo version
+
+      - uses: actions/checkout@v4
+        with:
+          # The theme is vendored rather than a submodule, so no recursive
+          # checkout is needed. Full history gives Hugo real lastmod dates.
+          fetch-depth: 0
+
+      - uses: actions/configure-pages@v5
+        id: pages
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Fail if a dev build leaked in
+        # public/ on the authoring machine was a `hugo server` build carrying
+        # livereload. Publishing that breaks the live site, so refuse to ship it.
+        run: |
+          if grep -rq "livereload.js" public/; then
+            echo "::error::livereload.js found in build output - this is a dev build, not a release build"
+            exit 1
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
