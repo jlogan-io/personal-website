@@ -12,6 +12,12 @@ theme = 'anatole'
   url = "/"
   
   [[menu.main]]
+  name = "Experience"
+  weight = 200
+  identifier = "experience"
+  url = "/experience/"
+
+  [[menu.main]]
   name = "Projects"
   weight = 200
   identifier = "projects"
@@ -70,24 +76,29 @@ theme = 'anatole'
   url = "/imprint/"
 
 [[params.socialIcons]]
-icon = "fab fa-linkedin-in"
+icon = "fa-brands fa-linkedin"
 title = "Linkedin"
 url = "https://www.linkedin.com/in/jonathan-logan-99ab925b/"
 
 [[params.socialIcons]]
-icon = "fa-regular fa-envelope"
-title = "e-mail"
-url = "mailto:jlogan3990@gmail.com"
+icon = "fa-regular fa-file"
+title = "Resume"
+url = "experience/"
 
 [[params.socialIcons]]
 icon = "fa-brands fa-instagram"
 title = "Instagram"
 url = "https://www.instagram.com/jlogan.io/"
 
+[[params.socialIcons]]
+icon = "fa-regular fa-envelope"
+title = "e-mail"
+url = "contact/"
+
 [params]
 title = "I'm Jonathan Logan"
 author = "Jonathan Logan"
-description = "Hello! I’m Jonathan Logan, an engineer who leads high-impact teams at the intersection of DevOps, agility, and AI. I believe in empowering people and building scalable systems. Off the clock, I’m off the grid: exploring California’s night skies, experimenting with tech, and making time count with my family."
+description = "Staff Technical Program Manager at PlayStation. I lead teams building scalable systems at the intersection of cloud, AI, and gaming."
 profilePicture = "images/jonathanlogan.png"
 mainSections = []
 contentratio = 0.6

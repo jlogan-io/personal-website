@@ -1,0 +1,8 @@
+# Hugo build output. Never commit this: the copy on bravo is a `hugo server`
+# dev build carrying livereload.js, and publishing it would break the live site.
+/public/
+/resources/
+.hugo_build.lock
+
+# macOS
+.DS_Store
