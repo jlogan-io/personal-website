@@ -1,4 +1,10 @@
-# Experience
+---
+author: Jonathan Logan
+title: Experience
+date: 2025-05-21
+description: Professional Experience
+contact: false
+---
 
 I have over 12 years of experience leading a diverse portfolio of projects and working with teams of all sizes. I have architected, developed, and delivered digital products to help businesses improve people's lives by solving complex problems with simple solutions.
 
