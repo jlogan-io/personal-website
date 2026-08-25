@@ -30,9 +30,9 @@
         </div>
       {{ end }}
         {{ if .Site.Params.fullPostContent }}
-          <p>{{ .Content | markdownify }}</p>
+          <p>{{ .Content }}</p>
         {{ else }}
-          <p>{{ .Summary | markdownify }}</p>
+          <p>{{ .Summary }}</p>
         {{ end }}
         <!-- add read more -->
         {{- if and (.Truncated) (.Site.Params.readMore) -}}

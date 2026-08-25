@@ -1,0 +1,21 @@
+# Shared config for both lychee jobs in .github/workflows/ci.yml.
+
+# LinkedIn answers bots with HTTP 999 and Formspree's form endpoint is POST-only,
+# so a GET correctly gets 405. Neither is a broken link; both would fail the
+# check forever.
+exclude = [
+  "^https://www\\.linkedin\\.com/",
+  "^https://formspree\\.io/",
+  # Wayback snapshots are immutable by design, so there is nothing to check,
+  # and the host routinely takes over 30s to answer.
+  "^https://web\\.archive\\.org/",
+]
+
+# 206 for range requests, 429 for rate limiting -- both mean the resource is
+# there.
+accept = [200, 206, 429]
+
+max_concurrency = 4
+timeout = 30
+retry_wait_time = 5
+no_progress = true

@@ -7,6 +7,8 @@ category:
   - Blog
 toc: true
 thumbnail: "posts/20250520-layoff/thumbnail-image.png"
+aliases:
+  - /Posts/20250520-layoff/
 ---
 
 A few weeks ago, I got laid off.

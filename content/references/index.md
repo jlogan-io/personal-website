@@ -4,6 +4,8 @@ title: References
 date: 2025-05-21
 description: Professional Refrences
 contact: false
+aliases:
+  - /refrences/
 ---
 
 The following references highlight my work as an Engineering Program Manager, particularly during my time at CrowdStrike. These testimonials reflect the impact I’ve made in driving cross-functional alignment, leading high-visibility initiatives, and blending technical depth with strategic execution. I’m proud to have partnered with talented leaders and engineers who can speak to the quality, rigor, and innovation I bring to every program I lead.

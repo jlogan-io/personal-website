@@ -83,7 +83,7 @@ url = "https://www.linkedin.com/in/jonathan-logan-99ab925b/"
 [[params.socialIcons]]
 icon = "fa-regular fa-file"
 title = "Resume"
-url = "experience/"
+url = "/experience/"
 
 [[params.socialIcons]]
 icon = "fa-brands fa-instagram"
@@ -93,7 +93,7 @@ url = "https://www.instagram.com/jlogan.io/"
 [[params.socialIcons]]
 icon = "fa-regular fa-envelope"
 title = "e-mail"
-url = "contact/"
+url = "/contact/"
 
 [params]
 title = "I'm Jonathan Logan"
