@@ -37,6 +37,13 @@ on a daily schedule as well as on push, so the post goes live on the first build
 after its date with nothing further to do. Set `draft: false` when you are done
 writing — a draft stays a draft no matter what its date says.
 
+To check what a scheduled post will look like once it goes live, build with the
+clock moved forward:
+
+```bash
+hugo server --clock 2026-09-02T09:00:00-07:00
+```
+
 Note that GitHub disables scheduled workflows in a repository with no activity
 for 60 days. If the site has been dormant that long, a scheduled post needs a
 push (or a manual run from the Actions tab) to go out.

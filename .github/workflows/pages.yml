@@ -5,6 +5,16 @@ on:
     branches: [main]
   # Lets you rebuild without a commit, e.g. after changing Pages settings.
   workflow_dispatch:
+  # Scheduled publishing. Hugo omits future-dated content from a build, so a
+  # post dated next Tuesday simply is not in the site until a build happens on
+  # or after that day -- this is the build that happens. 13:17 UTC is early
+  # morning Pacific; the odd minute avoids the top-of-hour queue where GitHub
+  # delays scheduled runs the most.
+  #
+  # Caveat worth knowing: GitHub disables scheduled workflows in a repository
+  # with no activity for 60 days, so a dormant site stops publishing on time.
+  schedule:
+    - cron: "17 13 * * *"
 
 permissions:
   contents: read
