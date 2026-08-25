@@ -70,12 +70,13 @@ jobs:
   external-links:
     name: External links (advisory)
     runs-on: ubuntu-latest
-    # Other people's servers rate-limit and go down. Worth knowing about, never
-    # worth blocking a merge on.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: lycheeverse/lychee-action@v2
+        # continue-on-error on the STEP, not the job. At job level the run stays
+        # green but the job itself still reports as failed, which puts a red X
+        # on the PR for something that is explicitly not blocking.
+        continue-on-error: true
         with:
           # --root-dir static so root-relative references in the markdown
           # (/images/map.png) resolve to the file that actually backs them,
@@ -90,10 +91,6 @@ jobs:
   lighthouse:
     name: Lighthouse (advisory)
     runs-on: ubuntu-latest
-    # Advisory until a baseline exists. Turn `continue-on-error` off and set
-    # real minimums in lighthouserc.json once the redesign lands and the
-    # numbers stop moving.
-    continue-on-error: true
     env:
       HUGO_VERSION: 0.165.0
     steps:
@@ -112,6 +109,10 @@ jobs:
         run: hugo --gc --minify --baseURL "http://localhost:8080/"
 
       - uses: treosh/lighthouse-ci-action@v12
+        # Advisory until the redesign settles and a baseline exists. Scores are
+        # in the job log and the uploaded report; tighten lighthouserc.json and
+        # drop this line to start enforcing them.
+        continue-on-error: true
         with:
           configPath: ./lighthouserc.json
           uploadArtifacts: true
