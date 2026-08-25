@@ -135,7 +135,7 @@ python3 scripts/optimize-images.py           # apply
 | `static/` | Files copied verbatim to the site root (favicons, images, CNAME). |
 | `archetypes/` | Front matter template for new posts. |
 | `scripts/` | `new-post.sh`, `optimize-images.py`. |
-| `.github/workflows/` | Build and deploy, plus PR checks. |
+| `.github/workflows/` | `pages.yml` deploys, `ci.yml` gates PRs, `preview.yml` previews them. |
 
 `public/` and `resources/_gen/` are build output and are **git-ignored**. They
 used to be committed, which is how a stale `hugo server` build — complete with
@@ -166,6 +166,40 @@ https://jlogan.io
 overridden with `configure-pages`'s `base_url` output, which reports
 `http://jlogan.io` for this custom-domain setup and put plain `http://` into
 every canonical URL, `og:url`, sitemap entry and RSS link on the live site.
+
+---
+
+## Pull request previews
+
+Every PR gets a live preview at a `*.pages.dev` URL, posted as a comment on the
+PR. Previews build with `--buildDrafts --buildFuture`, so a draft or a scheduled
+post can be reviewed before it is published anywhere.
+
+Previews are served by **Cloudflare Pages**, separate from production. GitHub
+Pages has no preview mechanism of its own, and the usual workaround
+(`rossjrw/pr-preview-action`) requires switching Pages to "Deploy from branch",
+which would mean rebuilding the working production deploy. Keeping previews on a
+second platform leaves production untouched.
+
+They carry `X-Robots-Tag: noindex`, written at deploy time rather than committed,
+so it cannot reach the production build.
+
+### One-time setup
+
+1. In the Cloudflare dashboard, create a Pages project named
+   `jlogan-io-preview`. Choose **direct upload** — do *not* connect it to the
+   GitHub repo, or it will also build `main` and race with production.
+2. Create an API token with the **Cloudflare Pages: Edit** permission.
+3. Add two repository secrets under Settings → Secrets and variables → Actions:
+
+   | Secret | Value |
+   |---|---|
+   | `CLOUDFLARE_API_TOKEN` | the token from step 2 |
+   | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard → Workers & Pages → Account ID |
+
+Until those secrets exist the preview job fails and the rest of the checks still
+run; nothing about production depends on it. Fork PRs skip the job entirely,
+since forks cannot read secrets.
 
 ---
 
