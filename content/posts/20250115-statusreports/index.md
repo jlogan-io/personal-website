@@ -18,6 +18,8 @@ toc: true
 thumbnail: "posts/20250115-statusreports/thumbnail-image.png"
 author: Jonathan Logan
 
+aliases:
+  - /Posts/20250115-statusreports/
 ---
 
 

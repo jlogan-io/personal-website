@@ -66,6 +66,23 @@ else fail "sitemap has only $URLS URLs, expected at least $MIN_URLS"; fi
 if [ "$POSTS" -ge "$MIN_POSTS" ]; then ok "$POSTS post pages built (min $MIN_POSTS)"
 else fail "only $POSTS post pages built, expected at least $MIN_POSTS"; fi
 
+# --- real pages, not redirect stubs ------------------------------------------
+# Legacy aliases include /Posts/<slug>/, which differs from /posts/<slug>/ only
+# by case. On a case-insensitive filesystem (macOS) those are the same path, so
+# a build there can in principle write the redirect stub over the real post.
+# CI runs on Linux and is unaffected, but a locally-built site must never ship
+# with a post replaced by a one-line refresh.
+STUBBED=""
+for f in "$DIR/index.html" "$DIR/posts/index.html" "$DIR"/posts/*/index.html; do
+  [ -f "$f" ] || continue
+  if grep -qs 'http-equiv=.\?refresh' "$f"; then STUBBED="$STUBBED $f"; fi
+done
+if [ -n "$STUBBED" ]; then
+  fail "real pages replaced by redirect stubs:$STUBBED"
+else
+  ok "posts are real pages, not redirect stubs"
+fi
+
 # --- weight budget -----------------------------------------------------------
 # The theme renders plain <img src> with no Hugo image processing, so whatever
 # is committed is what every visitor downloads. These ceilings are set just above

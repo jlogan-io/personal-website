@@ -8,6 +8,9 @@ category:
 thumbnail: "posts/20250611-tpm-companion/thumbnail-image.png"
 draft: false
 toc: true
+aliases:
+  - /Posts/20250611-tpm-companion/
+  - /Posts/20250611-tpm-companion/ai-assistant-tpm-blog-updated/
 ---
 
 In late 2024, I found myself at an inflection point. I was managing a growing portfolio of technical programs; Each project with its own moving parts, stakeholders, and sources of truth. My weeks were filled with Zoom meetings, Jira ticket reviews, Slack updates, and status report writing. Despite years of experience, I realized that the coordination tax was growing and becoming unsustainable.
