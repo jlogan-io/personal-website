@@ -1,0 +1,15 @@
+{{/* The wordmark carries aria-current on the home page; section links carry it
+     on their own pages and anywhere beneath them, so a post highlights
+     "Writing". */}}
+<nav class="nav" aria-label="Primary">
+  <a class="nav__wordmark" href="{{ "/" | relURL }}"{{ if .IsHome }} aria-current="page"{{ end }}>{{ site.Home.Params.wordmark | default site.Params.author }}</a>
+
+  {{- range site.Menus.main }}
+    {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) -}}
+    <a class="nav__link" href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+  {{- end }}
+
+  {{- with site.Home.Params.email }}
+  <a class="btn btn--primary btn--nav" href="mailto:{{ . }}">Say hello</a>
+  {{- end }}
+</nav>

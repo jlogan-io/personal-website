@@ -4,6 +4,10 @@ title: Projects
 date: 2025-05-21
 description: Professional Projects
 contact: false
+menus:
+  main:
+    name: Projects
+    weight: 300
 ---
 
 Welcome to my professional project portfolio—a showcase of the high-impact programs I’ve led across cybersecurity, cloud infrastructure, AI tooling, and defense. From navigating a global outage at CrowdStrike with urgency and precision, to building scalable cloud infrastructure in GCP, pioneering GenAI-powered program automation, and driving large-scale authorization migrations at AWS, each initiative reflects my commitment to technical excellence, cross-functional alignment, and strategic execution. Whether managing mission-critical systems for national defense or delivering AI-integrated solutions for modern enterprises, I lead with clarity, resilience, and a deep understanding of complex systems at scale.

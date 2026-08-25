@@ -1,0 +1,150 @@
+/* Reset and document-level defaults. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-bright);
+  font-family: var(--sans);
+  font-size: 16px;
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--selection); }
+
+/* The design sets line-height per element rather than globally; a global value
+ * inflates the flex rows in the nav and the badge pills by a few px each. */
+
+a { color: var(--brass); }
+a:hover { color: var(--brass-hover); }
+
+/* Visible keyboard focus. The design specifies no focus style, and the browser
+ * default ring is nearly invisible on this background. */
+:focus-visible {
+  outline: 2px solid var(--brass-hover);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* The signature move: an italic serif phrase inside a heading, in brass. */
+h1 em, h2 em, h3 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--brass-bright);
+}
+
+/* --- layout ------------------------------------------------------------- */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container--article { max-width: var(--container-article); }
+
+/* Skip link, for keyboard users landing on a page with a nav ahead of content. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--brass);
+  color: var(--on-brass);
+  padding: 12px 20px;
+  border-radius: 0 0 var(--radius-code) 0;
+  font-weight: 600;
+  z-index: 10;
+}
+.skip-link:focus { left: 0; color: var(--on-brass); }
+
+/* --- nav ---------------------------------------------------------------- */
+
+/* Links stay aligned to the 1040px container while the bottom rule runs the
+ * full width of the viewport. */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 22px max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+  border-bottom: 1px solid var(--divider);
+}
+
+.nav__wordmark {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 19px;
+  text-decoration: none;
+  color: var(--text-wordmark);
+  margin-right: auto;
+}
+.nav__wordmark:hover { color: var(--text-wordmark); }
+
+.nav__link {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--text-nav);
+}
+.nav__link:hover { color: var(--warm-90h); }
+.nav__link[aria-current="page"] {
+  color: var(--brass-bright);
+  font-weight: 600;
+}
+
+/* --- buttons ------------------------------------------------------------ */
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+}
+
+.btn--primary { background: var(--brass); color: var(--on-brass); }
+.btn--primary:hover { background: var(--brass-hover); color: var(--on-brass); }
+
+.btn--secondary {
+  background: transparent;
+  border: 1px solid var(--border-muted);
+  color: var(--text-quote);
+  padding: 11px 24px;
+}
+.btn--secondary:hover { border-color: var(--brass); color: var(--brass-hover); }
+
+/* The nav's "Say hello" pill is the primary button one size down. */
+.btn--nav { font-size: 14px; padding: 9px 18px; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* --- footer ------------------------------------------------------------- */
+
+.footer {
+  border-top: 1px solid var(--divider);
+  margin-top: 24px;
+  padding: 28px 0 40px;
+  font-size: 13px;
+  color: var(--text-footer);
+}

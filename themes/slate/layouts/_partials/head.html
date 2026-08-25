@@ -1,0 +1,44 @@
+{{- $title := cond .IsHome site.Title (printf "%s · %s" .Title site.Title) -}}
+{{- $desc := or .Description .Summary site.Params.description -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc | plainify | truncate 160 }}">
+{{ with site.Home.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Open Graph / Twitter. Anatole shipped these; keeping parity so sharing a
+     link does not regress with the redesign. */}}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc | plainify | truncate 160 }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+{{- with site.Home.Params.portrait }}
+  {{- with resources.Get . }}
+<meta property="og:image" content="{{ .Permalink }}">
+  {{- end }}
+{{- end }}
+<meta name="twitter:card" content="summary">
+
+{{/* Fonts. preconnect because the stylesheet and the font files come from two
+     different hosts; display=swap so text paints in the fallback rather than
+     waiting on the network (a Lighthouse font-display finding). */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Barlow:wght@400;500;600&display=swap">
+
+{{/* One stylesheet: tokens first, then everything that references them. */}}
+{{- $css := slice
+      (resources.Get "css/tokens.css")
+      (resources.Get "css/base.css")
+    | resources.Concat "css/main.css" -}}
+{{- if hugo.IsProduction -}}
+  {{- $css = $css | minify | fingerprint -}}
+{{- end -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}"{{ with $css.Data.Integrity }} integrity="{{ . }}"{{ end }}>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+{{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">{{ end }}
