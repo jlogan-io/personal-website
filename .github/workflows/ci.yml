@@ -1,0 +1,118 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [main]
+  # So the gates can be run against main on demand, not only on PRs.
+  workflow_dispatch:
+
+# A new push to a PR makes the previous run's result meaningless.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and verify
+    runs-on: ubuntu-latest
+    env:
+      # Keep in lockstep with .github/workflows/pages.yml. If these drift, CI
+      # stops testing what actually ships.
+      HUGO_VERSION: 0.165.0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Hugo (extended)
+        run: |
+          curl -sSLo hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+          hugo version
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+        # --panicOnWarning turns Hugo's warnings into failures. The build is
+        # warning-free as of this commit, and the point of the gate is that it
+        # stays that way -- a deprecation notice is a thing to act on, not to
+        # scroll past for six months.
+        run: hugo --gc --minify --panicOnWarning
+
+      - name: Verify the build
+        run: ./scripts/verify-build.sh public
+
+      - name: Check internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --offline checks only what this build produced. External links are
+          # someone else's uptime and would make the gate flaky; they are
+          # checked separately below, without blocking.
+          args: >-
+            --config lychee.toml
+            --offline
+            --root-dir "${{ github.workspace }}/public"
+            'public/**/*.html'
+          fail: true
+
+      - uses: actions/upload-artifact@v4
+        # Keep the built site so a failing run can be inspected, and so a
+        # reviewer can download and open it.
+        if: always()
+        with:
+          name: site
+          path: public
+          retention-days: 7
+
+  external-links:
+    name: External links (advisory)
+    runs-on: ubuntu-latest
+    # Other people's servers rate-limit and go down. Worth knowing about, never
+    # worth blocking a merge on.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          # --root-dir static so root-relative references in the markdown
+          # (/images/map.png) resolve to the file that actually backs them,
+          # which also catches a post pointing at an image that is not there.
+          args: >-
+            --config lychee.toml
+            --root-dir "${{ github.workspace }}/static"
+            'content/**/*.md'
+            'hugo.toml'
+          fail: true
+
+  lighthouse:
+    name: Lighthouse (advisory)
+    runs-on: ubuntu-latest
+    # Advisory until a baseline exists. Turn `continue-on-error` off and set
+    # real minimums in lighthouserc.json once the redesign lands and the
+    # numbers stop moving.
+    continue-on-error: true
+    env:
+      HUGO_VERSION: 0.165.0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Hugo (extended)
+        run: |
+          curl -sSLo hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+
+      - name: Build
+        # Relative baseURL so the report is against a local server rather than
+        # the live site.
+        run: hugo --gc --minify --baseURL "http://localhost:8080/"
+
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
