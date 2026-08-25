@@ -2,7 +2,9 @@
 title: "A Multi-Agent System for Technical Program Management"
 date: 2025-06-11
 author: "Jonathan Logan"
-tags: ["AI", "Technical Program Management", "Claude", "Multi-Agent Systems", "Automation", "Jira", "Slack", "Confluence", "RAG"]
+tag: ["AI", "Technical Program Management", "Claude", "Multi-Agent Systems", "Automation", "Jira", "Slack", "Confluence", "RAG"]
+category:
+  - Blog
 thumbnail: "posts/20250611-tpm-companion/thumbnail-image.png"
 draft: false
 toc: true
