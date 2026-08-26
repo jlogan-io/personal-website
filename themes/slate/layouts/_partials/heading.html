@@ -1,0 +1,3 @@
+{{/* Renders a heading string, turning *asterisks* into the brass italic span.
+     `markdownify` alone would wrap it in <p>; this keeps it inline. */}}
+{{- . | markdownify | strings.TrimPrefix "<p>" | strings.TrimSuffix "</p>" | safeHTML -}}

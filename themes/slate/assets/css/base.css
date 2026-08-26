@@ -63,7 +63,15 @@ h1 em, h2 em, h3 em {
 
 /* --- layout ------------------------------------------------------------- */
 
+/* content-box, deliberately, against the border-box reset above.
+ *
+ * The design files have no box-sizing reset, so their container's 1040px is
+ * the CONTENT width and the gutter sits outside it. Matching that keeps the
+ * measured widths -- 1040px of content, 258.75px stat tiles -- identical to
+ * the reference. Under border-box the same declaration would yield 912px of
+ * content and every column on every page would be 128px narrower. */
 .container {
+  box-sizing: content-box;
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
@@ -94,7 +102,15 @@ h1 em, h2 em, h3 em {
   align-items: center;
   gap: 24px;
   flex-wrap: wrap;
-  padding: 22px max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+  /* Aligns the nav with the container's CONTENT edge.
+   *
+   * The handoff's formula adds a gutter on top of the centring offset, which
+   * lands the links one gutter inboard of the page content -- 184px against
+   * the content's 120px at 1280. Its README states the formula exists to keep
+   * the links "aligned to the 1040px container", so the extra term is a slip:
+   * it only aligns under a border-box reset the design files do not have.
+   * Dropping it makes the alignment real. */
+  padding: 22px max(var(--gutter), calc((100% - var(--container)) / 2));
   border-bottom: 1px solid var(--divider);
 }
 
@@ -225,16 +241,16 @@ h1 em, h2 em, h3 em {
 /* --- footer ------------------------------------------------------------- */
 
 .footer {
-  border-top: 1px solid var(--divider);
-  margin-top: 24px;
   font-size: 13px;
   color: var(--text-footer);
 }
 
-.footer__inner {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 26px var(--gutter) 48px;
+/* The rule sits inside the container's padding, so it spans the 1040px content
+ * column rather than the full viewport -- matching the design, where the footer
+ * is a child of the container. */
+.footer__row {
+  padding: 26px 0 48px;
+  border-top: 1px solid var(--divider);
   display: flex;
   align-items: center;
   gap: 10px;
