@@ -5,12 +5,14 @@ author: "Jonathan Logan"
 tag: ["AI", "Technical Program Management", "Claude", "Multi-Agent Systems", "Automation", "Jira", "Slack", "Confluence", "RAG"]
 category:
   - Blog
-thumbnail: "posts/20250611-tpm-companion/thumbnail-image.png"
+thumbnail: "writing/20250611-tpm-companion/thumbnail-image.png"
 draft: false
 toc: true
 aliases:
+  - /posts/20250611-tpm-companion/
   - /Posts/20250611-tpm-companion/
   - /Posts/20250611-tpm-companion/ai-assistant-tpm-blog-updated/
+description: Agents that read the program, not just the prompt.
 ---
 
 In late 2024, I found myself at an inflection point. I was managing a growing portfolio of technical programs; Each project with its own moving parts, stakeholders, and sources of truth. My weeks were filled with Zoom meetings, Jira ticket reviews, Slack updates, and status report writing. Despite years of experience, I realized that the coordination tax was growing and becoming unsustainable.

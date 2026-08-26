@@ -38,6 +38,11 @@
 {{- end -}}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}"{{ with $css.Data.Integrity }} integrity="{{ . }}"{{ end }}>
 
+{{/* Set before paint so the collapsed nav never flashes expanded, and so a
+     browser without JS keeps the design's wrapping nav instead of a toggle
+     that does nothing. */}}
+<script>document.documentElement.classList.add('js')</script>
+
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">

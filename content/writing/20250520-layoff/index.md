@@ -6,9 +6,11 @@ tag: ["career", "identity", "layoffs", "secular buddhism", "mindfulness", "resil
 category: 
   - Blog
 toc: true
-thumbnail: "posts/20250520-layoff/thumbnail-image.png"
+thumbnail: "writing/20250520-layoff/thumbnail-image.png"
 aliases:
+  - /posts/20250520-layoff/
   - /Posts/20250520-layoff/
+description: Career, identity and resilience — the personal one.
 ---
 
 A few weeks ago, I got laid off.

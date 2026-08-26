@@ -14,9 +14,11 @@ tag:
   - Cyber
   - Security
 toc: true
-thumbnail: "posts/20250215-mircromanagers/thumbnail-image.png"
+thumbnail: "writing/20250215-mircromanagers/thumbnail-image.png"
 author: Jonathan Logan
-
+aliases:
+  - /posts/20250215-mircromanagers/
+description: Working with a micromanager without losing the plot.
 ---
 
 The cybersecurity field is fast-paced, high-stakes, and constantly evolving. As a senior program manager, I've learned that technical challenges are only one part of the equation. Navigating interpersonal dynamics, especially with a micromanager, can be just as critical—and often more complex. Micromanagers scrutinize every detail, often leaving their teams feeling stifled, untrusted, and overwhelmed. Learning how to effectively manage the relationship can be pivotal for your career growth and mental well-being.

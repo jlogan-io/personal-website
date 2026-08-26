@@ -58,7 +58,7 @@ MIN_POSTS=4
 # grep -o, not grep -c: the sitemap is minified onto a single line, so counting
 # lines reports 1 no matter how many URLs it holds.
 URLS=$(grep -o '<loc>' "$DIR/sitemap.xml" 2>/dev/null | wc -l | tr -d ' ')
-POSTS=$(find "$DIR/posts" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+POSTS=$(find "$DIR/writing" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 
 if [ "$URLS" -ge "$MIN_URLS" ]; then ok "sitemap has $URLS URLs (min $MIN_URLS)"
 else fail "sitemap has only $URLS URLs, expected at least $MIN_URLS"; fi
@@ -67,20 +67,21 @@ if [ "$POSTS" -ge "$MIN_POSTS" ]; then ok "$POSTS post pages built (min $MIN_POS
 else fail "only $POSTS post pages built, expected at least $MIN_POSTS"; fi
 
 # --- real pages, not redirect stubs ------------------------------------------
-# Legacy aliases include /Posts/<slug>/, which differs from /posts/<slug>/ only
-# by case. On a case-insensitive filesystem (macOS) those are the same path, so
-# a build there can in principle write the redirect stub over the real post.
-# CI runs on Linux and is unaffected, but a locally-built site must never ship
-# with a post replaced by a one-line refresh.
+# Posts live under /writing/; /posts/ and /Posts/ are redirect stubs pointing
+# at them, and /Posts/ differs from /posts/ only by case. On a case-insensitive
+# filesystem (macOS) those two are the same path, so a build there can in
+# principle write one stub over the other -- or over a real page. CI runs on
+# Linux and is unaffected, but a locally-built site must never ship with an
+# article replaced by a one-line refresh.
 STUBBED=""
-for f in "$DIR/index.html" "$DIR/posts/index.html" "$DIR"/posts/*/index.html; do
+for f in "$DIR/index.html" "$DIR/writing/index.html" "$DIR"/writing/*/index.html; do
   [ -f "$f" ] || continue
   if grep -qs 'http-equiv=.\?refresh' "$f"; then STUBBED="$STUBBED $f"; fi
 done
 if [ -n "$STUBBED" ]; then
   fail "real pages replaced by redirect stubs:$STUBBED"
 else
-  ok "posts are real pages, not redirect stubs"
+  ok "articles are real pages, not redirect stubs"
 fi
 
 # --- weight budget -----------------------------------------------------------

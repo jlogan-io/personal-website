@@ -60,6 +60,6 @@ contact_body: >-
   San Diego County, California. Email is the fastest route; the professional
   record lives on LinkedIn.
 
-aliases:
-  - /contact/
+# The contact block above is a summary; the full "Say hello" page is its own
+# section under content/contact/, so the home page must not alias that path.
 ---

@@ -6,10 +6,12 @@ tag: ["AI", "Program Management", "Productivity", "Agile", "Leadership", "Claude
 category: 
   - Blog
 toc: true
-thumbnail: "posts/20250525-ai-in-pgm/thumbnail-image.png"
+thumbnail: "writing/20250525-ai-in-pgm/thumbnail-image.png"
 draft: false
 aliases:
+  - /posts/20250525-ai-in-pgm/
   - /Posts/20250525-ai-in-pgm/
+description: Where AI actually earns its seat in the PgM process.
 ---
 
 The role of a Program Manager (PM) is dynamic, demanding an ability to juggle strategic oversight with detailed tactical execution. Increasingly, Generative AI has emerged as a transformative tool that streamlines these complexities. In this post, I'll share insights and real-world experiences highlighting how Generative AI tools, specifically Claude 3.7 Sonnet, can significantly enhance PM effectiveness, productivity, and agility by enabling PMs to drive execution and empower engineering teams.

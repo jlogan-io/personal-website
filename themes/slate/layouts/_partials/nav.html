@@ -1,15 +1,29 @@
 {{/* The wordmark carries aria-current on the home page; section links carry it
      on their own pages and anywhere beneath them, so a post highlights
-     "Writing". */}}
+     "Writing".
+
+     Below --nav-breakpoint the links collapse behind a toggle. The handoff
+     specifies no media queries and lets the row wrap to two lines instead;
+     this is a deliberate departure. Without JS the links stay visible and the
+     nav wraps exactly as the design intended, so nothing depends on the
+     script. */}}
 <nav class="nav" aria-label="Primary">
   <a class="nav__wordmark" href="{{ "/" | relURL }}"{{ if .IsHome }} aria-current="page"{{ end }}>{{ site.Home.Params.wordmark | default site.Params.author }}</a>
 
-  {{- range site.Menus.main }}
-    {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) -}}
-    <a class="nav__link" href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
-  {{- end }}
+  <button class="nav__toggle" type="button"
+          aria-controls="nav-links" aria-expanded="false" aria-label="Menu">
+    <span class="nav__toggle-bar"></span>
+    <span class="nav__toggle-bar"></span>
+    <span class="nav__toggle-bar"></span>
+  </button>
 
-  {{- with site.Home.Params.email }}
-  <a class="btn btn--primary btn--nav" href="mailto:{{ . }}">Say hello</a>
-  {{- end }}
+  <div class="nav__links" id="nav-links">
+    {{- range site.Menus.main }}
+      {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) -}}
+      <a class="nav__link" href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+    {{- with site.Home.Params.email }}
+    <a class="btn btn--primary btn--nav" href="mailto:{{ . }}">Say hello</a>
+    {{- end }}
+  </div>
 </nav>

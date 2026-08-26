@@ -11,7 +11,7 @@ itself.
 ## The everyday loop
 
 ```bash
-./scripts/new-post.sh "My Post Title"   # scaffold content/posts/YYYYMMDD-slug/
+./scripts/new-post.sh "My Post Title"   # scaffold content/writing/YYYYMMDD-slug/
 hugo server -D                          # preview on localhost:1313, drafts shown
 git add . && git commit -m "..." && git push
 ```
@@ -80,7 +80,7 @@ Posts are **page bundles**: a directory per post containing `index.md` plus its
 images, so images are referenced by plain filename.
 
 ```
-content/posts/20250611-tpm-companion/
+content/writing/20250611-tpm-companion/
 ├── index.md
 └── thumbnail-image.png
 ```
@@ -106,7 +106,7 @@ category:
 tag:
   - example
 toc: true
-thumbnail: "posts/20250611-tpm-companion/thumbnail-image.png"
+thumbnail: "writing/20250611-tpm-companion/thumbnail-image.png"
 ---
 ```
 

@@ -1,0 +1,22 @@
+{{/* The Home Lab hardware panel: label/value pairs.
+
+     {{< bench "App" "Expo SDK 54" "Rendering" "three.js" >}}
+
+     Positional arguments in pairs, so the markdown reads as a table rather
+     than as nested YAML. Styling lands in B5. */}}
+{{- $args := .Params -}}
+{{- if not (modBool (len $args) 2) -}}
+  {{- errorf "bench: needs label/value pairs, got %d arguments in %s" (len $args) .Position -}}
+{{- end -}}
+<aside class="bench" aria-label="The bench">
+  <p class="bench__label">The bench</p>
+  <dl class="bench__grid">
+    {{- range $i, $v := $args }}
+      {{- if modBool $i 2 }}
+    <dt class="bench__key">{{ $v }}</dt>
+      {{- else }}
+    <dd class="bench__value">{{ $v }}</dd>
+      {{- end }}
+    {{- end }}
+  </dl>
+</aside>

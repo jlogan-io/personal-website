@@ -10,6 +10,9 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{- $js := resources.Get "js/nav.js" -}}
+  {{- if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end -}}
+  <script src="{{ $js.RelPermalink }}" defer></script>
   {{ block "scripts" . }}{{ end }}
 </body>
 </html>

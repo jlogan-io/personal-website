@@ -15,11 +15,13 @@ tag:
   - Security
   - Reporting
 toc: true
-thumbnail: "posts/20250115-statusreports/thumbnail-image.png"
+thumbnail: "writing/20250115-statusreports/thumbnail-image.png"
 author: Jonathan Logan
 
 aliases:
+  - /posts/20250115-statusreports/
   - /Posts/20250115-statusreports/
+description: Reporting that people read — and act on.
 ---
 
 
