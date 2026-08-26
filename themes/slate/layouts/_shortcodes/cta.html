@@ -1,0 +1,14 @@
+{{/* A primary/secondary button pair inside an article.
+
+     {{< cta "Read the report" "/files/report.pdf" "See the project" "/projects/" >}} */}}
+{{- $args := .Params -}}
+{{- if not (modBool (len $args) 2) -}}
+  {{- errorf "cta: needs label/url pairs, got %d arguments in %s" (len $args) .Position -}}
+{{- end -}}
+<div class="article-cta">
+  {{- range $i, $v := $args }}
+    {{- if modBool $i 2 }}
+  <a class="btn {{ if eq $i 0 }}btn--primary{{ else }}btn--secondary{{ end }}" href="{{ index $args (add $i 1) }}">{{ $v }}</a>
+    {{- end }}
+  {{- end }}
+</div>

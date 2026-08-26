@@ -1,0 +1,402 @@
+/* Writing index and article pages. Measured from the .dc.html references,
+ * except where marked as an extension the handoff does not cover. */
+
+/* --- index -------------------------------------------------------------- */
+
+.writing-hero { padding: clamp(48px, 7vw, 88px) 0 32px; }
+.writing-hero__intro { max-width: 56ch; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+/* Real links to the category archives, styled as pills. Without JS they
+ * navigate; with it they filter in place. */
+.filter { text-decoration: none; }
+.filter[aria-current="true"] { background: var(--brass); color: var(--on-brass); }
+.filter[aria-current="true"]:hover { background: var(--brass-hover); color: var(--on-brass); }
+
+.posts { padding: 0 0 48px; }
+.posts__rule { height: 1px; background: var(--divider); }
+
+/* The negative margin plus matching padding lets the hover slab outset the
+ * text column rather than boxing it in. */
+.post-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 26px 12px;
+  margin: 0 -12px;
+  border-bottom: 1px solid var(--divider);
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-code);
+}
+.post-row:hover { background: var(--surface); color: inherit; }
+
+.post-row__date {
+  flex: 0 0 110px;
+  font-size: 13.5px;
+  color: var(--text-faint);
+}
+
+.post-row__text {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.post-row__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--text-bright);
+}
+
+.post-row__dek {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* --- article shell ------------------------------------------------------ */
+
+.article {
+  box-sizing: content-box;
+  max-width: var(--container-article);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.article__header { padding: clamp(48px, 7vw, 80px) 0 36px; }
+
+.article__back {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.article__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.article__date { font-size: 13.5px; color: var(--text-faint); }
+
+.article__title {
+  font-weight: 500;
+  font-size: clamp(36px, 4.6vw, 54px);
+  line-height: 1.12;
+  margin: 18px 0 0;
+  color: var(--text-brightest);
+}
+
+.article__dek {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.5;
+  margin: 18px 0 0;
+  color: var(--brass-strong);
+}
+
+.article__rule {
+  height: 1px;
+  background: var(--divider);
+  margin-bottom: 40px;
+}
+
+/* --- article body ------------------------------------------------------- */
+
+/* A flex column with a 24px gap, so every block is spaced by the container
+ * rather than by margins that then have to be collapsed. */
+.article__body {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--text-body);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 16px;
+}
+
+.article__body > * { margin: 0; }
+
+.article__body h2 {
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.25;
+  margin: 16px 0 -8px;
+  color: var(--text-heading);
+}
+
+.article__body h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 8px 0 -12px;
+  color: var(--text-heading);
+}
+
+.article__body a { text-decoration: underline; text-underline-offset: 2px; }
+
+.article__body strong { color: var(--text-bright); font-weight: 600; }
+
+.article__body ul,
+.article__body ol { padding-left: 24px; }
+.article__body li { margin-bottom: 8px; }
+
+.pullquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.45;
+  margin: 16px 0;
+  padding-left: 24px;
+  border-left: 3px solid var(--brass);
+  color: var(--text-quote);
+}
+
+.article__body pre {
+  margin: 0;
+  background: var(--surface-deep);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-code);
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-code);
+}
+
+.article__body :not(pre) > code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--surface-deep);
+  border: 1px solid var(--divider);
+  border-radius: 5px;
+  padding: 1px 5px;
+  color: var(--text-code);
+}
+
+/* --- panels: bench, abstract -------------------------------------------- */
+
+.panel {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 40px;
+}
+.panel--abstract { padding: 26px 30px; margin-bottom: 32px; }
+
+.panel__label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0;
+  color: var(--brass-bright);
+}
+
+.panel__body {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+  color: var(--cool-82);
+}
+
+.bench__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px 32px;
+  margin: 14px 0 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--cool-80);
+}
+/* One cell per pair, label stacked over value. */
+.bench__key { color: var(--text-bright); font-weight: 600; }
+.bench__value { margin: 0; }
+
+/* --- key figures -------------------------------------------------------- */
+
+.keyfigures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.keyfigure { background: var(--surface); padding: 22px; }
+
+.keyfigure__value {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--brass-bright);
+}
+
+.keyfigure__label {
+  font-size: 13px;
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+/* --- article CTA and footer --------------------------------------------- */
+
+.article-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+
+.article__footer {
+  margin-top: 32px;
+  padding: 32px 0 48px;
+  border-top: 1px solid var(--divider);
+}
+
+.article__footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.article__footer-note {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-date);
+}
+
+.article__footer-link {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.attribution { margin-top: 40px; }
+.attribution__row { display: flex; align-items: flex-start; gap: 12px; }
+.attribution .mark { margin-top: 2px; }
+.attribution__text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-date);
+}
+
+/* --- extensions the handoff does not cover ------------------------------ */
+
+/* Figures, the Mermaid diagram, tables and the contents list have no design.
+ * They are built from the same parts as everything else: surface panels,
+ * 1px dividers, 12px radii, brass for emphasis. */
+
+.article__body figure { margin: 0; }
+
+.article__body figure img,
+.article__body > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-code);
+  border: 1px solid var(--divider);
+}
+
+.article__body figcaption {
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-top: 10px;
+  color: var(--text-faint);
+}
+
+.article__body .mermaid {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-code);
+  padding: 20px;
+  overflow-x: auto;
+}
+
+/* architecture-beta hardcodes its label fill and ignores both `theme` and
+ * themeVariables, so its text arrives near-black on the dark panel -- 1.11:1,
+ * which is unreadable. Mermaid inlines its own <style> into the SVG, hence
+ * !important. Revisit if the diagram type leaves beta and starts honouring
+ * the theme. */
+.article__body .mermaid svg text,
+.article__body .mermaid svg .nodeLabel,
+.article__body .mermaid svg .edgeLabel {
+  fill: var(--text-bright) !important;
+  color: var(--text-bright) !important;
+  font-family: var(--sans) !important;
+}
+.article__body .mermaid svg .edgeLabel rect { fill: var(--surface) !important; }
+
+.table-wrap { overflow-x: auto; }
+
+.article__body table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 15px;
+}
+.article__body th,
+.article__body td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--divider);
+}
+.article__body th {
+  font-weight: 600;
+  color: var(--text-bright);
+  border-bottom-color: var(--border-muted);
+}
+
+/* Contents. A quiet rail rather than a panel -- it precedes the article and
+ * should not compete with the dek above it. */
+.toc {
+  border-left: 1px solid var(--divider);
+  padding: 2px 0 2px 20px;
+  margin-bottom: 8px;
+}
+
+.toc__label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brass-bright);
+  margin: 0 0 10px;
+}
+
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0 0 6px; }
+.toc ul ul { padding-left: 16px; margin-top: 6px; }
+
+.toc a {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.toc a:hover { color: var(--brass-hover); }
+
+/* --- responsive --------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .keyfigures { grid-template-columns: 1fr; }
+  .article__footer-link { margin-left: 0; white-space: normal; }
+}

@@ -1,0 +1,9 @@
+{{/* Replaces Hugo's built-in figure, which emits its own markup and skips the
+     render hook -- so images added this way were shipping as full-size PNGs.
+
+     {{< figure src="x.png" title="Caption" alt="..." >}} */}}
+{{- partial "figure.html" (dict
+      "page" .Page
+      "src" (.Get "src")
+      "alt" (.Get "alt" | default (.Get "title") | default "")
+      "caption" (.Get "title" | default (.Get "caption"))) -}}

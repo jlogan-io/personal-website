@@ -1,0 +1,5 @@
+{{/* Mermaid fences render client-side. The library is only fetched on pages
+     that actually contain a diagram -- see the scripts block in
+     writing/page.html keying off .Store. */}}
+{{- .Page.Store.Set "hasMermaid" true -}}
+<pre class="mermaid">{{ .Inner | htmlEscape | safeHTML }}</pre>

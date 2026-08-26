@@ -1,0 +1,21 @@
+{{/* Master's variant: the four-tile stat band.
+
+     {{< keyfigures "4,406" "meetings in the corpus" "94.3%" "captured" >}}
+
+     Each tile is emitted whole on the even index, reading its label from the
+     next argument -- rather than opening a div on one pass and closing it on
+     the next, which is easy to get subtly wrong. */}}
+{{- $args := .Params -}}
+{{- if not (modBool (len $args) 2) -}}
+  {{- errorf "keyfigures: needs value/label pairs, got %d arguments in %s" (len $args) .Position -}}
+{{- end -}}
+<section class="keyfigures" aria-label="Key figures">
+  {{- range $i, $v := $args }}
+    {{- if modBool $i 2 }}
+  <div class="keyfigure">
+    <div class="keyfigure__value">{{ $v }}</div>
+    <div class="keyfigure__label">{{ index $args (add $i 1) }}</div>
+  </div>
+    {{- end }}
+  {{- end }}
+</section>
