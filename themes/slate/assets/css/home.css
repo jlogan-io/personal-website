@@ -229,9 +229,23 @@
   .cards { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* The hero goes single-column here rather than being left to wrap on its own.
+ *
+ * Left to flex, the row breaks when figure + gap + the body's 440px basis no
+ * longer fits -- about 750px. The design centres the portrait at 640px, so
+ * between 641 and 750 it sits hard left with the headline stacked beneath it,
+ * which reads like a mistake. Switching to an explicit column at the same
+ * width the row would have broken keeps the two in step: the layout can no
+ * longer wrap behind the rule's back, so changing the basis or the gap later
+ * cannot desynchronise them again.
+ *
+ * align-items goes back to stretch so the body still fills the column; only
+ * the figure centres. The headline stays left-aligned, as the design has it. */
+@media (max-width: 750px) {
+  .hero { flex-direction: column; align-items: stretch; }
+  .hero__figure { align-self: center; }
+}
+
 @media (max-width: 640px) {
   .cards { grid-template-columns: 1fr; }
-  /* The hero collapses to one column; the portrait centres over the text
-   * rather than hanging off the left edge. */
-  .hero__figure { margin-inline: auto; }
 }
