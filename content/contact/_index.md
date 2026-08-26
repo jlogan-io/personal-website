@@ -35,4 +35,5 @@ cta_body: Hiring? A full PDF résumé and references are available on request.
 cta_label: Request the résumé
 cta_secondary_label: View experience
 cta_secondary_url: /experience/
+description: "Get in touch with Jonathan Logan — Staff Technical Program Manager in San Diego County, California."
 ---

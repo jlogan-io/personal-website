@@ -18,4 +18,5 @@ intro: >-
   and defense — from a global outage handled with urgency and precision to
   mission-critical systems for national defense. Each entry: what it was, and
   what it changed.
+description: "High-impact programs across cybersecurity, cloud infrastructure, AI tooling and defense."
 ---

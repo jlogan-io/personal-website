@@ -33,11 +33,18 @@ a:hover { color: var(--brass-hover); }
 
 /* Visible keyboard focus. The design specifies no focus style, and the browser
  * default ring is nearly invisible on this background. */
-:focus-visible {
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--brass-hover);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 6px;
 }
+/* Mouse users get no ring; keyboard users keep it. */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+summary:focus:not(:focus-visible) { outline: none; }
 
 img { max-width: 100%; height: auto; }
 
@@ -91,21 +98,25 @@ h1 em, h2 em, h3 em {
   border-bottom: 1px solid var(--divider);
 }
 
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.mark { border-radius: 50%; display: block; flex: 0 0 auto; }
+.mark--footer { opacity: 0.85; }
+
 .nav__wordmark {
   font-family: var(--serif);
   font-weight: 600;
   font-size: 19px;
-  text-decoration: none;
   color: var(--text-wordmark);
-  margin-right: auto;
-}
-.nav__wordmark:hover { color: var(--text-wordmark); }
-
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
+  /* The script mark's optical centre sits below its bounding box. */
+  position: relative;
+  top: 2px;
 }
 
 .nav__link {
@@ -119,63 +130,70 @@ h1 em, h2 em, h3 em {
   font-weight: 600;
 }
 
-/* The toggle exists only below the breakpoint, and only when JS is there to
- * drive it -- otherwise the links are never hidden and a button that does
- * nothing would be left on screen. */
-.nav__toggle { display: none; }
+/* --- collapsed nav ------------------------------------------------------ */
 
-.nav__toggle-bar {
+/* A native <details>: opens, closes, takes focus and answers Escape with no
+ * JavaScript at all. Hidden above the breakpoint. */
+.nav__menu { display: none; position: relative; margin-inline-start: auto; }
+
+.nav__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 6px;
+}
+.nav__summary::-webkit-details-marker { display: none; }
+
+.nav__bar {
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--text-nav);
   border-radius: 2px;
-  transition: transform 140ms ease, opacity 140ms ease;
+  background: var(--text-bright);
 }
 
-/* The links need 480px plus gutters before they wrap to a second row; below
- * ~533px the design's nav becomes two lines. Collapsing at 600px keeps a
- * margin for late-loading webfonts shifting the measurement. */
-@media (max-width: 600px) {
-  .js .nav { position: relative; }
-
-  .js .nav__toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: 0;
-    padding: 8px;
-    margin: -8px;
-    cursor: pointer;
-  }
-  .js .nav__toggle:hover .nav__toggle-bar { background: var(--warm-90h); }
-  .js .nav__toggle[aria-expanded="true"] .nav__toggle-bar { background: var(--brass-bright); }
-
-  /* Three bars into a cross. */
-  .js .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .js .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) { opacity: 0; }
-  .js .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  .js .nav__links {
-    display: none;
-    flex-basis: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 24px 0 6px;
-  }
-  .js .nav__links[data-open] { display: flex; }
-
-  /* Touch targets, and a tap area that spans the row rather than just the
-     glyph. */
-  .js .nav__link { font-size: 16px; padding: 4px 0; }
-  .js .btn--nav { font-size: 15px; padding: 11px 22px; }
+.nav__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  min-width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 16px 40px oklch(0.1 0.02 255 / 0.5);
 }
+
+.nav__panel-link {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-quote);
+}
+.nav__panel-link:hover { background: var(--bg); color: var(--text-quote); }
+
+.nav__panel-pill {
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  padding: 11px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--brass);
+  color: var(--on-brass);
+}
+.nav__panel-pill:hover { background: var(--brass-hover); color: var(--on-brass); }
 
 /* --- buttons ------------------------------------------------------------ */
 
@@ -209,7 +227,45 @@ h1 em, h2 em, h3 em {
 .footer {
   border-top: 1px solid var(--divider);
   margin-top: 24px;
-  padding: 28px 0 40px;
   font-size: 13px;
   color: var(--text-footer);
+}
+
+.footer__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 26px var(--gutter) 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Matches the wordmark's optical nudge beside the same mark. */
+.footer__inner span { position: relative; top: 1px; }
+
+
+/* --- responsive --------------------------------------------------------- */
+
+/* Two breakpoints, from the v2 handoff. Component-specific rules live beside
+ * their components; these are the shared ones. */
+
+@media (max-width: 900px) {
+  .grid-2up { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .nav { padding-top: 14px; padding-bottom: 14px; gap: 6px 16px; }
+
+  /* The inline links give way to the disclosure menu. */
+  .nav [data-nav-link] { display: none; }
+  .nav__menu { display: block; }
+
+  .grid-2up,
+  .grid-1up { grid-template-columns: 1fr; }
+
+  h1 { font-size: clamp(34px, 10vw, 44px); }
+
+  /* Right-aligned metadata drops under its heading rather than being pushed
+   * off the edge, and date lines are allowed to wrap. */
+  .meta-right { margin-left: 0; }
+  .nowrap { white-space: normal; }
 }

@@ -10,9 +10,8 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
-  {{- $js := resources.Get "js/nav.js" -}}
-  {{- if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end -}}
-  <script src="{{ $js.RelPermalink }}" defer></script>
+  {{/* No site-wide script: the nav is a native <details> and needs none.
+       Individual pages can still add one through this block. */}}
   {{ block "scripts" . }}{{ end }}
 </body>
 </html>

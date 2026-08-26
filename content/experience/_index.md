@@ -41,4 +41,5 @@ references_heading: On the record
 
 cta_body: A full PDF résumé — and further references — on request.
 cta_label: Request the résumé
+description: "Twelve years of complex problems, simple solutions: PlayStation, CrowdStrike, AWS and Northrop Grumman."
 ---

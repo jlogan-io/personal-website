@@ -1,5 +1,6 @@
 <footer class="footer">
-  <div class="container">
-    &copy; {{ site.Home.Params.author | default site.Params.author }} {{ now.Year }}
+  <div class="footer__inner">
+    {{ partial "mark.html" "footer" }}
+    <span>&copy; {{ site.Home.Params.author | default site.Params.author }} {{ now.Year }}</span>
   </div>
 </footer>

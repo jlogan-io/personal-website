@@ -12,11 +12,14 @@ title: Home
 # --- site-wide -------------------------------------------------------------
 author: Jonathan Logan
 wordmark: Jonathan Logan
+# Appended to the site name in the home page's <title>.
+tagline: Staff Technical Program Manager
 email: jlogan3990@gmail.com
 portrait: images/jonathanlogan.png
 description: >-
-  Staff Technical Program Manager at PlayStation. I lead teams building
-  scalable systems at the intersection of cloud, AI and gaming.
+  Staff TPM at PlayStation. Twelve years leading programs across defense,
+  cloud, security and gaming — engineer by training, program manager by
+  passion.
 social:
   - name: LinkedIn
     url: https://www.linkedin.com/in/jonathan-logan-99ab925b/
