@@ -1,0 +1,393 @@
+/* Inner pages: Experience, Projects, Say hello.
+ * Values measured from the .dc.html references. */
+
+/* --- shared page hero --------------------------------------------------- */
+
+.page-hero { padding: clamp(48px, 7vw, 88px) 0 48px; }
+
+.page-hero__heading {
+  font-weight: 500;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.1;
+  color: var(--text-brightest);
+}
+
+.page-hero__intro {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 20px 0 0;
+  color: var(--text-secondary);
+}
+/* The reference sets a different measure per page. */
+.page-hero__intro--experience { max-width: 58ch; }
+.page-hero__intro--projects   { max-width: 62ch; }
+.page-hero__intro--contact    { max-width: 56ch; }
+
+/* --- em-dash bullets ---------------------------------------------------- */
+
+/* The design's list marker: no disc, a brass em dash hung in the left indent. */
+.bullets {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 76ch;
+}
+
+.bullets li {
+  font-size: 15px;
+  line-height: 1.6;
+  padding-left: 24px;
+  position: relative;
+  color: var(--text-body);
+}
+
+.bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--brass-bright);
+}
+
+/* --- capability cards --------------------------------------------------- */
+
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 0 0 64px;
+}
+
+.capability {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 24px;
+}
+
+.capability__title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-bright);
+}
+
+.capability__body {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 10px 0 0;
+  color: var(--cool-74);
+}
+
+/* --- roles -------------------------------------------------------------- */
+
+.roles { padding: 0 0 24px; }
+
+.role {
+  padding: 36px 0;
+  border-top: 1px solid var(--divider);
+}
+/* The final role closes the run with a rule beneath it. */
+.role:last-child { border-bottom: 1px solid var(--divider); }
+
+.role__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+}
+
+.role__org {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--text-wordmark);
+}
+
+.role__title { font-size: 15px; color: var(--text-secondary); }
+
+.role__meta {
+  margin-left: auto;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--brass-bright);
+  white-space: nowrap;
+}
+
+.role__summary {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 70ch;
+  margin: 16px 0 0;
+  color: var(--text-secondary);
+}
+
+/* Northrop's four positions, a grid rather than bullets. */
+.subroles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px 40px;
+  margin-top: 24px;
+}
+
+.subrole__head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.subrole__years {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--brass-bright);
+  white-space: nowrap;
+}
+
+.subrole__title {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-bright);
+}
+
+.subrole__body {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 8px 0 0;
+  color: var(--cool-74);
+}
+
+/* --- references --------------------------------------------------------- */
+
+.references { padding: 40px 0 32px; }
+
+.references__heading {
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 28px;
+  color: var(--text-brightest);
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.reference {
+  margin: 0;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reference__quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.45;
+  margin: 0;
+  color: var(--text-quote);
+}
+
+/* margin-top:auto pins the caption to the card's foot, so quotes of different
+ * lengths still line their attributions up across a row. */
+.reference__caption {
+  margin-top: auto;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-date);
+}
+
+.reference__name { color: var(--text-quote); font-weight: 600; }
+
+/* --- closing CTA row ---------------------------------------------------- */
+
+.cta { padding: 32px 0 64px; }
+
+.cta__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  border-top: 1px solid var(--divider);
+  padding-top: 36px;
+}
+
+.cta__body {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 44ch;
+  color: var(--text-secondary);
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: auto;
+}
+
+/* --- projects ----------------------------------------------------------- */
+
+.programs {
+  padding: 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.program {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 32px;
+}
+
+.program__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+}
+
+.program__title {
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--text-heading);
+}
+
+.program__credit {
+  margin-left: auto;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--brass-bright);
+  white-space: nowrap;
+}
+
+.program__summary {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 14px 0 0;
+  max-width: 74ch;
+  color: var(--text-secondary);
+}
+
+.program .bullets { margin-top: 14px; max-width: 74ch; }
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.badge {
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-muted);
+}
+
+/* The first badge is the headline metric. */
+.badge--accent {
+  color: var(--brass-bright);
+  border-color: var(--brass-outline);
+}
+
+/* --- say hello ---------------------------------------------------------- */
+
+.channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  gap: 16px;
+  padding: 0 0 56px;
+}
+
+.channel {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 26px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.channel:hover { background: oklch(0.28 0.022 255); }
+
+.channel__kicker {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brass-bright);
+}
+
+.channel__handle {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--text-heading);
+}
+
+/* The email address is split so it can only ever break at the @, never
+ * mid-word; the smaller size keeps the longest handle on two lines. */
+.channel__handle--email {
+  font-size: 19px;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+.channel__handle--email span { white-space: nowrap; }
+
+.channel__body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-nav);
+}
+
+.topics { padding: 0 0 56px; }
+
+.topics__inner {
+  border-top: 1px solid var(--divider);
+  padding-top: 36px;
+}
+
+.topics__heading {
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  color: var(--text-brightest);
+}
+
+.topics .bullets { margin-top: 0; gap: 10px; max-width: 74ch; }
+.topics .bullets li { font-size: 15.5px; }
+
+.contact-cta { padding: 0 0 64px; }
+
+/* --- responsive --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .capabilities { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .capabilities { grid-template-columns: 1fr; }
+  .program { padding: 24px; }
+
+  /* Right-aligned metadata drops under its heading instead of being squeezed
+   * off the edge, and the date lines are allowed to wrap. */
+  .role__meta,
+  .program__credit { margin-left: 0; white-space: normal; }
+  .cta__actions { margin-left: 0; }
+}

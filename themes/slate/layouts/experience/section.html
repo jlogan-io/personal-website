@@ -1,0 +1,91 @@
+{{ define "main" }}
+{{- $p := .Params -}}
+<div class="container">
+
+  <section class="page-hero">
+    <h1 class="page-hero__heading">{{ partial "heading.html" $p.heading }}</h1>
+    {{- with $p.intro }}
+    {{- /* <email> in the intro becomes a real mailto link. */ -}}
+    {{- $intro := replace . "<email>" (printf `<a href="mailto:%s">%s</a>` site.Home.Params.email site.Home.Params.email) }}
+    <p class="page-hero__intro page-hero__intro--experience">{{ $intro | safeHTML }}</p>
+    {{- end }}
+  </section>
+
+  {{- with $p.capabilities }}
+  <section class="capabilities" aria-label="Capabilities">
+    {{- range . }}
+    <div class="capability">
+      <h2 class="capability__title">{{ .title }}</h2>
+      <p class="capability__body">{{ .body }}</p>
+    </div>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  <section class="roles" aria-label="Roles">
+    {{- range .Pages }}
+    <div class="role">
+      <div class="role__head">
+        <h3 class="role__org">{{ .Params.org }}</h3>
+        <span class="role__title">{{ .Params.role }}</span>
+        <span class="role__meta">{{ .Params.dates }}{{ with .Params.location }} · {{ . }}{{ end }}</span>
+      </div>
+      {{/* The body is markdown: a summary paragraph then a bullet list. The
+           paragraph is lifted out so it can carry its own measure, and the list
+           picks up the em-dash treatment. */}}
+      {{- $c := .Content -}}
+      {{- $paras := findRE `(?s)<p>.*?</p>` $c -}}
+      {{- with index $paras 0 }}
+      <p class="role__summary">{{ . | replaceRE `</?p>` "" | safeHTML }}</p>
+      {{- end }}
+      {{- with index (findRE `(?s)<ul>.*?</ul>` $c) 0 }}
+      {{ . | replaceRE `<ul>` `<ul class="bullets">` | safeHTML }}
+      {{- end }}
+      {{- with .Params.subroles }}
+      <div class="subroles">
+        {{- range . }}
+        <div class="subrole">
+          <div class="subrole__head">
+            <span class="subrole__years">{{ .years }}</span>
+            <h4 class="subrole__title">{{ .title }}</h4>
+          </div>
+          <p class="subrole__body">{{ .body }}</p>
+        </div>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+    {{- end }}
+  </section>
+
+  {{- with site.GetPage "/references" }}
+  <section class="references" aria-label="References">
+    <h2 class="references__heading">{{ $p.references_heading }}</h2>
+    <div class="reference-grid">
+      {{- range .Pages }}
+      <figure class="reference">
+        <blockquote class="reference__quote">“{{ .Content | plainify | chomp }}”</blockquote>
+        <figcaption class="reference__caption">
+          <strong class="reference__name">{{ .Params.name }}</strong><br>
+          {{ .Params.title }}, {{ .Params.org }}{{ with .Params.relationship }} — {{ . }}{{ end }}
+        </figcaption>
+      </figure>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  <section class="cta" aria-label="Résumé">
+    <div class="cta__row">
+      <p class="cta__body">{{ $p.cta_body }}</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="mailto:{{ site.Home.Params.email }}?subject=R%C3%A9sum%C3%A9%20request">{{ $p.cta_label }}</a>
+        {{- with index (where site.Home.Params.social "name" "LinkedIn") 0 }}
+        <a class="btn btn--secondary" href="{{ .url }}" rel="me noopener">LinkedIn</a>
+        {{- end }}
+      </div>
+    </div>
+  </section>
+
+</div>
+{{ end }}

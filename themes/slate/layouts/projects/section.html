@@ -1,0 +1,36 @@
+{{ define "main" }}
+{{- $p := .Params -}}
+<div class="container">
+
+  <section class="page-hero">
+    <h1 class="page-hero__heading">{{ partial "heading.html" $p.heading }}</h1>
+    <p class="page-hero__intro page-hero__intro--projects">{{ $p.intro }}</p>
+  </section>
+
+  <section class="programs" aria-label="Program entries">
+    {{- range .Pages }}
+    <article class="program">
+      <div class="program__head">
+        <h2 class="program__title">{{ .Title }}</h2>
+        <span class="program__credit">{{ delimit (slice .Params.role .Params.org .Params.period) " · " }}</span>
+      </div>
+      {{- $c := .Content -}}
+      {{- with index (findRE `(?s)<p>.*?</p>` $c) 0 }}
+      <p class="program__summary">{{ . | replaceRE `</?p>` "" | safeHTML }}</p>
+      {{- end }}
+      {{- with index (findRE `(?s)<ul>.*?</ul>` $c) 0 }}
+      {{ . | replaceRE `<ul>` `<ul class="bullets">` | safeHTML }}
+      {{- end }}
+      {{- with .Params.badges }}
+      <div class="badges">
+        {{- range $i, $b := . }}
+        <span class="badge{{ if eq $i 0 }} badge--accent{{ end }}">{{ $b }}</span>
+        {{- end }}
+      </div>
+      {{- end }}
+    </article>
+    {{- end }}
+  </section>
+
+</div>
+{{ end }}

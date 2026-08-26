@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{- $p := .Params -}}
+<div class="container">
+
+  <section class="page-hero">
+    <h1 class="page-hero__heading">{{ partial "heading.html" $p.heading }}</h1>
+    <p class="page-hero__intro page-hero__intro--contact">{{ $p.intro }}</p>
+  </section>
+
+  {{- with $p.channels }}
+  <section class="channels" aria-label="Channels">
+    {{- range . }}
+    <a class="channel" href="{{ .url }}"{{ if hasPrefix .url "http" }} rel="me noopener"{{ end }}>
+      <span class="channel__kicker">{{ .kicker }}</span>
+      {{- if .handle_start }}
+      {{/* Split so the address can only ever wrap at the @. */}}
+      <span class="channel__handle channel__handle--email"><span>{{ .handle_start }}</span><span>{{ .handle_end }}</span></span>
+      {{- else }}
+      <span class="channel__handle">{{ .handle }}</span>
+      {{- end }}
+      <span class="channel__body">{{ .body }}</span>
+    </a>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  {{- with $p.topics }}
+  <section class="topics" aria-labelledby="topics">
+    <div class="topics__inner">
+      <h2 class="topics__heading" id="topics">{{ $p.topics_heading }}</h2>
+      <ul class="bullets">
+        {{- range . }}
+        <li>{{ . }}</li>
+        {{- end }}
+      </ul>
+    </div>
+  </section>
+  {{- end }}
+
+  <section class="contact-cta" aria-label="Résumé">
+    <div class="cta__row">
+      <p class="cta__body">{{ $p.cta_body }}</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="mailto:{{ site.Home.Params.email }}?subject=R%C3%A9sum%C3%A9%20request">{{ $p.cta_label }}</a>
+        <a class="btn btn--secondary" href="{{ $p.cta_secondary_url | relURL }}">{{ $p.cta_secondary_label }}</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+{{ end }}
