@@ -1,7 +1,23 @@
 {{ define "main" }}
+{{/* Fallback for any section without a template of its own. */}}
 <div class="container">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}<h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>{{ end }}
+  <section class="page-hero">
+    <h1 class="page-hero__heading">{{ .Title }}</h1>
+    {{- with .Content }}<div class="page-hero__intro">{{ . }}</div>{{ end }}
+  </section>
+  {{- with .Pages }}
+  <section class="posts" aria-label="Pages">
+    <div class="posts__rule"></div>
+    {{- range . }}
+    <a class="post-row" href="{{ .RelPermalink }}">
+      <span class="post-row__date">{{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}</span>
+      <span class="post-row__text">
+        <span class="post-row__title">{{ .Title }}</span>
+        {{- with .Description }}<span class="post-row__dek">{{ . }}</span>{{ end }}
+      </span>
+    </a>
+    {{- end }}
+  </section>
+  {{- end }}
 </div>
 {{ end }}

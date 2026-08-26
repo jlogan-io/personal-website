@@ -1,6 +1,31 @@
 {{ define "main" }}
+{{/* A single tag or category: the term as the heading, then the same post rows
+     the Writing index uses. */}}
 <div class="container">
-  <h1>{{ .Title }}</h1>
-  {{ range .Pages }}<h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>{{ end }}
+
+  <section class="page-hero">
+    <p class="term-kicker">{{ .Data.Singular }}</p>
+    <h1 class="page-hero__heading">{{ .Title }}</h1>
+    <p class="page-hero__intro">
+      {{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }}.
+      <a href="{{ (site.GetPage "/writing").RelPermalink }}">All writing →</a>
+    </p>
+  </section>
+
+  <section class="posts" aria-label="Posts">
+    <div class="posts__rule"></div>
+    {{- range .Pages }}
+    {{- $cat := index .Params.category 0 | default "" }}
+    <a class="post-row" href="{{ .RelPermalink }}">
+      <span class="post-row__date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      <span class="post-row__text">
+        <span class="post-row__title">{{ .Title }}</span>
+        {{- with .Description }}<span class="post-row__dek">{{ . }}</span>{{ end }}
+      </span>
+      {{- with $cat }}{{ partial "badge.html" (dict "text" . "accent" (eq . "Blog")) }}{{ end }}
+    </a>
+    {{- end }}
+  </section>
+
 </div>
 {{ end }}

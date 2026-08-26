@@ -400,3 +400,69 @@
   .keyfigures { grid-template-columns: 1fr; }
   .article__footer-link { margin-left: 0; white-space: normal; }
 }
+
+/* --- taxonomy and 404 --------------------------------------------------- */
+
+/* No design reference for these. Built from the parts the rest of the site
+ * already uses: the page hero, the post row, the badge pill. */
+
+.term-kicker {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brass-bright);
+  margin: 0 0 12px;
+}
+
+/* Terms as a pill cloud. The count rides along in the same pill so a term's
+ * weight is legible without a second column. */
+.termlist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 0 64px;
+  margin: 0;
+  list-style: none;
+}
+
+.termlist a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-quote);
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+}
+.termlist a:hover { border-color: var(--brass); color: var(--brass-hover); }
+
+.termlist__count {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+}
+.termlist a:hover .termlist__count { color: var(--brass); }
+
+.empty-note {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  padding: 0 0 64px;
+}
+
+.notfound { padding: clamp(64px, 12vw, 140px) 0 clamp(64px, 10vw, 120px); }
+.notfound__actions { margin-top: 28px; }
+
+.notfound__code {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(64px, 12vw, 120px);
+  line-height: 1;
+  color: var(--brass-bright);
+  margin: 0 0 8px;
+}
