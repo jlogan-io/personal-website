@@ -244,6 +244,13 @@
 @media (max-width: 750px) {
   .hero { flex-direction: column; align-items: stretch; }
   .hero__figure { align-self: center; }
+
+  /* flex-basis follows the main axis, so the body's 440px stops being a width
+   * and becomes a minimum HEIGHT the moment the hero turns into a column --
+   * leaving a tall band of dead space under the buttons. Back to intrinsic
+   * sizing; min-width has no meaning here either and would only risk an
+   * overflow at the narrow end. */
+  .hero__body { flex: 0 1 auto; min-width: 0; }
 }
 
 @media (max-width: 640px) {
