@@ -71,25 +71,28 @@
   </section>
   {{- end }}
 
-  {{- with site.GetPage "/references" }}
-    {{- range first 1 (where .Pages "Params.featured" true) }}
-  <section class="section section--quote" aria-label="Quote">
+  {{/* Quote and contact share one closing block so they sit side by side on
+       desktop instead of stacking down the left edge. They stack again below
+       the breakpoint. */}}
+  <section class="closing" aria-labelledby="talk">
+    {{- with site.GetPage "/references" }}
+      {{- range first 1 (where .Pages "Params.featured" true) }}
     <figure class="quote">
       <blockquote class="quote__text">“{{ .Summary }}”</blockquote>
       <figcaption class="quote__caption">— {{ .Params.name }}, {{ .Params.title }}, {{ .Params.org }}</figcaption>
     </figure>
-  </section>
-    {{- end }}
-  {{- end }}
-
-  <section class="section section--contact contact" aria-labelledby="talk">
-    <h2 class="contact__heading" id="talk">{{ partial "heading.html" $p.contact_heading }}</h2>
-    <p class="contact__body">{{ $p.contact_body }}</p>
-    <div class="btn-row">
-      <a class="btn btn--primary" href="mailto:{{ site.Home.Params.email }}">{{ site.Home.Params.email }}</a>
-      {{- range site.Home.Params.social }}
-      <a class="btn btn--secondary" href="{{ .url }}" rel="me noopener">{{ .name }}</a>
       {{- end }}
+    {{- end }}
+
+    <div class="contact">
+      <h2 class="contact__heading" id="talk">{{ partial "heading.html" $p.contact_heading }}</h2>
+      <p class="contact__body">{{ $p.contact_body }}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="mailto:{{ site.Home.Params.email }}">{{ site.Home.Params.email }}</a>
+        {{- range site.Home.Params.social }}
+        <a class="btn btn--secondary" href="{{ .url }}" rel="me noopener">{{ .name }}</a>
+        {{- end }}
+      </div>
     </div>
   </section>
 

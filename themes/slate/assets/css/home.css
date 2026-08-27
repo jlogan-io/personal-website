@@ -75,8 +75,6 @@
 
 .section { padding: 0 0 72px; }
 .section--programs { padding-bottom: 80px; }
-.section--quote { padding-bottom: 88px; }
-.section--contact { padding-bottom: 80px; }
 
 .section__heading {
   font-weight: 500;
@@ -177,11 +175,23 @@
 
 /* --- pull quote --------------------------------------------------------- */
 
-.quote {
-  margin: 0;
+/* The closing block. The design stacks the quote above the contact, both
+ * ranged left, which leaves the right half of the page empty at desktop
+ * widths. Pairing them fills the measure and keeps the reading order --
+ * testimonial, then the invitation to act.
+ *
+ * The rule moves to the wrapper so it spans both columns rather than breaking
+ * across them. */
+.closing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
   border-top: 1px solid var(--divider);
-  padding-top: 44px;
+  padding: 44px 0 80px;
 }
+
+.quote { margin: 0; }
 
 .quote__text {
   font-family: var(--serif);
@@ -227,6 +237,10 @@
 @media (max-width: 900px) {
   .stats,
   .cards { grid-template-columns: repeat(2, 1fr); }
+
+  /* Below this the two columns are too narrow for the contact buttons to sit
+   * on one line, so the pair stacks and the quote regains its full measure. */
+  .closing { grid-template-columns: 1fr; gap: 48px; }
 }
 
 /* The hero goes single-column here rather than being left to wrap on its own.
