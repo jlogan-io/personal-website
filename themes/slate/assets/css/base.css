@@ -2,6 +2,12 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* The UA rule for [hidden] is display:none at the lowest specificity, so any
+ * author rule setting display -- .post-row is display:flex -- silently beats
+ * it and the element stays on screen with the attribute set. Restated here so
+ * `el.hidden = true` means what it says anywhere on the site. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
