@@ -136,9 +136,16 @@
 
 /* --- programme cards ---------------------------------------------------- */
 
+/* Fixed two columns, not auto-fit.
+ *
+ * auto-fit with a 280px minimum yields three tracks in the 1040px column, and
+ * with four featured programs that strands the fourth card alone on a second
+ * row. The handoff's README calls for a "2x2 card grid" -- its own rendering
+ * just does not produce one at this width. Four across would give each card
+ * 242px, which is too narrow for titles like "CoPlay - AI PMO assistant". */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
@@ -235,8 +242,7 @@
 /* --- responsive --------------------------------------------------------- */
 
 @media (max-width: 900px) {
-  .stats,
-  .cards { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
 
   /* Below this the two columns are too narrow for the contact buttons to sit
    * on one line, so the pair stacks and the quote regains its full measure. */
