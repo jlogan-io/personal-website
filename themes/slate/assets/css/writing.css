@@ -365,25 +365,43 @@
   border-bottom-color: var(--border-muted);
 }
 
-/* Contents. A quiet rail rather than a panel -- it precedes the article and
- * should not compete with the dek above it. */
+/* Contents: the same surface panel as the bench and abstract blocks, wrapped
+ * in a <details> so it can be folded away. */
 .toc {
-  border-left: 1px solid var(--divider);
-  padding: 2px 0 2px 20px;
-  margin-bottom: 8px;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 20px 24px;
+  margin-bottom: 32px;
 }
 
-.toc__label {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--brass-bright);
-  margin: 0 0 10px;
+.toc__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+.toc__summary::-webkit-details-marker { display: none; }
+.toc__summary .panel__label { margin: 0; }
+
+/* A chevron drawn from two borders, rotated. Points down when closed, up when
+ * open, so the control reads as "there is more below". */
+.toc__chevron {
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--brass-bright);
+  border-bottom: 2px solid var(--brass-bright);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 140ms ease;
+}
+.toc[open] .toc__chevron { transform: rotate(225deg) translate(-2px, -2px); }
+
+.toc__body { padding-top: 14px; }
 
 .toc ul { list-style: none; margin: 0; padding: 0; }
 .toc li { margin: 0 0 6px; }
+.toc li:last-child { margin-bottom: 0; }
 .toc ul ul { padding-left: 16px; margin-top: 6px; }
 
 .toc a {
