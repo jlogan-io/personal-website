@@ -29,20 +29,25 @@ Astronomy got to me early, and exoplanets in particular. The idea that we can
 point an instrument at a star hundreds of light years away, watch it dim by a
 fraction of a percent, and from that work out that a planet is there, how big
 it is, and how long its year lasts, has never stopped seeming implausible to
-me. We have found thousands of them. Most people could not name one.
+me. We have found thousands of them, and I still find that hard to hold in my
+head.
 
-The thing that turned an interest into a project happened while I was at
+The thing that turned that interest into a project happened while I was at
 Northrop Grumman. Northrop was the prime contractor for the James Webb Space
-Telescope, and I had the chance to see it during assembly. Standing in front of
-it is different from seeing the photographs. It is enormous, and it is
-obviously handmade. Thousands of people built that thing to sit a million miles
-from Earth, unfolding itself on the way, with no possibility of anyone going
-out to fix it. Then it worked.
+Telescope, and I got the rare opportunity to suit up and stand in the clean
+room, looking up at it while the mirrors were being assembled.
 
-What stayed with me was not the engineering, though the engineering is
-staggering. It was the ambition of the question. We built that to go and look
-at atmospheres of planets we will never visit, orbiting stars we can barely
-see, on the chance that one of them might tell us something.
+I was not there for the telescope. I was there as a quality engineer,
+validating that the lab's equipment was operating within tolerance. That was
+the job at the time: calibration schedules, instrument records, tolerances.
+By every measure on my calendar it was a completely routine visit.
+
+It was also one of the most rewarding hours of my career. Thousands of people
+built that thing to sit a million miles from Earth and unfold itself on the way
+out, with no possibility of anyone going to fix it if it went wrong. Then it
+worked. And it worked in order to go and look at the atmospheres of planets we
+will never visit, orbiting stars we can barely see, on the chance that one of
+them tells us something.
 
 The archive those discoveries land in is a CSV file. That is the gap I wanted
 to close.
