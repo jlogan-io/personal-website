@@ -33,15 +33,14 @@
 <meta name="twitter:image" content="{{ . }}">
 {{- end }}
 
-{{/* Fonts. preconnect because the stylesheet and the font files come from two
-     different hosts; display=swap so text paints in the fallback rather than
-     waiting on the network (a Lighthouse font-display finding). */}}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Barlow:wght@400;500;600&display=swap">
+{{/* Fonts are self-hosted; see themes/slate/assets/css/fonts.css. The heading
+     face is preloaded because the h1 is the largest contentful paint on every
+     page, and discovering it only after the stylesheet parses delayed it. */}}
+<link rel="preload" href="{{ "/fonts/newsreader-latin-normal-cY9AfjOCX1hbuyalUrK4397yjIJFJpc.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 
 {{/* One stylesheet: tokens first, then everything that references them. */}}
 {{- $css := slice
+      (resources.Get "css/fonts.css")
       (resources.Get "css/tokens.css")
       (resources.Get "css/base.css")
       (resources.Get "css/home.css")

@@ -31,8 +31,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # The anatole theme compiles SCSS, which the plain Hugo binary cannot do.
-      # It must be the EXTENDED build or the CSS silently comes out empty.
+      # The extended build. The slate theme does not compile SCSS, but it does
+      # use Hugo's image processing for WebP output, and matching the version
+      # developed against keeps CI and local builds honest.
       HUGO_VERSION: 0.165.0
     steps:
       - name: Install Hugo (extended)
@@ -43,8 +44,9 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          # The theme is vendored rather than a submodule, so no recursive
-          # checkout is needed. Full history gives Hugo real lastmod dates.
+          # The theme lives in this repo rather than as a submodule, so no
+          # recursive checkout is needed. Full history gives Hugo real lastmod
+          # dates.
           fetch-depth: 0
 
       - uses: actions/configure-pages@v5

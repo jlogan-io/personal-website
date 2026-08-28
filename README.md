@@ -1,7 +1,7 @@
 # jlogan.io
 
-Personal site, built with [Hugo](https://gohugo.io/) using a vendored copy of the
-[anatole](https://github.com/lxndrblz/anatole) theme.
+Personal site, built with [Hugo](https://gohugo.io/) and a purpose-built theme,
+`themes/slate`, implementing the "Slate + Serif" design.
 
 Write markdown locally, push to `main`, and the live site rebuilds and deploys
 itself.
@@ -62,8 +62,8 @@ You need **Hugo extended**, at the same version CI uses:
 hugo version   # must report 'extended' and v0.165.0
 ```
 
-The `extended` build is not optional: the theme compiles SCSS via `css.Sass`,
-and the standard build cannot do that. The version is pinned in
+Use the `extended` build. The theme does not compile SCSS, but it does use
+Hugo's image processing to emit WebP, and matching CI avoids surprises. The version is pinned in
 `.github/workflows/pages.yml` (`HUGO_VERSION`). Bump it there and locally
 together, as a deliberate commit.
 
@@ -130,7 +130,7 @@ python3 scripts/optimize-images.py           # apply
 | Path | Purpose |
 |---|---|
 | `content/` | The site's markdown. This is the only directory you normally edit. |
-| `themes/anatole/` | The theme, **vendored** (not a submodule). Committed in full. |
+| `themes/slate/` | The theme. Templates, CSS tokens and components. |
 | `assets/` | Custom CSS/JS layered over the theme. |
 | `static/` | Files copied verbatim to the site root (favicons, images, CNAME). |
 | `archetypes/` | Front matter template for new posts. |
@@ -205,7 +205,8 @@ since forks cannot read secrets.
 
 ## Known rough edges
 
-- Several paths the old hand-built site served now 404: `/Posts/` (capital P),
-  `/refrences/` (typo), `/tags/` (plural). Inbound links to them are broken.
-- The headshot and post thumbnails are PNGs of photographs. Moving them through
-  Hugo image processing and emitting WebP would cut them again.
+- `/Posts/<slug>/` aliases differ from `/posts/<slug>/` only by case, which a
+  case-insensitive filesystem cannot represent. `scripts/verify-build.sh` fails
+  the build if one has overwritten the other.
+- Post thumbnails are still committed as PNGs. Nothing in the theme renders
+  them, so they cost repository size rather than page weight.
