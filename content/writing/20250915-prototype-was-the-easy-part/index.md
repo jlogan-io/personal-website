@@ -8,76 +8,102 @@ tag:
   - AI
   - Program Management
   - CoPlay
-  - Adoption
+  - Electron
 toc: true
 draft: true
-description: A tool that serves one program manager is not the same tool that serves fourteen portfolios.
+description: The Flask app proved the idea. Everything that made it usable came afterwards.
 ---
 
-I wrote about the multi-agent system I built for my own program management work,
-and the post did well. People liked the architecture diagram. What that post did
-not say, because I did not know it yet, is that the version I had built was the
-easy half of the problem.
+I wrote up the multi-agent system I had built for my own program management
+work, and people liked it. The architecture diagram did the rounds. What that
+post could not tell you, because I did not know it yet, is that the version I
+had built was the easy half of the problem.
 
 It worked. It worked genuinely well. It also had exactly one user, and that user
 had written it.
 
+## What the Flask app actually proved
+
+The CrowdStrike-era build was a Python Flask application talking to the OpenAI
+API, pulling from Jira, Bitbucket, Confluence and Zoom, with MySQL underneath
+for history. It cut my manual reporting effort by about 85%, and that number was
+real.
+
+What it proved was narrow and important: if you ground a model in a program's
+own record, the output stops being generic. That is the whole thesis, and one
+prototype was enough to establish it.
+
+What it did not prove is that anyone other than me could use it.
+
+## The problem with a server
+
+The Flask app assumed a server, and a server assumes that program data leaves
+the machine it lives on. For my own use inside one organisation that was
+manageable. As soon as I imagined a second PMO, or a second company, it became
+the first question anyone would ask and the hardest one to answer well.
+
+So the rebuild that became CoPlay is a desktop application. Electron, React and
+TypeScript, with the program data held in a local SQLite database on the user's
+own machine. Retrieval runs locally too: documents are chunked, embedded with
+Amazon Titan, and stored in the same SQLite file using sqlite-vec, so there is
+no external vector database in the picture at all.
+
+That decision cost me a great deal of convenience. It is also the reason the
+tool is deployable in an enterprise PMO, where "where does our program data go"
+is not a rhetorical question. Model calls go out to AWS Bedrock. The corpus does
+not.
+
 ## Everything it knew, it knew from me
 
-A tool you build for yourself inherits all of your assumptions without ever
-stating them. Mine assumed a particular way of naming Jira epics, because that
-is how I named them. It assumed meetings had agendas, because mine did. It
-assumed the person reading the status report already knew what the program was
-for, because I did.
+A tool you build for yourself inherits your assumptions without ever stating
+them. Mine assumed a particular way of naming epics, because that is how I named
+them. It assumed meetings had agendas, because mine did. It assumed the reader
+of a status report already knew what the program was for.
 
-None of that is written down anywhere in the code. It is just absent from the
+None of that is written down anywhere in the code. It is simply absent from the
 list of things the code handles.
 
-The first time someone else pointed it at their programs, the output was
-confident and wrong in a way that was hard to argue with. It looked like a
-status report. It had the right shape. It just described a program that did not
-exist.
+The first time the assistant ran against someone else's programs, the output was
+confident and wrong in a way that was hard to argue with. It had the right
+shape. It just described a program that did not exist.
 
-## What generalising actually meant
+## What generalising actually cost
 
-I had assumed this would be a matter of adding configuration. Let people set
-their own conventions, expose a few options, ship it. That was wrong twice over.
+I had assumed this would be a matter of configuration. Expose some options, let
+people set their conventions, ship it. That was wrong twice over.
 
-The first problem is that the conventions are not the interesting variable. What
-varies between portfolios is what counts as a risk, what counts as done, and who
-the report is for. Those are judgement calls, and judgement calls do not go in a
-settings file.
+The conventions are not the interesting variable. What varies between portfolios
+is what counts as a risk, what counts as done, and who the report is for. Those
+are judgement calls, and judgement calls do not go in a settings file.
 
-The second problem is that once a tool has more than one user, being wrong stops
-being a nuisance and starts being a liability. When I was the only user I could
-glance at a generated status report and know instantly whether it had understood
-the week. Someone reading their own program's report for the first time has no
-such calibration. They have to trust it, or check it entirely by hand, and if
-they check it entirely by hand the tool has cost them time rather than saved it.
+And once a tool has more than one user, being wrong stops being a nuisance and
+becomes a liability. When I was the only user I could glance at a generated
+report and know instantly whether it had understood the week. Someone reading
+their own program's report for the first time has no such calibration. They have
+to trust it or check it by hand, and if they check it by hand the tool has cost
+them time rather than saved it.
 
-## The rebuild
+## Where it ended up
 
-I ended up rebuilding rather than extending. The prototype had a single pipeline
-with the steps hard-wired in the order I happened to want them. What replaced it
-was a set of modular capabilities that could be composed per portfolio, which is
-how it ended up at thirty-seven of them.
+The rebuild is a different class of object from the prototype. Roughly 940
+TypeScript source files against about 260 test files, at version 1.3.0. Twenty
+four feature pages, around 150 backend services, English and Japanese
+localisation. It is signed, notarised, and ships with an auto-updater, with code
+review and test gates before anything merges.
 
-That sounds like an architecture decision. It was really an organisational one.
-Modularity mattered because it let a portfolio adopt three capabilities without
-adopting all thirty-seven, and partial adoption turned out to be the only kind
-that actually happens.
+None of that is interesting in itself. It is what "someone else can rely on
+this" costs when written out as a bill of materials.
 
 ## What I would tell myself in May
 
-Build the thing for yourself first. That part I would not change. You cannot
-design a tool for program management by interviewing people about program
-management, and having a working artefact to react to is worth more than any
-amount of requirements gathering.
+Build the thing for yourself first. I would not change that. You cannot design a
+tool for program management by interviewing people about program management, and
+a working artefact to react to beats any amount of requirements gathering.
 
 But do not confuse the prototype working with the problem being solved. The
 prototype proves the idea is possible. It tells you almost nothing about whether
 it survives contact with people who did not build it, and that second question
-is the one that determines whether anything you built matters in a year.
+is the one that decides whether any of it mattered.
 
-Mine took most of a year to answer, and the answer required throwing away code I
-was proud of.
+Mine took the better part of a year to answer, and the answer required throwing
+away code I was fond of.

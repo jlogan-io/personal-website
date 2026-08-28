@@ -11,7 +11,7 @@ tag:
   - Leadership
 toc: true
 draft: true
-description: Getting a PMO to adopt a tool it never requested, and the features nobody touched.
+description: The risk that ended the project was never technical. It was whether anyone would trust it.
 ---
 
 No one asked me to build CoPlay. There was no ticket, no mandate, and no
@@ -20,79 +20,89 @@ own week had become unsustainable, and then I had the more interesting problem
 of finding out whether anyone else wanted it.
 
 Program management is the discipline of getting things adopted across teams that
-did not ask. It was slightly humbling to discover how little that helped when
-the thing being adopted was mine.
+did not ask for them. It was mildly humbling to discover how little that helped
+when the thing being adopted was mine.
+
+## The risk changed character twice
+
+When we kept a risk register for this project, the most instructive thing in it
+was not any individual entry. It was that the dominant risk moved twice.
+
+Early on the dominant risk was technical feasibility, and an already-working
+prototype retired most of it. That is the advantage of starting from something
+operational rather than a proposal.
+
+What replaced it was organisational. Program managers unconvinced that an
+assistant supports rather than supplants their judgement represent a threat that
+no amount of engineering resolves. You cannot ship your way out of someone
+believing the tool is there to do their job rather than the tedious parts of it.
+
+By the fifth week the dominant risk had moved again, to evidentiary credibility.
+A time-savings claim with no quality check behind it is vulnerable on exactly the
+grounds the research literature identifies, and being vulnerable there would have
+undone the adoption work regardless of how good the tool was.
+
+Three different risks. Only the first one was about software.
 
 ## Why a demo does not work
 
 My instinct was to show people. Book time, walk through the capabilities,
-demonstrate the status report generating itself in seven minutes instead of
-however long it usually took.
+generate a status report in front of them.
 
 Demos produce enthusiasm and no behaviour change. People would say it looked
-genuinely useful, mean it sincerely, and then not use it. The gap is not
-scepticism. It is that adopting a tool means changing a routine that currently
-works, and a demo gives someone a reason to be impressed without giving them a
-reason to change on Tuesday morning.
+genuinely useful, mean it, and then not use it. The gap is not scepticism. It is
+that adopting a tool means changing a routine that currently works, and a demo
+gives someone a reason to be impressed without giving them a reason to change on
+Tuesday morning.
 
-What actually moved people was narrower. I stopped showing the system and
-started asking what part of their week they most resented. Then I set up the one
-capability that addressed it, on their programs, with their data, and left them
-alone.
+We ended up structuring the adoption work around ADKAR, which sounds more formal
+than it felt. The useful part was that it moved the operative question from what
+we were building to how someone would actually change their behaviour. A
+stakeholder presentation builds awareness. A live demonstration against the
+user's own workflow builds desire, which is different from a demo against mine.
+Onboarding supplies knowledge and ability. Feedback channels provide the
+reinforcement that decides whether week three happens.
 
-## Partial adoption is the only kind
+Twenty four people used the beta. That number is small enough that every one of
+them was a conversation.
 
-I had built thirty-seven modular capabilities imagining that a portfolio would
-adopt a coherent set of them. In practice every portfolio that came on board
-adopted between two and four, and each picked a different two to four.
+## Traceability is the trust lever
 
-That was initially frustrating. It stopped being frustrating when I noticed the
-alternative was adopting zero. A tool that requires wholesale commitment gets
-evaluated as a decision, and decisions get deferred. A tool that solves one
-irritating thing this week gets tried.
+The single most useful thing anyone told me came out of a peer review in week
+four: the lever is traceability, not accuracy.
 
-The modularity I had built for architectural reasons turned out to matter for
-entirely organisational ones. That was luck rather than foresight, and I would
-now design for it deliberately.
+I had been treating trust as a function of being right. Get the output good
+enough and people will rely on it. That is wrong, or at least insufficient.
+People rely on things they can check. An assistant that is right 95% of the time
+and offers no way to verify any particular claim is less usable than one that is
+right 90% of the time and shows its sources, because the second one lets a
+program manager spend thirty seconds confirming the bit they doubt.
 
-## The features nobody touched
+That reframed the faithfulness work entirely. Grading output against its sources
+started as quality assurance. It turned out to be a change management mechanism,
+because citable grounding is what lets someone verify rather than believe.
 
-A fair number of the thirty-seven have never been meaningfully used. Some of that
-is discoverability, but most of it is that I built things which were interesting
-to build rather than things which were annoying to do by hand.
+## What the executive review asked about
 
-The capabilities that got used share a shape. They take something a person did
-every week, that they disliked, that had a clear correct answer, and that they
-could check quickly. Status report drafting fits all four. So does action item
-extraction, which is why the capture rate ended up being the number worth
-measuring.
+The first external gate was an executive review in July. The questions were not
+about capability. They were about data privacy, output reliability, and workflow
+integration, in that order.
 
-The ones that went unused tended to fail the last condition. If verifying the
-output takes as long as producing it, nobody uses it twice, no matter how clever
-it is.
+That ordering is worth sitting with. Nobody asked whether it could write a status
+report. They asked where the program data went, how they would know when it was
+wrong, and what it would break.
 
-## Trust is earned per-portfolio
-
-The thing I underestimated most was that trust does not transfer. A portfolio
-seeing the assistant work well for a neighbouring portfolio does not conclude
-that it will work for them. They conclude that it worked over there.
-
-Every portfolio ran its own informal trial where someone checked the output by
-hand for a few weeks before relying on it. That is entirely rational, and it
-means the adoption curve is not a curve at all. It is fourteen separate small
-curves, each starting from zero.
-
-Budgeting for that changed how I introduced it. Instead of a rollout I planned
-for a series of first weeks, and made it as easy as possible for someone to
-verify the assistant against reality while they still did not believe it.
+Those became the change management agenda for the rest of the project, and two
+of the three were already answered by architecture decisions made much earlier
+for different reasons. Keeping program data local stopped being a technical
+preference and became the answer to the first question anyone senior asked.
 
 ## What I would tell another program manager
 
-Build it for yourself, prove it on your own work, and then expect to spend
-considerably more effort on adoption than on engineering. Not because people are
-resistant, but because you are asking them to change something that currently
-functions, on the strength of a promise, using a tool that occasionally gets
-things wrong.
+Build it for yourself, prove it on your own work, and then expect to spend more
+effort on adoption than on engineering. Not because people are resistant, but
+because you are asking them to change something that currently functions, on the
+strength of a promise, using a tool that sometimes gets things wrong.
 
 The engineering is the part you control. The adoption is the part that decides
 whether any of it mattered.

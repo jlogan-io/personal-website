@@ -11,82 +11,104 @@ tag:
   - Cost
 toc: true
 draft: true
-description: The unit economics of agentic tooling, which is the first question anyone senior actually asks.
+description: What agentic tooling actually costs to operate, and what drives the variance.
 ---
 
 Every time I have shown an AI tool to an engineering leader, the second question
 has been some version of "what does it cost to run". Almost nobody writing about
-agentic systems answers it, which is strange, because it is the question that
+agentic systems answers it, which is odd, because it is the question that
 decides whether the thing gets funded.
 
-A completed agent run on CoPlay costs about 58 cents.
+Across the measured period CoPlay spent $423.22 in total, at $0.58 per completed
+agent run.
 
-## What a run is
+## Why the unit matters more than the number
+
+Cost per token is meaningless to anyone making a decision, because nobody
+budgets in tokens. Cost per completed run is something a manager can reason
+about immediately, because they know roughly how many status reports their
+organisation produces in a month.
 
 A run is one full pass of a capability over a real program: gathering the
 relevant material, retrieving what matters, generating the output, and checking
 it. A status report is a run. Extracting the action items from a week of
 meetings is a run.
 
-The unit matters more than the number. Cost per token is meaningless to anyone
-making a decision, because nobody budgets in tokens. Cost per status report is
-something a manager can reason about immediately, because they know how many
-status reports their organisation produces.
+## What actually drives the cost
 
-## Where the money goes
+I assumed the answer would be retrieval, since a single run considers far more
+of the corpus than it uses. I was wrong, and I only found out because I ran the
+regression rather than trusting the intuition.
 
-The generation step is not the expensive part, which surprised me when I first
-broke it down. Retrieval is.
+Regressing cost on agent iterations across 637 runs gives a slope of $0.0302 per
+iteration, with r = 0.646 and an R-squared of 0.418. So iteration count explains
+about 42% of the variance in what a run costs. The rest is prompt size, tool
+calls and model routing.
 
-A single run touches far more of the corpus than it uses. It has to, because
-finding the right context means looking at a lot of context that turns out to be
-wrong. Every document considered and discarded is paid for. The output people
-actually see is the cheapest thing in the pipeline.
+That 42% is the useful part. It says the expensive runs are the ones that go
+around the loop repeatedly, and it says something like 58% of the variance sits
+somewhere I had not instrumented well enough to attribute. Both of those are
+worth knowing, and neither is what I would have guessed.
 
-The second largest cost was rework. Early on, a meaningful share of runs
-produced something that needed regenerating, usually because retrieval had
-surfaced stale material. A run that has to happen twice costs twice, and that
-does not appear anywhere in a pricing page.
+It is worth stating plainly that this is association, not causation. More
+iterations correlate with higher cost. Whether the iterations cause the cost or
+both follow from the task being harder is not something a regression on
+operational telemetry can settle.
 
-## What brought it down
+## The bimodal problem
 
-Three changes, in order of how much they mattered.
+Status reporting has a median turnaround of 7.7 minutes. It also has a mean of
+30.0 and a ninetieth percentile of 82.1, which tells you the distribution is not
+remotely normal.
 
-Narrowing the search space using program structure before similarity ever gets
-involved. A ticket knows its epic; a meeting knows its portfolio. Using that to
-cut candidates cheaply meant paying the model to consider far less.
+Splitting it apart: 22 single-turn requests resolved in about 0.9 minutes, while
+40 iterated reports averaged 46.0 minutes across 11.3 exchanges. Those are two
+different activities wearing the same name. Averaging across them describes
+neither.
 
-Caching what does not change. A portfolio's structure, its standing
-participants, its glossary of internal names. These get retrieved constantly
-and change rarely, so I treat them as fixed context rather than fetching them
-per run, which removed a surprising amount of repeated spend.
+The cost story follows the same split, because iterations are what cost money. A
+one-shot report is nearly free. A report someone argues with for eleven turns is
+not, and it is also the one most likely to be genuinely useful, because the
+arguing is where the judgement went in.
 
-Failing earlier. If a run cannot find adequate grounding, the cheapest thing it
-can do is stop and say so. That is also the most useful thing it can do, which
-is a rare case of the honest behaviour and the economical behaviour being the
-same behaviour.
+I do not think that is a problem to optimise away. It is a description of two
+different jobs.
 
-## Why the number is worth publishing
+## What agent runs actually succeed at
+
+Agent runs succeed 86.1% of the time. The remaining 14% is not evenly
+distributed either: ingestion jobs fail at elevated rates from authentication
+churn, which is a plumbing problem rather than a model problem.
+
+That distinction matters for cost, because a failed ingestion means retrieval
+runs against a stale corpus, and a well-generated answer over stale material is
+the most expensive kind of wrong. It costs the same as a good one and takes
+longer to catch.
+
+Replacing static API keys with delegated authorization through MCP is on the
+roadmap for exactly this reason.
+
+## Why publish the number
 
 At 58 cents, a portfolio generating a weekly status report spends about thirty
 dollars a year on that capability. Whatever you think a program manager's hour
 is worth, the arithmetic is not close.
 
 That is the actual argument, and it only works if you know the number. Without
-it, "we should use AI for reporting" is a matter of taste, and the conversation
+it, "we should use AI for reporting" is a matter of taste and the conversation
 turns on whoever is most enthusiastic. With it, the conversation turns on
-whether the assistant's output is good enough to rely on, which is the question
-that deserves the attention.
+whether the output is good enough to rely on, which is the question that
+deserves the attention.
 
 I would rather argue about quality than about whether the idea is sensible.
 
-## The caveat
+## The caveat that matters
 
-Unit cost is the easy part of the economics. It does not include the time I
-spent building it, the time other people spent verifying it before they trusted
-it, or the cost of the runs that produced something nobody used.
+Unit cost is the easy part of the economics. It excludes the time I spent
+building the thing, the time other people spent verifying it before they trusted
+it, and the runs that produced something nobody used.
 
-If I costed those honestly the number would be much larger and much less
-flattering, which is exactly why the capstone evaluation includes a derived
-time-savings model rather than stopping at cost per run. A tool that is cheap to
+Costed honestly, the number is much larger and much less flattering. Which is
+why the capstone evaluation pairs it with a derived time-savings model and a
+faithfulness check rather than stopping at cost per run. A tool that is cheap to
 operate and expensive to trust is not cheap.
