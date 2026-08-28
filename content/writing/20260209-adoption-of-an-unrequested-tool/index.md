@@ -1,5 +1,5 @@
 ---
-title: "Nobody asked for this"
+title: "Driving Adoption of a Tool Nobody Requested"
 date: 2026-02-09
 author: Jonathan Logan
 category:
@@ -11,7 +11,7 @@ tag:
   - Leadership
 toc: true
 draft: true
-description: The risk that ended the project was never technical. It was whether anyone would trust it.
+description: The hardest risks on this project were organizational, not technical.
 ---
 
 No one asked me to build CoPlay. There was no ticket, no mandate, and no

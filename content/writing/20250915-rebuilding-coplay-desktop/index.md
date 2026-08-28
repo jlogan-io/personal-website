@@ -1,5 +1,5 @@
 ---
-title: "The prototype worked. That was the easy part."
+title: "Rebuilding CoPlay as a Desktop Application"
 date: 2025-09-15
 author: Jonathan Logan
 category:
@@ -11,7 +11,7 @@ tag:
   - Electron
 toc: true
 draft: true
-description: The Flask app proved the idea. Everything that made it usable came afterwards.
+description: The Flask prototype proved the idea. Making it usable by anyone else meant starting over.
 ---
 
 I wrote up the multi-agent system I had built for my own program management

@@ -1,5 +1,5 @@
 ---
-title: "24,500 documents, and where they live"
+title: "Running Retrieval Without a Vector Database"
 date: 2025-11-10
 author: Jonathan Logan
 category:
@@ -11,7 +11,7 @@ tag:
   - SQLite
 toc: true
 draft: true
-description: Retrieval that never leaves the machine, and why that constraint made the design better.
+description: Keeping 24,500 program documents on the user’s own machine, and what that constraint improved.
 ---
 
 The thing that makes an AI assistant useful inside a program management office

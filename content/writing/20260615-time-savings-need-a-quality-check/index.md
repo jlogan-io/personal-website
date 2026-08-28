@@ -1,5 +1,5 @@
 ---
-title: "Workslop, and the number I could not defend"
+title: "Why Time Savings Need an Independent Quality Check"
 date: 2026-06-15
 author: Jonathan Logan
 category:
@@ -11,7 +11,7 @@ tag:
   - Program Management
 toc: true
 draft: true
-description: A 92% time saving with no quality check behind it is evidence of speed, not value.
+description: A 92% efficiency figure with nothing behind it is evidence of speed, not of value.
 ---
 
 The most impressive number this project produced is an aggregate time saving of

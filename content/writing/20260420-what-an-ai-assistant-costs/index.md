@@ -1,5 +1,5 @@
 ---
-title: "58 cents a run"
+title: "What an AI Assistant Costs to Operate"
 date: 2026-04-20
 author: Jonathan Logan
 category:
@@ -11,7 +11,7 @@ tag:
   - Cost
 toc: true
 draft: true
-description: What agentic tooling actually costs to operate, and what drives the variance.
+description: Measured operating cost across 637 agent runs, and what actually drives the variance.
 ---
 
 Every time I have shown an AI tool to an engineering leader, the second question
