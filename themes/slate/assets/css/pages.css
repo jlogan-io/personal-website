@@ -264,6 +264,35 @@
   color: var(--text-heading);
 }
 
+.program__link { color: inherit; text-decoration: none; }
+
+/* The whole card is the target -- a stretched pseudo-element over the article,
+ * so the link keeps its real text for screen readers and the browser status
+ * bar while the click area covers the card. The badges and bullets stay
+ * selectable because nothing wraps them. */
+.program { position: relative; }
+.program__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+}
+.program:hover { background: oklch(0.28 0.022 255); }
+.program:hover .program__title { color: var(--brass-hover); }
+.program:focus-within { outline: 2px solid var(--brass-hover); outline-offset: 3px; }
+
+/* Sits under the badges as the visible affordance. Hidden from assistive tech
+ * and skipped by the keyboard, since the title link already goes here. */
+.program__more {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--brass-bright);
+}
+.program:hover .program__more { color: var(--brass-hover); }
+
 .program__credit {
   margin-left: auto;
   font-size: 13.5px;

@@ -61,7 +61,9 @@
       <div class="card">
         <span class="card__kicker">{{ .Params.kicker | default (printf "%s · %s" .Params.org .Params.period) }}</span>
         <h3 class="card__title">{{ .Params.home_title | default .Title }}</h3>
-        <p class="card__body">{{ .Summary }}</p>
+        {{/* home_summary is the short version written for this card;
+             `summary` is the longer one the projects page uses. */}}
+        <p class="card__body">{{ .Params.home_summary | default .Summary }}</p>
       </div>
       {{- end }}
     </div>

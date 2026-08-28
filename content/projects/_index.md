@@ -5,9 +5,11 @@ menus:
     name: Projects
     weight: 300
 
+# Each project now publishes its own long-form page at /projects/<slug>/.
+# list:local keeps them out of site-wide lists and the RSS feed -- those are
+# for the writing -- while still feeding this page and the home cards.
 cascade:
   - build:
-      render: never
       list: local
     target:
       path: '/projects/**'

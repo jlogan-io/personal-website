@@ -1,0 +1,39 @@
+{{ define "main" }}
+{{- $section := site.GetPage "/projects" -}}
+<article class="article">
+
+  <header class="article__header">
+    <a class="article__back" href="{{ $section.RelPermalink }}">← All programs</a>
+    <div class="article__meta">
+      {{- with .Params.badges }}{{ partial "badge.html" (dict "text" (index . 0) "accent" true) }}{{ end }}
+      <span class="article__date">{{ delimit (slice .Params.role .Params.org .Params.period) " · " }}</span>
+    </div>
+    <h1 class="article__title">{{ .Title }}</h1>
+    {{- with .Params.summary }}<p class="article__dek">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="article__rule"></div>
+
+  {{- with .Params.highlights }}
+  <aside class="panel" aria-label="At a glance">
+    <p class="panel__label">At a glance</p>
+    <ul class="bullets">
+      {{- range . }}<li>{{ . | markdownify }}</li>{{ end }}
+    </ul>
+  </aside>
+  {{- end }}
+
+  <section class="article__body">
+    {{ .Content }}
+  </section>
+
+  <footer class="article__footer">
+    <div class="article__footer-row">
+      {{ partial "mark.html" "footer" }}
+      <p class="article__footer-note">{{ .Params.footer_note | default "More of the work on the programs page." }}</p>
+      <a class="article__footer-link" href="{{ $section.RelPermalink }}">All programs →</a>
+    </div>
+  </footer>
+
+</article>
+{{ end }}
