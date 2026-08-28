@@ -1,0 +1,293 @@
+/* Reset and document-level defaults. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* The UA rule for [hidden] is display:none at the lowest specificity, so any
+ * author rule setting display -- .post-row is display:flex -- silently beats
+ * it and the element stays on screen with the attribute set. Restated here so
+ * `el.hidden = true` means what it says anywhere on the site. */
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-bright);
+  font-family: var(--sans);
+  font-size: 16px;
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--selection); }
+
+/* The design sets line-height per element rather than globally; a global value
+ * inflates the flex rows in the nav and the badge pills by a few px each. */
+
+a { color: var(--brass); }
+a:hover { color: var(--brass-hover); }
+
+/* Visible keyboard focus. The design specifies no focus style, and the browser
+ * default ring is nearly invisible on this background. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--brass-hover);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+/* Mouse users get no ring; keyboard users keep it. */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+summary:focus:not(:focus-visible) { outline: none; }
+
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* The signature move: an italic serif phrase inside a heading, in brass. */
+h1 em, h2 em, h3 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--brass-bright);
+}
+
+/* --- layout ------------------------------------------------------------- */
+
+/* content-box, deliberately, against the border-box reset above.
+ *
+ * The design files have no box-sizing reset, so their container's 1040px is
+ * the CONTENT width and the gutter sits outside it. Matching that keeps the
+ * measured widths -- 1040px of content, 258.75px stat tiles -- identical to
+ * the reference. Under border-box the same declaration would yield 912px of
+ * content and every column on every page would be 128px narrower. */
+.container {
+  box-sizing: content-box;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container--article { max-width: var(--container-article); }
+
+/* Skip link, for keyboard users landing on a page with a nav ahead of content. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--brass);
+  color: var(--on-brass);
+  padding: 12px 20px;
+  border-radius: 0 0 var(--radius-code) 0;
+  font-weight: 600;
+  z-index: 10;
+}
+.skip-link:focus { left: 0; color: var(--on-brass); }
+
+/* --- nav ---------------------------------------------------------------- */
+
+/* Links stay aligned to the 1040px container while the bottom rule runs the
+ * full width of the viewport. */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  /* Aligns the nav with the container's CONTENT edge.
+   *
+   * The handoff's formula adds a gutter on top of the centring offset, which
+   * lands the links one gutter inboard of the page content -- 184px against
+   * the content's 120px at 1280. Its README states the formula exists to keep
+   * the links "aligned to the 1040px container", so the extra term is a slip:
+   * it only aligns under a border-box reset the design files do not have.
+   * Dropping it makes the alignment real. */
+  padding: 22px max(var(--gutter), calc((100% - var(--container)) / 2));
+  border-bottom: 1px solid var(--divider);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.mark { border-radius: 50%; display: block; flex: 0 0 auto; }
+.mark--footer { opacity: 0.85; }
+
+.nav__wordmark {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--text-wordmark);
+  /* The script mark's optical centre sits below its bounding box. */
+  position: relative;
+  top: 2px;
+}
+
+.nav__link {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--text-nav);
+}
+.nav__link:hover { color: var(--warm-90h); }
+.nav__link[aria-current="page"] {
+  color: var(--brass-bright);
+  font-weight: 600;
+}
+
+/* --- collapsed nav ------------------------------------------------------ */
+
+/* A native <details>: opens, closes, takes focus and answers Escape with no
+ * JavaScript at all. Hidden above the breakpoint. */
+.nav__menu { display: none; position: relative; margin-inline-start: auto; }
+
+.nav__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 6px;
+}
+.nav__summary::-webkit-details-marker { display: none; }
+
+.nav__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-bright);
+}
+
+.nav__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  min-width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 16px 40px oklch(0.1 0.02 255 / 0.5);
+}
+
+.nav__panel-link {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-quote);
+}
+.nav__panel-link:hover { background: var(--bg); color: var(--text-quote); }
+
+.nav__panel-pill {
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  padding: 11px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--brass);
+  color: var(--on-brass);
+}
+.nav__panel-pill:hover { background: var(--brass-hover); color: var(--on-brass); }
+
+/* --- buttons ------------------------------------------------------------ */
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+}
+
+.btn--primary { background: var(--brass); color: var(--on-brass); }
+.btn--primary:hover { background: var(--brass-hover); color: var(--on-brass); }
+
+.btn--secondary {
+  background: transparent;
+  border: 1px solid var(--border-muted);
+  color: var(--text-quote);
+  padding: 11px 24px;
+}
+.btn--secondary:hover { border-color: var(--brass); color: var(--brass-hover); }
+
+/* The nav's "Say hello" pill is the primary button one size down. */
+.btn--nav { font-size: 14px; padding: 9px 18px; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* --- footer ------------------------------------------------------------- */
+
+.footer {
+  font-size: 13px;
+  color: var(--text-footer);
+}
+
+/* The rule sits inside the container's padding, so it spans the 1040px content
+ * column rather than the full viewport -- matching the design, where the footer
+ * is a child of the container. */
+.footer__row {
+  padding: 26px 0 48px;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Matches the wordmark's optical nudge beside the same mark. */
+.footer__inner span { position: relative; top: 1px; }
+
+
+/* --- responsive --------------------------------------------------------- */
+
+/* Two breakpoints, from the v2 handoff. Component-specific rules live beside
+ * their components; these are the shared ones. */
+
+@media (max-width: 900px) {
+  .grid-2up { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .nav { padding-top: 14px; padding-bottom: 14px; gap: 6px 16px; }
+
+  /* The inline links give way to the disclosure menu. */
+  .nav [data-nav-link] { display: none; }
+  .nav__menu { display: block; }
+
+  .grid-2up,
+  .grid-1up { grid-template-columns: 1fr; }
+
+  h1 { font-size: clamp(34px, 10vw, 44px); }
+
+  /* Right-aligned metadata drops under its heading rather than being pushed
+   * off the edge, and date lines are allowed to wrap. */
+  .meta-right { margin-left: 0; }
+  .nowrap { white-space: normal; }
+}

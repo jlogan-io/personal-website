@@ -1,0 +1,4 @@
+name = "Slate + Serif"
+license = "MIT"
+description = "Dark, resume-first theme for jlogan.io. Newsreader + Barlow, brass accents."
+min_version = "0.146.0"

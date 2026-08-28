@@ -1,0 +1,50 @@
+{{ define "main" }}
+{{- $p := .Params -}}
+{{- $posts := .Pages -}}
+{{- $cats := slice -}}
+{{- range $posts }}{{ range .Params.category }}{{ $cats = $cats | append . }}{{ end }}{{ end -}}
+{{/* Sorted, so the pill order does not drift with whatever happens to be the
+     newest post. */}}
+{{- $cats = uniq $cats | sort -}}
+<div class="container">
+
+  <section class="writing-hero page-hero">
+    <h1 class="page-hero__heading">{{ partial "heading.html" $p.heading }}</h1>
+    <p class="page-hero__intro writing-hero__intro">{{ $p.intro }}</p>
+
+    {{/* Real links to the category archives. Without JS they navigate there;
+         with it they filter this list in place. */}}
+    <div class="filters" role="list">
+      <a class="btn btn--secondary filter" role="listitem" href="{{ .RelPermalink }}"
+         data-filter="all" aria-current="true">All posts</a>
+      {{- range $cats }}
+      <a class="btn btn--secondary filter" role="listitem"
+         href="{{ (site.GetPage (printf "/category/%s" (urlize .))).RelPermalink | default (printf "/category/%s/" (urlize .)) }}"
+         data-filter="{{ urlize . }}">{{ . }}</a>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="posts" aria-label="Posts">
+    <div class="posts__rule"></div>
+    {{- range $posts }}
+    {{- $cat := index .Params.category 0 | default "" }}
+    <a class="post-row" href="{{ .RelPermalink }}" data-category="{{ urlize $cat }}">
+      <span class="post-row__date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      <span class="post-row__text">
+        <span class="post-row__title">{{ .Title }}</span>
+        {{- with .Description }}<span class="post-row__dek">{{ . }}</span>{{ end }}
+      </span>
+      {{- with $cat }}{{ partial "badge.html" (dict "text" . "accent" (eq . "Blog")) }}{{ end }}
+    </a>
+    {{- end }}
+  </section>
+
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+{{- $js := resources.Get "js/filter.js" -}}
+{{- if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end -}}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{ end }}

@@ -1,0 +1,278 @@
+/* Home page. Every value here is measured from Home.dc.html. */
+
+/* --- hero --------------------------------------------------------------- */
+
+.hero {
+  padding: clamp(56px, 9vw, 120px) 0 72px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px clamp(40px, 7vw, 96px);
+  align-items: center;
+}
+
+.hero__figure { margin: 0; flex: 0 0 auto; }
+
+.hero__portrait {
+  width: clamp(180px, 22vw, 240px);
+  height: clamp(180px, 22vw, 240px);
+  border-radius: 50%;
+  box-shadow: var(--shadow-portrait);
+  object-fit: cover;
+  display: block;
+}
+
+.hero__body { flex: 1 1 440px; min-width: 300px; }
+
+.hero__heading {
+  font-weight: 500;
+  font-size: clamp(42px, 5.6vw, 68px);
+  line-height: 1.08;
+  color: var(--text-brightest);
+}
+
+.hero__intro {
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.6;
+  max-width: 54ch;
+  margin: 24px 0 0;
+  color: var(--text-secondary);
+}
+
+.hero .btn-row { margin-top: 28px; }
+
+/* --- stat band ---------------------------------------------------------- */
+
+/* The 1px grid gap is doing the work of hairline rules: the divider colour
+ * shows through between tiles, so no tile needs a border of its own. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 88px;
+}
+
+.stat { background: var(--surface); padding: 26px; }
+
+.stat__value {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--brass-bright);
+}
+
+.stat__label {
+  font-size: 13px;
+  margin-top: 10px;
+  color: var(--text-muted);
+}
+
+/* --- section headings --------------------------------------------------- */
+
+.section { padding: 0 0 72px; }
+.section--programs { padding-bottom: 80px; }
+
+.section__heading {
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 12px;
+  color: var(--text-brightest);
+}
+.section--programs .section__heading { margin-bottom: 28px; }
+
+.section__link {
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* --- experience digest -------------------------------------------------- */
+
+.digest-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.digest-row:last-of-type { border-bottom: 0; }
+
+.digest__date {
+  flex: 0 0 120px;
+  font-size: 14px;
+  color: var(--text-date);
+  padding-top: 5px;
+}
+
+.digest__org { flex: 1 1 200px; min-width: 180px; }
+
+.digest__name {
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 1.15;
+  color: var(--text-bright);
+}
+
+.digest__role {
+  font-size: 14px;
+  margin-top: 5px;
+  color: var(--text-date);
+}
+
+.digest__summary { flex: 2 1 340px; min-width: 280px; }
+.digest__summary p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.section__foot { margin-top: 28px; }
+
+/* --- programme cards ---------------------------------------------------- */
+
+/* Fixed two columns, not auto-fit.
+ *
+ * auto-fit with a 280px minimum yields three tracks in the 1040px column, and
+ * with four featured programs that strands the fourth card alone on a second
+ * row. The handoff's README calls for a "2x2 card grid" -- its own rendering
+ * just does not produce one at this width. Four across would give each card
+ * 242px, which is too narrow for titles like "CoPlay - AI PMO assistant". */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card__kicker {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brass-bright);
+}
+
+.card__title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--text-bright);
+}
+
+.card__body {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--cool-76);
+}
+
+/* --- pull quote --------------------------------------------------------- */
+
+/* The closing block. The design stacks the quote above the contact, both
+ * ranged left, which leaves the right half of the page empty at desktop
+ * widths. Pairing them fills the measure and keeps the reading order --
+ * testimonial, then the invitation to act.
+ *
+ * The rule moves to the wrapper so it spans both columns rather than breaking
+ * across them. */
+.closing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
+  border-top: 1px solid var(--divider);
+  padding: 44px 0 80px;
+}
+
+.quote { margin: 0; }
+
+.quote__text {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.4;
+  max-width: 38ch;
+  margin: 0;
+  color: var(--text-quote);
+}
+
+.quote__caption {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-date);
+  margin: 18px 0 0;
+}
+
+/* --- contact ------------------------------------------------------------ */
+
+.contact__heading {
+  font-weight: 500;
+  font-size: clamp(30px, 3.6vw, 42px);
+  line-height: 1.2;
+  margin: 0;
+  max-width: 24ch;
+  color: var(--text-brightest);
+}
+
+.contact__body {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 16px 0 0;
+  max-width: 54ch;
+  color: var(--cool-76);
+}
+
+.contact .btn-row { margin-top: 28px; }
+
+/* --- responsive --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Below this the two columns are too narrow for the contact buttons to sit
+   * on one line, so the pair stacks and the quote regains its full measure. */
+  .closing { grid-template-columns: 1fr; gap: 48px; }
+}
+
+/* The hero goes single-column here rather than being left to wrap on its own.
+ *
+ * Left to flex, the row breaks when figure + gap + the body's 440px basis no
+ * longer fits -- about 750px. The design centres the portrait at 640px, so
+ * between 641 and 750 it sits hard left with the headline stacked beneath it,
+ * which reads like a mistake. Switching to an explicit column at the same
+ * width the row would have broken keeps the two in step: the layout can no
+ * longer wrap behind the rule's back, so changing the basis or the gap later
+ * cannot desynchronise them again.
+ *
+ * align-items goes back to stretch so the body still fills the column; only
+ * the figure centres. The headline stays left-aligned, as the design has it. */
+@media (max-width: 750px) {
+  .hero { flex-direction: column; align-items: stretch; }
+  .hero__figure { align-self: center; }
+
+  /* flex-basis follows the main axis, so the body's 440px stops being a width
+   * and becomes a minimum HEIGHT the moment the hero turns into a column --
+   * leaving a tall band of dead space under the buttons. Back to intrinsic
+   * sizing; min-width has no meaning here either and would only risk an
+   * overflow at the narrow end. */
+  .hero__body { flex: 0 1 auto; min-width: 0; }
+}
+
+@media (max-width: 640px) {
+  .cards { grid-template-columns: 1fr; }
+}

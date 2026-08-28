@@ -1,0 +1,3 @@
+{{/* ![alt](file.png "caption") -- shares its implementation with the figure
+     shortcode so both routes render identically. */}}
+{{- partial "figure.html" (dict "page" .Page "src" .Destination "alt" .Text "caption" .Title) -}}

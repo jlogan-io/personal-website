@@ -1,0 +1,16 @@
+{{/* Contents. The handoff has no design for this, so it is built from parts
+     the rest of the site already uses: the surface panel of the bench and
+     abstract blocks, and their brass uppercase label.
+
+     A native <details> -- open by default, since a contents list nobody can
+     see is not doing its job, but collapsible for readers who would rather
+     get on with it. No JavaScript, and keyboard operable for free. */}}
+<details class="toc" open>
+  <summary class="toc__summary">
+    <span class="panel__label">Contents</span>
+    <span class="toc__chevron" aria-hidden="true"></span>
+  </summary>
+  <div class="toc__body">
+    {{ .TableOfContents }}
+  </div>
+</details>

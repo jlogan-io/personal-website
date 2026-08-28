@@ -1,0 +1,102 @@
+{{ define "main" }}
+{{- $p := .Params -}}
+<div class="container">
+
+  <section class="hero">
+    {{- with site.Home.Params.portrait }}
+      {{- with resources.Get . }}
+        {{- $img := .Process "resize 480x480 webp q85" }}
+    <figure class="hero__figure">
+      <img class="hero__portrait" src="{{ $img.RelPermalink }}" width="240" height="240"
+           alt="Portrait of {{ site.Home.Params.author }}" fetchpriority="high" decoding="async">
+    </figure>
+      {{- end }}
+    {{- end }}
+    <div class="hero__body">
+      <h1 class="hero__heading">{{ partial "heading.html" $p.heading }}</h1>
+      <p class="hero__intro">{{ $p.intro }}</p>
+      {{- with $p.actions }}
+      <div class="btn-row">
+        {{- range . }}
+        <a class="btn {{ if .primary }}btn--primary{{ else }}btn--secondary{{ end }}" href="{{ .url | relURL }}">{{ .label }}</a>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+  </section>
+
+  {{- with $p.stats }}
+  <section class="stats" aria-label="At a glance">
+    {{- range . }}
+    <div class="stat">
+      <div class="stat__value">{{ .value }}</div>
+      <div class="stat__label">{{ .label }}</div>
+    </div>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  {{- with site.GetPage "/experience" }}
+  <section class="section" aria-labelledby="where">
+    <h2 class="section__heading" id="where">{{ $p.experience_heading }}</h2>
+    {{- range .Pages }}
+    <div class="digest-row">
+      <div class="digest__date">{{ .Params.dates }}</div>
+      <div class="digest__org">
+        <h3 class="digest__name">{{ .Params.org }}</h3>
+        <div class="digest__role">{{ .Params.role }}</div>
+      </div>
+      <div class="digest__summary"><p>{{ .Summary }}</p></div>
+    </div>
+    {{- end }}
+    <a class="section__link" href="{{ .RelPermalink }}">{{ $p.experience_link }}</a>
+  </section>
+  {{- end }}
+
+  {{- with site.GetPage "/projects" }}
+  <section class="section section--programs" aria-labelledby="proud">
+    <h2 class="section__heading" id="proud">{{ $p.projects_heading }}</h2>
+    <div class="cards">
+      {{- range where .Pages "Params.featured" true }}
+      <div class="card">
+        <span class="card__kicker">{{ .Params.kicker | default (printf "%s · %s" .Params.org .Params.period) }}</span>
+        <h3 class="card__title">{{ .Params.home_title | default .Title }}</h3>
+        {{/* home_summary is the short version written for this card;
+             `summary` is the longer one the projects page uses. */}}
+        <p class="card__body">{{ .Params.home_summary | default .Summary }}</p>
+      </div>
+      {{- end }}
+    </div>
+    <div class="section__foot">
+      <a class="section__link" href="{{ .RelPermalink }}">{{ $p.projects_link }}</a>
+    </div>
+  </section>
+  {{- end }}
+
+  {{/* Quote and contact share one closing block so they sit side by side on
+       desktop instead of stacking down the left edge. They stack again below
+       the breakpoint. */}}
+  <section class="closing" aria-labelledby="talk">
+    {{- with site.GetPage "/references" }}
+      {{- range first 1 (where .Pages "Params.featured" true) }}
+    <figure class="quote">
+      <blockquote class="quote__text">“{{ .Summary }}”</blockquote>
+      <figcaption class="quote__caption">— {{ .Params.name }}, {{ .Params.title }}, {{ .Params.org }}</figcaption>
+    </figure>
+      {{- end }}
+    {{- end }}
+
+    <div class="contact">
+      <h2 class="contact__heading" id="talk">{{ partial "heading.html" $p.contact_heading }}</h2>
+      <p class="contact__body">{{ $p.contact_body }}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="mailto:{{ site.Home.Params.email }}">{{ site.Home.Params.email }}</a>
+        {{- range site.Home.Params.social }}
+        <a class="btn btn--secondary" href="{{ .url }}" rel="me noopener">{{ .name }}</a>
+        {{- end }}
+      </div>
+    </div>
+  </section>
+
+</div>
+{{ end }}

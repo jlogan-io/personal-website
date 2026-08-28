@@ -1,0 +1,10 @@
+{{/* The brass JL mark. The source is 512px for a 34px slot -- 7.5x more pixels
+     than any display needs -- so it is resized and emitted as WebP.
+     Call as: {{ partial "mark.html" "nav" }} or {{ partial "mark.html" "footer" }} */}}
+{{- $variant := . | default "nav" -}}
+{{- $size := cond (eq $variant "footer") 24 34 -}}
+{{- with resources.Get "images/mark-brass.png" -}}
+  {{- $r := .Process (printf "resize %dx webp q90" (mul $size 2)) -}}
+  <img class="mark mark--{{ $variant }}" src="{{ $r.RelPermalink }}" alt=""
+       width="{{ $size }}" height="{{ $size }}" loading="lazy" decoding="async">
+{{- end -}}

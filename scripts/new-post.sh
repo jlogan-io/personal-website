@@ -4,7 +4,7 @@
 #
 #   ./scripts/new-post.sh "The Art of Sending Quality Status Reports"
 #
-# Creates content/posts/YYYYMMDD-slug/index.md from archetypes/default.md,
+# Creates content/writing/YYYYMMDD-slug/index.md from archetypes/default.md,
 # matching the layout the existing posts already use: a directory per post, with
 # images living beside the markdown so they can be referenced by plain filename.
 #
@@ -39,7 +39,7 @@ SLUG=$(printf '%s' "$TITLE" \
   | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
 [ -n "$SLUG" ] || die "title produced an empty slug: $TITLE"
 
-BUNDLE="content/posts/${DATESTAMP}-${SLUG}"
+BUNDLE="content/writing/${DATESTAMP}-${SLUG}"
 [ -e "$BUNDLE" ] && die "$BUNDLE already exists"
 
 command -v hugo >/dev/null 2>&1 || die "hugo is not installed.
@@ -56,7 +56,7 @@ hugo new "${BUNDLE}/index.md" >/dev/null
 #               page bundle includes the YYYYMMDD prefix ("20250611 Tpm
 #               Companion"). Replace it with the title as typed.
 #   thumbnail - a site-root-relative path that has to name this bundle,
-#               e.g. posts/20250611-tpm-companion/thumbnail-image.png
+#               e.g. writing/20250611-tpm-companion/thumbnail-image.png
 #   date      - `hugo new` always stamps "now". If a date was passed it has to
 #               win, or a post scheduled for next week is dated today and
 #               publishes immediately. Plain YYYY-MM-DD, matching the existing
@@ -64,7 +64,7 @@ hugo new "${BUNDLE}/index.md" >/dev/null
 #
 # awk rather than sed: titles legitimately contain quotes, slashes, pipes and
 # ampersands, all of which are live characters in a sed replacement.
-THUMB_PATH="posts/${DATESTAMP}-${SLUG}/thumbnail-image.png"
+THUMB_PATH="writing/${DATESTAMP}-${SLUG}/thumbnail-image.png"
 awk -v title="$TITLE" -v thumb="$THUMB_PATH" -v postdate="$DATE" '
   # Only rewrite the first occurrence of each, so a later line in the body that
   # happens to start with "title:" is left alone.

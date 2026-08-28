@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{ or site.Language.Locale site.Language.Lang }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {{ partial "nav.html" . }}
+  <main id="main">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{/* No site-wide script: the nav is a native <details> and needs none.
+       Individual pages can still add one through this block. */}}
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>

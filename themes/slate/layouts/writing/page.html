@@ -1,0 +1,77 @@
+{{ define "main" }}
+{{- $cat := index .Params.category 0 | default "" -}}
+{{- $section := site.GetPage "/writing" -}}
+<article class="article">
+
+  <header class="article__header">
+    <a class="article__back" href="{{ $section.RelPermalink }}">← All writing</a>
+    <div class="article__meta">
+      {{- with $cat }}{{ partial "badge.html" (dict "text" . "accent" (eq . "Blog")) }}{{ end }}
+      <span class="article__date">
+        {{ .Date.Format "Jan 2, 2006" }}
+        {{- with .Params.credit }} · {{ . }}
+        {{- else }} · {{ .ReadingTime }} min read{{ end }}
+      </span>
+    </div>
+    <h1 class="article__title">{{ .Title }}</h1>
+    {{- with .Description }}<p class="article__dek">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="article__rule"></div>
+
+  {{- if and .Params.toc (gt (len .TableOfContents) 100) }}
+  {{ partial "toc.html" . }}
+  {{- end }}
+
+  <section class="article__body">
+    {{ .Content }}
+  </section>
+
+  {{- with .Params.attribution }}
+  <div class="attribution">
+    <div class="attribution__row">
+      {{ partial "mark.html" "footer" }}
+      <p class="attribution__text">{{ . | markdownify }}</p>
+    </div>
+  </div>
+  {{- end }}
+
+  <footer class="article__footer">
+    <div class="article__footer-row">
+      {{ partial "mark.html" "footer" }}
+      <p class="article__footer-note">{{ .Params.footer_note | default "More dispatches from the home lab as they happen." }}</p>
+      <a class="article__footer-link" href="{{ $section.RelPermalink }}">More writing →</a>
+    </div>
+  </footer>
+
+</article>
+{{ end }}
+
+{{ define "scripts" }}
+{{/* Mermaid is ~1MB, and exactly one post has a diagram. The codeblock render
+     hook flags the page while .Content renders, which happens before this
+     block, so the library is fetched only where it is actually used. Pinned
+     rather than floating: architecture-beta is v11+ and a silent major bump
+     would break the diagram with no build error. */}}
+{{- if .Store.Get "hasMermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+  // theme:'dark' rather than 'base'. architecture-beta ignores most of the
+  // generic themeVariables -- with 'base' its labels came out near-black on
+  // the dark panel, i.e. invisible. The dark theme gets the contrast right on
+  // its own; only the accent and typeface are overridden.
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'strict',
+    theme: 'dark',
+    themeVariables: {
+      fontFamily: 'Barlow, sans-serif',
+      fontSize: '14px',
+      lineColor: 'oklch(0.78 0.09 85)',
+      mainBkg: 'oklch(0.31 0.02 255)',
+      nodeBorder: 'oklch(0.42 0.02 255)'
+    }
+  });
+</script>
+{{- end }}
+{{ end }}

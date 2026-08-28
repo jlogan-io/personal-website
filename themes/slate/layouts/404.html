@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="container">
+  <section class="notfound">
+    <p class="notfound__code">404</p>
+    <h1 class="page-hero__heading">That page has <em>moved on.</em></h1>
+    <p class="page-hero__intro">
+      The link may be from an older version of this site. The writing, the
+      programs and the résumé are all still here.
+    </p>
+    <div class="btn-row notfound__actions">
+      <a class="btn btn--primary" href="{{ "/" | relURL }}">Home</a>
+      <a class="btn btn--secondary" href="{{ "/writing/" | relURL }}">Writing</a>
+      <a class="btn btn--secondary" href="{{ "/experience/" | relURL }}">Experience</a>
+    </div>
+  </section>
+</div>
+{{ end }}

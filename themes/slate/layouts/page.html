@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{/* Fallback for a standalone page outside the designed sections. */}}
+<article class="article">
+  <header class="article__header">
+    <h1 class="article__title">{{ .Title }}</h1>
+    {{- with .Description }}<p class="article__dek">{{ . }}</p>{{ end }}
+  </header>
+  <div class="article__rule"></div>
+  <section class="article__body">{{ .Content }}</section>
+</article>
+{{ end }}

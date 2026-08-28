@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{/* The index of all tags or all categories. */}}
+<div class="container">
+
+  <section class="page-hero">
+    <h1 class="page-hero__heading">{{ .Title }}</h1>
+    <p class="page-hero__intro">
+      {{/* .Data.Plural is "tag", not "tags" -- the taxonomy keys in hugo.toml
+           are singular. The page title already carries the right plural. */}}
+      {{ len .Data.Terms }} {{ .Title | lower }} across the writing.
+      <a href="{{ (site.GetPage "/writing").RelPermalink }}">All writing →</a>
+    </p>
+  </section>
+
+  {{- $terms := .Data.Terms.Alphabetical }}
+  {{- if $terms }}
+  <ul class="termlist">
+    {{- range $terms }}
+    <li>
+      <a href="{{ .Page.RelPermalink }}">
+        {{ .Page.Title }}<span class="termlist__count">{{ .Count }}</span>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="empty-note">Nothing filed here yet.</p>
+  {{- end }}
+
+</div>
+{{ end }}

@@ -1,121 +1,36 @@
+# Build configuration only.
+#
+# Everything the site *says* -- nav labels, contact details, social links, page
+# copy -- lives in markdown under content/. Nothing here needs editing to
+# publish, rename or reorder anything. See README.md.
+
 baseURL = 'https://jlogan.io'
+title = 'Jonathan Logan'
+theme = 'slate'
 locale = 'en-us'
-title = 'Jonathan Logan - Personal Website'
-theme = 'anatole'
 
-[menu]
-	
-  [[menu.main]]
-  name = "Home"
-  identifier = "home"
-  weight = 100
-  url = "/"
-  
-  [[menu.main]]
-  name = "Experience"
-  weight = 200
-  identifier = "experience"
-  url = "/experience/"
-
-  [[menu.main]]
-  name = "Projects"
-  weight = 200
-  identifier = "projects"
-  url = "/projects/"
-  
-  [[menu.main]]
-  name = "References"
-  weight = 300
-  identifier = "references"
-  url = "/references/"
-
-  [[menu.main]]
-  name = "Posts"
-  weight = 400
-  identifier = "posts"
-  url = "/posts/"
-  
-    [[menu.main]]
-    name = "All Posts"
-    weight = 410
-    identifier = "allposts"
-    url = "/posts/"
-    parent = "posts"
- 
-    [[menu.main]]
-    name = "Home Lab"
-    weight = 420
-    identifier = "homelab"
-    url = "/category/home-lab/"
-    parent = "posts"
-
-    [[menu.main]]
-    name = "Blog"
-    weight = 420
-    identifier = "blog"
-    url = "/category/blog/"
-    parent = "posts"
-	
-#    [[menu.main]]
-#    name = "Astrophotography"
-#    weight = 430
-#    identifier = "astrophotography"
-#    url = "/category/astrophotography/"
-#    parent = "posts"
-
-  [[menu.main]]
-  name = "Contact"
-  weight = 600
-  identifier = "contact"
-  url = "/contact/"
-
-  [[footer]]
-  name = "imprint"
-  weight = 1
-  identifier = "imprint"
-  url = "/imprint/"
-
-[[params.socialIcons]]
-icon = "fa-brands fa-linkedin"
-title = "Linkedin"
-url = "https://www.linkedin.com/in/jonathan-logan-99ab925b/"
-
-[[params.socialIcons]]
-icon = "fa-regular fa-file"
-title = "Resume"
-url = "/experience/"
-
-[[params.socialIcons]]
-icon = "fa-brands fa-instagram"
-title = "Instagram"
-url = "https://www.instagram.com/jlogan.io/"
-
-[[params.socialIcons]]
-icon = "fa-regular fa-envelope"
-title = "e-mail"
-url = "/contact/"
-
+# Posts are the only section that paginates or feeds RSS from the home page.
 [params]
-title = "I'm Jonathan Logan"
-author = "Jonathan Logan"
-description = "Staff Technical Program Manager at PlayStation. I lead teams building scalable systems at the intersection of cloud, AI, and gaming."
-profilePicture = "images/jonathanlogan.png"
-mainSections = []
-contentratio = 0.6
-postSectionName = "posts"
-pygmentsCodeFences = true
-pygmentsUseClasses = true
-customCss = ["css/custom.css", "css/syntax.css"]
-customJs = ["js/custom.js"]
-contactFormAction = "https://formspree.io/f/xbjnqokd"
-readMore = true
-doNotLoadAnimations = true
-hidesidebar = true
-
-[mermaid]
-enable = true
+  mainSections = ['writing']
 
 [taxonomies]
-    category = "category"
-    series = "series"
-    tag = "tag"
+  category = 'category'
+  series = 'series'
+  tag = 'tag'
+
+[markup]
+  [markup.goldmark.renderer]
+    # Post bodies are authored here, not user-submitted; the render hooks need
+    # to emit real markup.
+    unsafe = true
+  [markup.highlight]
+    noClasses = false          # style from syntax.css, not inline
+    lineNumbersInTable = false
+    tabWidth = 2
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'

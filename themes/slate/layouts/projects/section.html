@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{- $p := .Params -}}
+<div class="container">
+
+  <section class="page-hero">
+    <h1 class="page-hero__heading">{{ partial "heading.html" $p.heading }}</h1>
+    <p class="page-hero__intro page-hero__intro--projects">{{ $p.intro }}</p>
+  </section>
+
+  <section class="programs" aria-label="Program entries">
+    {{- range .Pages }}
+    {{/* A project either publishes its own page or points at an existing
+         write-up elsewhere -- ExoExplorer's lives in the home lab. */}}
+    {{- $url := .Params.link | default .RelPermalink -}}
+    <article class="program">
+      <div class="program__head">
+        <h2 class="program__title"><a class="program__link" href="{{ $url | relURL }}">{{ .Title }}</a></h2>
+        <span class="program__credit">{{ delimit (slice .Params.role .Params.org .Params.period) " · " }}</span>
+      </div>
+      {{- with .Params.summary }}
+      <p class="program__summary">{{ . }}</p>
+      {{- end }}
+      {{- with .Params.highlights }}
+      <ul class="bullets">
+        {{- range . }}<li>{{ . | markdownify }}</li>{{ end }}
+      </ul>
+      {{- end }}
+      {{- with .Params.badges }}
+      <div class="badges">
+        {{- range $i, $b := . }}
+        <span class="badge{{ if eq $i 0 }} badge--accent{{ end }}">{{ $b }}</span>
+        {{- end }}
+      </div>
+      {{- end }}
+      <a class="program__more" href="{{ $url | relURL }}" tabindex="-1" aria-hidden="true">
+        {{ if .Params.link }}Read the write-up{{ else }}Read the full story{{ end }} →
+      </a>
+    </article>
+    {{- end }}
+  </section>
+
+</div>
+{{ end }}

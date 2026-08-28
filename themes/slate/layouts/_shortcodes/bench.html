@@ -1,0 +1,25 @@
+{{/* The Home Lab hardware panel: label/value pairs.
+
+     {{< bench "App" "Expo SDK 54" "Rendering" "three.js" >}}
+
+     Each pair is one grid cell, label above value -- so a long value wraps
+     under its own label instead of shunting the next pair sideways. A <dl>
+     with div-wrapped dt/dd pairs, which HTML5 allows and which says what this
+     actually is. */}}
+{{- $args := .Params -}}
+{{- if not (modBool (len $args) 2) -}}
+  {{- errorf "bench: needs label/value pairs, got %d arguments in %s" (len $args) .Position -}}
+{{- end -}}
+<aside class="panel bench" aria-label="The bench">
+  <h2 class="panel__label">The bench</h2>
+  <dl class="bench__grid">
+    {{- range $i, $v := $args }}
+      {{- if modBool $i 2 }}
+    <div class="bench__item">
+      <dt class="bench__key">{{ $v }}</dt>
+      <dd class="bench__value">{{ index $args (add $i 1) }}</dd>
+    </div>
+      {{- end }}
+    {{- end }}
+  </dl>
+</aside>

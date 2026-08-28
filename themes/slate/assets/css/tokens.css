@@ -1,0 +1,81 @@
+/* Slate + Serif design tokens.
+ *
+ * Every colour in the design lives here once; components reference tokens and
+ * never literal colours. Values are the oklch() from the design files verbatim
+ * -- not converted to hex, which would lose wide-gamut rendering.
+ *
+ * The handoff README collapses the text colours into ranges ("0.7 - 0.72"),
+ * but the design files use 31 distinct values and assign them per element: the
+ * wordmark is 0.95 while a card heading is 0.93, an inactive nav link is 0.72
+ * while a card sublabel is 0.70. The ramp below is the source of truth and the
+ * semantic names underneath are aliases onto it, so both fidelity and
+ * readability survive.
+ */
+:root {
+  /* --- warm ramp (hue 90) : headings, quotes, anything serif ------------- */
+  --warm-96:  oklch(0.96 0.008 90);  /* h1 */
+  --warm-95:  oklch(0.95 0.01 90);   /* wordmark */
+  --warm-94:  oklch(0.94 0.01 90);   /* project card h2 */
+  --warm-93:  oklch(0.93 0.01 90);   /* body strong, card h3 */
+  --warm-90:  oklch(0.9 0.015 90);   /* blockquote, outlined button label */
+  --warm-90h: oklch(0.9 0.02 90);    /* nav link hover -- higher chroma */
+  --warm-85:  oklch(0.85 0.02 90);   /* code */
+
+  /* --- cool ramp (hue 255) : body and supporting text -------------------- */
+  --cool-84: oklch(0.84 0.012 255);  /* article and bullet body */
+  --cool-82: oklch(0.82 0.015 255);
+  --cool-80: oklch(0.8 0.015 255);
+  --cool-78: oklch(0.78 0.015 255);  /* paragraphs, neutral badges */
+  --cool-76: oklch(0.76 0.015 255);  /* home project card body */
+  --cool-74: oklch(0.74 0.015 255);
+  --cool-72: oklch(0.72 0.015 255);  /* inactive nav link */
+  --cool-70: oklch(0.7 0.015 255);   /* card sublabels */
+  --cool-68: oklch(0.68 0.015 255);  /* dates on the home digest */
+  --cool-66: oklch(0.66 0.015 255);  /* captions */
+  --cool-62: oklch(0.62 0.015 255);  /* footer */
+
+  /* --- surfaces ---------------------------------------------------------- */
+  --bg:           oklch(0.22 0.02 255);
+  --surface:      oklch(0.25 0.02 255);
+  --surface-deep: oklch(0.18 0.018 255);
+  --divider:      oklch(0.31 0.02 255);
+  --border-muted: oklch(0.42 0.02 255);
+
+  /* --- accent ------------------------------------------------------------ */
+  --brass:         oklch(0.78 0.09 85);        /* buttons, links, bullets */
+  --brass-bright:  oklch(0.8 0.09 85);         /* accent text on dark */
+  --brass-hover:   oklch(0.86 0.08 85);
+  --brass-outline: oklch(0.78 0.09 85 / 0.5);  /* accent badge border */
+  --brass-strong:  oklch(0.78 0.09 85 / 0.9);
+  --on-brass:      oklch(0.2 0.02 255);
+  --selection:     oklch(0.78 0.09 85 / 0.35);
+
+  /* --- semantic aliases: use these in components ------------------------- */
+  --text-brightest: var(--warm-96);
+  --text-bright:    var(--warm-93);
+  --text-wordmark:  var(--warm-95);
+  --text-heading:   var(--warm-94);
+  --text-quote:     var(--warm-90);
+  --text-body:      var(--cool-84);
+  --text-secondary: var(--cool-78);
+  --text-muted:     var(--cool-70);
+  --text-nav:       var(--cool-72);
+  --text-date:      var(--cool-68);
+  --text-faint:     var(--cool-66);
+  --text-footer:    var(--cool-62);
+  --text-code:      var(--warm-85);
+
+  /* --- type -------------------------------------------------------------- */
+  --serif: Newsreader, Georgia, 'Times New Roman', serif;
+  --sans:  Barlow, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* --- geometry ---------------------------------------------------------- */
+  --shadow-portrait: 0 24px 64px oklch(0.1 0.02 255 / 0.6);
+  --radius-card: 16px;
+  --radius-code: 12px;
+  --radius-pill: 999px;
+  --container: 1040px;
+  --container-article: 760px;
+  --gutter: clamp(24px, 5vw, 64px);
+}

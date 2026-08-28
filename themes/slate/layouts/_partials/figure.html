@@ -1,0 +1,26 @@
+{{/* One implementation behind both the image render hook and the figure
+     shortcode, so ![alt](x.png) and {{< figure src="x.png" >}} produce the
+     same markup and both get the same processing.
+
+     dict "page" PAGE "src" STRING "alt" STRING "caption" STRING */}}
+{{- $img := .page.Resources.GetMatch .src -}}
+{{- if not $img }}{{ $img = resources.Get .src }}{{ end -}}
+<figure>
+{{- with $img }}
+  {{- $w := 760 -}}
+  {{- $r := . -}}
+  {{- /* SVGs have no pixel dimensions to resize and nothing to gain from
+         WebP; pass them through untouched. */ -}}
+  {{- if and (ne .MediaType.SubType "svg") (gt .Width $w) -}}
+    {{- $r = .Process (printf "resize %dx webp q82" $w) -}}
+  {{- end }}
+  <img src="{{ $r.RelPermalink }}" alt="{{ $.alt }}"
+       {{ with $r.Width }}width="{{ . }}"{{ end }}{{ with $r.Height }} height="{{ . }}"{{ end }}
+       loading="lazy" decoding="async">
+{{- else }}
+  <img src="{{ .src | safeURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
+{{- end }}
+{{- with .caption }}
+  <figcaption>{{ . }}</figcaption>
+{{- end }}
+</figure>
