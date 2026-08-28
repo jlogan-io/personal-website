@@ -1,6 +1,6 @@
 ---
 title: "Why Time Savings Need an Independent Quality Check"
-date: 2026-06-15
+date: 2026-09-28
 author: Jonathan Logan
 category:
   - Blog
@@ -14,9 +14,9 @@ draft: true
 description: A 92% efficiency figure with nothing behind it is evidence of speed, not of value.
 ---
 
-The most impressive number this project produced is an aggregate time saving of
-about 92%. It is also the number I trust least, and I want to explain why,
-because the reasoning generalises well beyond this tool.
+The most impressive number our CoPlay evaluation produced is an aggregate time
+saving of about 92%. It is also the number I trust least, and I want to
+explain why, because the reasoning generalises well beyond this tool.
 
 ## Where 92% comes from
 

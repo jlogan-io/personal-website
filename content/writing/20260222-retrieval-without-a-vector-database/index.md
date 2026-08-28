@@ -1,6 +1,6 @@
 ---
 title: "Running Retrieval Without a Vector Database"
-date: 2025-11-10
+date: 2026-02-22
 author: Jonathan Logan
 category:
   - Blog
@@ -46,12 +46,12 @@ Holding that line ruled out the obvious retrieval stack. No managed vector
 database, no embedding service holding a copy of the corpus, no pipeline
 shipping meeting transcripts somewhere for indexing.
 
-What I ended up with instead: documents chunked and embedded with Amazon Titan,
-with the vectors stored in the same local SQLite database as everything else
-using sqlite-vec. Semantic search happens against a file on the user's disk.
-Roughly 24,500 source documents become about 71,847 retrievable chunks, and none
-of them leave. Only the retrieved context and the question go out to the model
-on AWS Bedrock.
+What I ended up with instead: documents chunked and embedded with Amazon
+Titan, with the vectors stored in the same local SQLite database as everything
+else using sqlite-vec. Semantic search happens against a file on the user's
+disk. A program of any size turns into tens of thousands of retrievable
+chunks, and none of them leave. Only the retrieved context and the question go
+out to the model on AWS Bedrock.
 
 The constraint made the system simpler. There is one datastore, it is a file,
 and backing it up is copying it.
@@ -104,9 +104,10 @@ That turned out to matter for a reason I had not anticipated. Traceability, not
 accuracy alone, is what makes people willing to rely on the thing. Being right is
 not sufficient if nobody can check.
 
-The measurable version of this became a faithfulness audit that grades generated
-artifacts against the source chunks they claim to draw from. I will write about
-that separately, because the result is more interesting than the mechanism.
+The version of this I actually want is a check that grades generated output
+against the source chunks it claims to draw from, so that grounding is a
+measured property rather than a design intention. That is not built yet. It is
+the next thing I want to be able to say something honest about.
 
 ## What I would keep
 

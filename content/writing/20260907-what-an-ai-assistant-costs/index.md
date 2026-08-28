@@ -1,6 +1,6 @@
 ---
 title: "What an AI Assistant Costs to Operate"
-date: 2026-04-20
+date: 2026-09-07
 author: Jonathan Logan
 category:
   - Blog
@@ -19,8 +19,9 @@ has been some version of "what does it cost to run". Almost nobody writing about
 agentic systems answers it, which is odd, because it is the question that
 decides whether the thing gets funded.
 
-Across the measured period CoPlay spent $423.22 in total, at $0.58 per completed
-agent run.
+We finished a formal evaluation of CoPlay last month, and one of the things it
+produced was an answer. Across the measured period the system spent $423.22 in
+total, at $0.58 per completed agent run.
 
 ## Why the unit matters more than the number
 

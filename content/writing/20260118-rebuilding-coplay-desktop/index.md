@@ -1,6 +1,6 @@
 ---
 title: "Rebuilding CoPlay as a Desktop Application"
-date: 2025-09-15
+date: 2026-01-18
 author: Jonathan Logan
 category:
   - Blog
@@ -83,16 +83,15 @@ their own program's report for the first time has no such calibration. They have
 to trust it or check it by hand, and if they check it by hand the tool has cost
 them time rather than saved it.
 
-## Where it ended up
-
-The rebuild is a different class of object from the prototype. Roughly 940
-TypeScript source files against about 260 test files, at version 1.3.0. Twenty
-four feature pages, around 150 backend services, English and Japanese
-localisation. It is signed, notarised, and ships with an auto-updater, with code
-review and test gates before anything merges.
-
-None of that is interesting in itself. It is what "someone else can rely on
-this" costs when written out as a bill of materials.
+## Where it is now It reached proof of concept this month, which means the
+retrieval path works end to end against a real program and the output is worth
+reading. That is a lower bar than it sounds. It is also the bar the Flask
+version cleared eight months ago, and the difference is that this one clears
+it on someone else's machine with their own data. What remains is the
+unglamorous half: test coverage, code signing and notarisation, an auto-
+updater, and enough review discipline that I am not the only person who can
+safely change it. None of that is interesting in itself. It is what "someone
+else can rely on this" costs when written out as a bill of materials.
 
 ## What I would tell myself in May
 
@@ -105,5 +104,5 @@ prototype proves the idea is possible. It tells you almost nothing about whether
 it survives contact with people who did not build it, and that second question
 is the one that decides whether any of it mattered.
 
-Mine took the better part of a year to answer, and the answer required throwing
-away code I was fond of.
+I am about two months into answering it, and the answer has already required
+throwing away code I was fond of.
