@@ -27,49 +27,48 @@ home_summary: >-
 ---
 
 On 19 July 2024 a misconfigured Sensor Channel File took CrowdStrike customers
-offline worldwide. I led the cross-functional response: a high-priority
-initiative to re-architect how Channel Files are built, validated and released,
-so that a single bad configuration could never again reach every customer at
-once.
+offline worldwide. I led the cross-functional response. The goal was not just
+to fix what broke that morning, but to re-architect how Channel Files get
+built, validated and released, so a single bad configuration could never again
+reach every customer at once.
 
-## Getting nine functions moving in the same direction
+## Getting nine functions moving together
 
-The response could not sit inside one team. Channel Files touch the sensor, the
-detection platform, the deployment pipeline and the customer-facing
-communications around all three. I directed and defined execution across Legal,
-TechOps, Platform Features, Platform Scale, ProdSec, InfoSec, Data Science,
-Detection Platform and Sensor — nine functions, each with its own backlog,
-release cadence and definition of done.
+This could not sit inside one team. Channel Files touch the sensor, the
+detection platform, the deployment pipeline, and every customer-facing message
+about all three. I directed execution across nine functions: Legal, TechOps,
+Platform Features, Platform Scale, ProdSec, InfoSec, Data Science, Detection
+Platform and Sensor. Each had its own backlog, its own release cadence, and its
+own idea of what "done" meant.
 
-The immediate work was sequencing: deciding what had to be true before anything
-shipped, and which teams were on the critical path for each of those
-conditions.
+I spent most of the first week on sequencing: working out what had to be true
+before anything shipped, and which team sat on the critical path for each of
+those conditions.
 
 ## Reprioritizing the company's backlog
 
-A hardened continuous-deployment pipeline for Channel Files was not on anyone's
-roadmap in July. Getting it built meant partnering with VPs and executive
-leadership to reprioritize engineering backlogs company-wide — making the case
-for what to stop, not just what to start, and holding that line while the
-organization was under considerable external pressure.
+A hardened continuous-deployment pipeline for Channel Files was on nobody's
+roadmap in July. Getting it built meant working with VPs and executive
+leadership to reprioritize engineering backlogs company-wide. That is mostly an
+argument about what to stop doing, not what to start, and it had to hold while
+the whole organization was under real external pressure.
 
 ## The ring-based model
 
-The durable outcome was a change in how Channel Files reach customers at all. I
-defined the delivery roadmap for a ring-based deployment model: releases move
-outward through progressively larger rings of customer environments, with
-validation gates between them, so problems surface against a small population
-before they can reach a large one.
+The change I care most about is how Channel Files reach customers at all. I
+defined the delivery roadmap for a ring-based deployment model. Releases now
+move outward through progressively larger rings of customer environments, with
+validation gates between them, so a problem shows up against a small population
+long before it can reach a large one.
 
-Staying technically fluent in the sensor architecture and the cloud
-infrastructure underneath it was what made the roadmap credible — scope,
-sequencing and risk decisions all depended on understanding what the pipeline
-actually did.
+Staying fluent in the sensor architecture and the cloud infrastructure under it
+is what made that roadmap credible. Every scope, sequencing and risk call
+depended on actually understanding what the pipeline did.
 
 ## What shipped, and when
 
-Initial remediation, design validation and production implementation roadmaps
-were delivered **in under two weeks**. That speed mattered less as an
-engineering achievement than as a signal: it was the artifact that let
-leadership, customers and the teams themselves see that the problem was
-understood and the path out was real.
+I delivered initial remediation, design validation and production
+implementation roadmaps in under two weeks. The speed mattered less as an
+engineering result than as a signal. It was the thing that let leadership,
+customers and the teams themselves see that the problem was understood and the
+way out was real.

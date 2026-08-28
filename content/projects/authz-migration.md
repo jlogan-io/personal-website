@@ -26,40 +26,35 @@ home_summary: >-
 
 AWS Security's Access Service was an internal authorization system that could
 no longer meet modern scalability requirements. Retiring it was the easy half
-of the sentence. The hard half was that more than five hundred service teams
-depended on it, each with their own use case, and none of them had asked for a
-migration.
+of that sentence. The hard half was that more than five hundred service teams
+depended on it, each with their own use case, and not one of them had asked for
+a migration.
 
 ## Sunsetting without an outage
 
-I orchestrated the phased retirement of the legacy service, working with
-engineering and operations to sequence the shutdown so that dependent services
-moved before their dependency disappeared. The service was Tier-1: the standard
-was **zero unplanned downtime**, and that is what it was retired with.
+I ran the phased retirement of the legacy service, working with engineering and
+operations to sequence the shutdown so that every dependent service moved
+before its dependency disappeared. The service was Tier-1, so the standard was
+zero unplanned downtime. That is what it was retired with.
 
 ## Five hundred conversations
 
-The migration strategy could not be a broadcast. I partnered personally with
-**500+ AWS customer teams** to assess each one's authorization use case and
-define a migration path to the right target:
-
-- **Bindles** — resource-based authorization
-- **TEAMS** — human-identity-based authorization
+There was no version of this that worked as a broadcast. I sat down with more than 500 AWS customer teams, assessed each one's
+authorization use case, and defined a migration path to the right target. That meant Bindles for
+resource-based authorization, or TEAMS for human-identity-based authorization.
 
 Which of the two applied was rarely obvious from the outside, and getting it
-wrong meant a team migrating twice. Most of the program's real work was in
+wrong meant a team migrating twice. Most of the program's real work lived in
 those assessments.
 
 ## Making the second hundred easier than the first
 
-Doing five hundred bespoke migrations was not viable, so the patterns that
-emerged were captured as a suite of reusable technical migration playbooks for
-**BRASS** (Bindles Resource Authorization System Service), the API layer
-supporting scalable authorization enforcement. Alongside the playbooks I
-provided direct implementation support and integration guidance, which
-accelerated onboarding onto the modern stack while keeping service
-interruptions to a minimum.
+Five hundred bespoke migrations was never going to work, so I captured the
+patterns as a set of reusable technical playbooks for BRASS, the API layer
+supporting scalable authorization enforcement. Alongside the playbooks I gave
+teams direct implementation support and integration guidance, which sped up
+onboarding onto the modern stack and kept service interruptions small.
 
-Throughout, the program held cross-functional alignment with product owners,
-software engineers and security architects to hit migration milestones and stay
-compliant with AWS security standards.
+Throughout, I held alignment across product owners, software engineers and
+security architects, so we hit the migration milestones without drifting out of
+compliance with AWS security standards.

@@ -27,45 +27,46 @@ home_summary: >-
   production telemetry — 94.3% of action items captured automatically.
 ---
 
-CoPlay is an AI assistant for program management offices, built and run in
-production and then evaluated against its own operating telemetry as the
-capstone for the M.S. in Engineering Leadership & Management at the University
-of San Diego (EML-595).
+CoPlay is an AI assistant for program management offices. I built it, ran it in
+production, and then evaluated it against its own operating telemetry as the
+capstone for my M.S. in Engineering Leadership & Management at the University
+of San Diego.
 
-The distinguishing feature is not the assistant. It is that the assistant was
+The interesting part is not the assistant. It is that the assistant was
 measured.
 
 ## Grounded in the program's own corpus
 
-Retrieval runs over the organization's real material — **24,500 documents
-across 14 portfolios** — rather than a general model's recollection of how
-program management usually works. Answers cite the program in front of them.
+Retrieval runs over the organization's real material, 24,500 documents across
+14 portfolios, rather than a general model's sense of how program management
+usually works. Answers cite the program actually in front of them.
 
-## What was built
+## What I built
 
 I owned the application and its operating environment from first commit through
-general availability: **37 modular workflow capabilities**, deployed and used by
-real PMO teams on live programs rather than in a sandbox.
+general availability. That came to 37 modular workflow capabilities, deployed
+and used by real PMO teams on live programs rather than in a sandbox.
 
 ## Evaluation as the deliverable
 
-Three indicators were defined before any result was known, which is the part
+I defined three indicators before I knew any of the results, which is the part
 that makes the numbers worth anything:
 
-- **94.3%** of tracked action items captured automatically
-- **7.7-minute** median status-report turnaround
-- **$0.58** cost per completed agent run
+- 94.3% of tracked action items captured automatically
+- a 7.7-minute median status-report turnaround
+- $0.58 per completed agent run
 
-The evaluation also carried a derived time-savings model and a faithfulness
-audit that graded output against the sources it claimed to draw from — checking
-not just whether the assistant was fast, but whether it was telling the truth.
+The evaluation also included a derived time-savings model and a faithfulness
+audit that graded output against the sources it claimed to draw from. I wanted
+to know whether the assistant was telling the truth, not just whether it was
+fast.
 
-## The wider argument
+## Why it was worth doing this way
 
 Organizations are adopting generative AI into management workflows faster than
-they are building any capability to evaluate it. A discipline that cannot
-distinguish real efficiency from the appearance of it will eventually buy the
-appearance. CoPlay was an attempt to do the harder version: ship the thing, then
-try in good faith to find out whether it worked.
+they are building any ability to evaluate it. A discipline that cannot tell
+real efficiency from the appearance of it will eventually buy the appearance.
+So I tried to do the harder version: ship the thing, then make a genuine effort
+to find out whether it worked.
 
 The full capstone report goes further into method and results.

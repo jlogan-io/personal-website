@@ -24,43 +24,40 @@ home_summary: >-
   Services. Deploy times fell from six months to under one.
 ---
 
-CrowdStrike's core development stack lived in AWS. Establishing a second home
-in Google Cloud Platform was a multi-year, multi-phase effort with a specific
-end state: Edge Services running at scale in GCP, ingesting sensor data
-efficiently as part of a hybrid architecture rather than a second copy of the
-first one.
+CrowdStrike's core development stack lived in AWS. Building a second home in
+Google Cloud Platform was a multi-year effort with a specific end state: Edge
+Services running at scale in GCP, ingesting sensor data efficiently as part of
+a hybrid architecture rather than a second copy of the first one.
 
 ## Phase 1: the ground floor
 
-Nothing could be onboarded until there was somewhere to onboard it to. Phase 1
-migrated the AWS-based CI/CD infrastructure — Kubernetes clusters, deployment
-pipelines and internal tooling — into GCP, and stood up **five environments**:
-one development, one staging and three production. That gave the organization
-full CI/CD deployment and testing capability in GCP before any customer-facing
-service depended on it.
+Nothing could be onboarded until there was somewhere to onboard it to. In Phase 1 I drove the move of our AWS-based CI/CD infrastructure into GCP,
+including the Kubernetes clusters, the deployment pipelines and the internal
+tooling. We stood up five environments: one development, one staging, and
+three production. That gave the
+organization full CI/CD and testing capability in GCP before any
+customer-facing service depended on it.
 
 ## Six months to under one
 
-The headline result was deployment time for core infrastructure falling **from
-six months to under one**. That came from working directly with engineering
-teams on three things: streamlining provisioning workflows, optimizing pipeline
-automation, and removing the manual bottlenecks that had accumulated in the
-existing process. None of the three was dramatic on its own; the compounding is
-where the number came from.
+Deployment time for core infrastructure fell from six months to under one. I got there by working directly with engineering teams on three unglamorous
+things: streamlining provisioning workflows, optimizing pipeline automation,
+and removing the manual bottlenecks that had built up in the existing process.
+None of them was dramatic on its own. The compounding is where the number came from.
 
 ## Phase 2: Edge Services
 
-With the foundation in place, focus shifted to onboarding the services that
-actually meet customer traffic — sensor data ingestion, third-party data
-ingestion, and the custom networking underneath both — into the hybrid
+With the foundation in place, I shifted focus to the services that actually
+meet customer traffic. We onboarded sensor data ingestion, third-party data
+ingestion, and the custom networking underneath both into the hybrid
 architecture.
 
-## Coordination as the real work
+## Coordination was the real work
 
 Execution ran across TechOps, Platform Features, Platform Scale, ProdSec,
-InfoSec and Sensor, spread over multiple time zones, with interdependencies
-that did not respect team boundaries. I drove that coordination, partnered with
-GCP leadership directly to resolve integration blockers and align technical
-strategy, and worked with internal VPs and Directors to shape roadmap
-priorities, sequence the phased migration and align resource planning across
-the platform and infrastructure groups.
+InfoSec and Sensor, spread over multiple time zones, with dependencies that did
+not respect team boundaries. I drove that coordination day to day. I also
+worked directly with GCP leadership to clear integration blockers and align
+technical strategy, and with our own VPs and Directors to shape roadmap
+priorities, sequence the phased migration, and plan resourcing across the
+platform and infrastructure groups.
